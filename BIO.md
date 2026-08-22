@@ -4,4 +4,4 @@ Throughout his military service, Sean led teams and organizations in complex env
 
 Today, Sean brings that leadership experience to the private sector through his work in project management at NeoGenomics Laboratories. He is pursuing the University of Hawaiʻi DLEMBA to deepen his business acumen, broaden his perspective, and complement his leadership experience with formal business education. His long-term goal is to integrate leadership and business expertise to drive strategic decision-making, solve complex organizational challenges, and create sustainable value for the organizations and people he serves.
 
--Drafted with help from Claude (Anthropic, 2026); reviewed and edited by me.
+-Drafted with help from ChatGPT; reviewed and edited by me.
