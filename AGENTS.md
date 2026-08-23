@@ -1,6 +1,6 @@
 # AGENTS.md
 
-Canonical file for how AI tools are used in this repository. `CLAUDE.md` points here so any AI agent picks up the same conventions regardless of which tool is invoked.
+Agents iterate create and review themselves to mirror working with a person. Canonical file for how AI tools are used in this repository. `CLAUDE.md` points here so any AI agent picks up the same conventions regardless of which tool is invoked.
 
 ## Disclosure
 
