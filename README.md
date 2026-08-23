@@ -10,12 +10,4 @@ Today, Sean brings that leadership experience to the private sector through his 
 
 See [RESUME.md](RESUME.md) for full professional history.
 
-## Index of Engagements
-
-No capabilities completed yet. As work begins, each engagement will be listed here with links to its capability folder, brief, and decision.
-
-| Capability | Brief | Decision |
-|---|---|---|
-| — | — | — |
-
--Drafted with help from ChatGPT; reviewed and edited by me.
+-Drafted with help from Claude,Anthropic 2026; reviewed and edited by me.
