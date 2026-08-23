@@ -18,4 +18,4 @@ No capabilities completed yet. As work begins, each engagement will be listed he
 |---|---|---|
 | — | — | — |
 
--Drafted with help from Claude,Anthropic 2026; reviewed and edited by me.
+-Drafted with help from (Claude, Anthropic 2026); reviewed and edited by me.
