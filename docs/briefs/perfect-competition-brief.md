@@ -4,7 +4,7 @@ engagement: perfect-competition
 capability: marginal-analysis
 date: 2026-08-26
 status: committed          # committed | superseded
-hypothesis: "About 5 tomato, 10 carrot and 20 mesclun beds, because carrots and mesclun take half or less the labor hours per bed that tomatoes do"
+hypothesis: "About 5 tomato, 10 carrot and 20 mesclun beds — tomato labor escalates 10% per bed against 2.5% and 1.25%, and I expect that to destroy a 3-4x revenue advantage within a few beds"
 ---
 
 # Perfect competition — engagement brief
@@ -53,21 +53,51 @@ Weather or external factors will not change the planned yields. With more time, 
 different configurations of crops and contingency plans if external factors did change
 yields or workers were not available.
 
-I am also assuming labor scales roughly with the number of beds, so that a crop needing
-fewer hours per bed can be planted more heavily without the cost per bed running away.
+**Labor is the resource I am economizing on.** Beds, temporary workers and the season
+are all capped too, but I am treating labor hours as the limit that decides the mix.
+That choice is an assumption, not a finding, and it is the one I would most want to
+test — it is possible the bed caps bind first and labor never runs short at all.
+
+**Labor per bed is not constant.** It rises with every bed added, and at very different
+speeds: 10% per bed for tomatoes against 2.5% for carrots and 1.25% for mesclun. I am
+assuming that escalation, rather than the starting hours per bed, is what eventually
+stops a crop.
+
+**Profit, not bed count, is the objective.** More beds of a cheap crop is only better if
+those beds earn more than they cost, so revenue per bed has to enter the comparison
+even though the farm cannot influence it.
 
 ## Hypothesis
 
-About 5 tomato beds and 20 mesclun, and 10 carrot beds since mesclun and carrots are a
-half or less hours of labor compared to tomatoes. Mesclun needs 1.25 hours per week per
-bed and carrots 0.833, against 2.50 for tomatoes, so the same labor buys two to three
-times as many beds of those crops.
+I expect about **5 tomato beds, 10 carrot beds and 20 mesclun beds** — 35 of the 64
+available.
+
+Tomatoes look like the obvious crop to plant: at $8,800 a bed they earn roughly three
+times mesclun ($2,700) and four times carrots ($2,094). I expect that advantage to be
+destroyed by how fast tomato labor escalates. A tomato bed starts at 2.50 hours per week
+against 1.25 for mesclun and 0.833 for carrots, and each additional tomato bed raises
+the labor on every tomato bed by 10%, against 1.25% for mesclun and 2.5% for carrots.
+Compounding at that rate, I expect the fifth or sixth tomato bed to cost more than it
+earns, well before the 20-bed cap.
+
+Between the two cheap crops I favor mesclun over carrots despite carrots needing fewer
+hours, because mesclun earns $2,700 a bed to carrots' $2,094 and escalates at half the
+rate — so mesclun stays profitable further up its range.
+
+I stop at 35 beds rather than filling all 64 because I expect all three crops to hit the
+point where marginal cost passes price before they hit their bed caps. On this reasoning
+the remaining beds are not worth planting, not merely unplanted.
 
 ## How I would know I was wrong
 
-If the model returns more than 5 tomato beds — or ranks the three crops by anything
-other than labor hours per bed — then labor hours per bed are not what decides the mix,
-and my reasoning is wrong.
+**If any crop stops at its bed cap rather than where its marginal cost meets its price**,
+then a fence set that crop's level and not the economics, and my claim that escalating
+labor is the binding limit is wrong.
+
+**If the model returns more than 8 tomato beds**, then tomato labor escalates more slowly
+than I think, and I have overweighted the 10% figure against the $8,800 price.
+
+Either result would tell me labor escalation is not what decides this mix.
 
 ---
 
