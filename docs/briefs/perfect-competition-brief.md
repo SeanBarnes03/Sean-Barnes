@@ -11,12 +11,16 @@ hypothesis: "About 5 tomato, 10 carrot and 20 mesclun beds, because carrots and 
 
 ## The problem
 
-**What is being decided:** the essential question is "what crop should we produce?
-What is the optimal number of beds? Optimal number of workers?" — the farm is
-determining its marginal cost (P=MC), and how many workers to employ.
+**What is being decided:** how many beds of each of the three crops to plant across
+the 64 beds available. The three bed counts are the only real choices — the number of
+temporary workers is not a separate decision, it follows from the labor hours those
+beds require. The rule that governs the decision is P = MC: keep planting a crop while
+the next bed costs less than it earns, and stop when it does not.
 
-**By whom:** the farm is making decisions relative to the market (their ability to
-produce supply vs market demand).
+**By whom:** the farmer. She is a price taker — far too small to move the price of a
+tomato at the farmers' market — so the price she faces is simply given, at any quantity
+she could plausibly grow. She cannot raise it by growing less or lower it by growing
+more, which is why the decision is about quantity and cost, not about pricing.
 
 **What happens if it is decided badly:** too much or too little will waste
 time/money/resources. The whole season is committed in one decision and cannot be
@@ -25,8 +29,8 @@ undone in July.
 **What is fixed:** Season 36 weeks - fixed costs $20,000 - 64 beds (16 beds × 4 plots)
 - the farmer: $50,000 a season, half her time in the field — 720 field hours at an
 implied $34.72/hr - up to 4 temporary workers at $25,000 each, 1,440 hours each,
-$17.36/hr - % diminishing returns. The farm is a price taker: it cannot move the price
-of any crop, so the prices below are given.
+$17.36/hr - % diminishing returns. The prices below are set by the market and cannot
+be changed.
 
 | Crop | Price $/bed | Fertilizer $/bed | Labor hrs/wk/bed | Diminishing returns | Max beds |
 |---|---|---|---|---|---|
@@ -34,12 +38,14 @@ of any crop, so the prices below are given.
 | Carrots | 2,094 | 440 | 0.833 | 2.50% / bed | 20 |
 | Mesclun | 2,700 | 880 | 1.25 | 1.25% / bed | 30 |
 
-**What is chosen:** how much and what to plant, how many workers to use and how to
-employ them.
+**What is chosen:** how many beds of each crop to plant.
 
-**What limits the choice:** 3 crops, 4 workers + 1 farmer to work, cost to plant,
-number of beds, % diminishing returns. Each crop also has its own bed cap — 20
-tomatoes, 20 carrots, 30 mesclun — and no more than 64 beds in total.
+**What limits the choice:** each crop's own bed cap — 20 tomatoes, 20 carrots, 30
+mesclun — no more than 64 beds in total, and no more than 4 temporary workers on top of
+the farmer's own 720 field hours. The binding limit may also be economic rather than
+physical: because each additional bed of a crop makes every bed of it more
+labor-hungry, the cost of the next bed climbs as more are planted, and a crop stops
+paying once its marginal cost passes its price.
 
 ## What I am assuming
 
