@@ -2,12 +2,9 @@
 
 ## About this repository
 
-Portfolio and coursework repository for Sean Barnes (University of Hawaiʻi DLEMBA).
-One folder per capability, each closed out with a written decision. Agents iterate
-create and review themselves to mirror working with a person.
+Portfolio and coursework repository for Sean Barnes (University of Hawaiʻi DLEMBA).  One folder per capability, each closed out with a written decision. Agents iterate create and review themselves to mirror working with a person.
 
-Canonical file: `AGENTS.md`. `CLAUDE.md` points here, so any AI tool picks up the same
-conventions regardless of which one is invoked.
+Canonical file: `AGENTS.md`. `CLAUDE.md` points here, so any AI tool picks up the same conventions regardless of which one is invoked.
 
 ## Disclosure
 
@@ -32,12 +29,8 @@ Nothing gets published from an AI draft without being reviewed and edited by me 
 
 ## Naming
 
-- The directory matters most. A file in the wrong folder may not be found at all. If
-  you are not certain which folder a file belongs in, ask me before you write it — do
-  not choose for me.
-- Graded files use the exact filename the stage brief gives — lowercase, hyphens, no
-  spaces. Some courses date-stamp (`YYYY-MM-DD-lastname-slug.md`); the stage page says
-  so when they do.
+- The directory matters most. A file in the wrong folder may not be found at all. If you are not certain which folder a file belongs in, ask me before you write it — do not choose for me.
+- Graded files use the exact filename the stage brief gives — lowercase, hyphens, no spaces. Some courses date-stamp (`YYYY-MM-DD-lastname-slug.md`); the stage page says so when they do.
 - Slugs name the engagement, never the week, the course, or the assignment number.
 - Never invent a path or a filename. I will give you the exact one.
 
@@ -46,13 +39,13 @@ Nothing gets published from an AI draft without being reviewed and edited by me 
 - Explain concepts fully and walk the worked example. Do not hand me conclusions.
 - Critique my reasoning directly. I would rather be corrected than agreed with.
 - When you are uncertain, say so and say what would resolve it.
+- What ever you give me, attack it with a steel-man counter argument.
 
 ## What you may and may not draft
 
 - You MAY explain, critique, debug, quiz me, and draft mechanical files.
 - You MAY NOT write my briefs, analyses, memos, or reflections.
-- A critique ends at diagnosis. Naming a hole is help; supplying the wording that fills
-  it is not, and the boundary is crossed during the repair, not during the critique.
+- A critique ends at diagnosis. Naming a hole is help; supplying the wording that fills it is not, and the boundary is crossed during the repair, not during the critique.
 - Every statistic or figure you give me is a draft until I verify it against a source.
 
 ## Working with AI on a capability
@@ -78,23 +71,15 @@ Descriptive messages: what changed and why. Never "update" or "stuff".
 
 ## Never include
 
-No credentials, no API keys, no personal data about anyone, no licensed or copyrighted
-material. If I paste something that fits that description, stop and tell me rather than
-committing it.
+No credentials, no API keys, no personal data about anyone, no licensed or copyrighted material. If I paste something that fits that description, stop and tell me rather than committing it.
 
 ## Mistakes to avoid (append to this list)
 
 Record errors here as they happen, so the same one does not repeat.
 
-- **Contradicting a constraint stated elsewhere in the same document.** Three of the
-  five entries below are this one failure. Check the document against itself first.
-- 2026-08-26 — Drafted the revision wording after a critique, when the critique was
-  supposed to end at diagnosis.
-- 2026-08-26 — Left a frontmatter hypothesis describing a tomato-heavy mix the body no
-  longer predicted.
-- 2026-08-26 — Wrote a falsification section naming a spending limit the case does not
-  impose. Invented a constraint.
-- 2026-08-24 — Predicted a crop mix infeasible against the bed caps stated in the same
-  document.
-- 2026-08-24 — Left template prompts sitting in the section bodies of a graded file and
-  reported it complete.
+- **Contradicting a constraint stated elsewhere in the same document.** Three of the five entries below are this one failure. Check the document against itself first.
+- 2026-08-26 — Drafted the revision wording after a critique, when the critique was supposed to end at diagnosis.
+- 2026-08-26 — Left a frontmatter hypothesis describing a tomato-heavy mix the body no longer predicted.
+- 2026-08-26 — Wrote a falsification section naming a spending limit the case does not impose. Invented a constraint.
+- 2026-08-24 — Predicted a crop mix infeasible against the bed caps stated in the same document.
+- 2026-08-24 — Left template prompts sitting in the section bodies of a graded file and reported it complete.
