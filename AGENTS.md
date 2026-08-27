@@ -2,7 +2,7 @@
 
 ## About this repository
 
-Portfolio and coursework repository for Sean Barnes (University of Hawaiʻi DLEMBA).  One folder per capability, each closed out with a written decision. Agents iterate create and review themselves to mirror working with a person.
+Portfolio and coursework repository for Sean Barnes (University of Hawaiʻi DLEMBA). One folder per capability, each closed out with a written decision.
 
 Canonical file: `AGENTS.md`. `CLAUDE.md` points here, so any AI tool picks up the same conventions regardless of which one is invoked.
 
@@ -19,7 +19,6 @@ Nothing gets published from an AI draft without being reviewed and edited by me 
 - `README.md` — who I am, plus an index of engagements.
 - `RESUME.md` — current resume.
 - `prompt-log.md` — running record of AI sessions that materially shaped the work in this repo. Not a transcript of every prompt — just the ones that mattered.
-- `.gitignore` — what must never enter the history.
 - `.claude/skills/` — personal sandbox for Claude Code skills. Nothing in it is load-bearing for the rest of the repo.
 - `capabilities/<name>/` — one folder per capability, each with `README.md`, `spec.md`, and any supporting model/workbook files.
 - `docs/briefs/` — written BEFORE the work: scope and hypothesis.
@@ -36,24 +35,25 @@ Nothing gets published from an AI draft without being reviewed and edited by me 
 
 ## How I work
 
-- Explain concepts fully and walk the worked example. Do not hand me conclusions.
+- Show the derivation before the number. If I ask a direct question, answer it in one line first, then show the work.
 - Critique my reasoning directly. I would rather be corrected than agreed with.
 - When you are uncertain, say so and say what would resolve it.
-- What ever you give me, attack it with a steel-man counter argument.
+- On any recommendation, judgment, or analysis, give me the strongest argument against your own answer before you give me the answer. Not on factual lookups or status checks.
 
 ## What you may and may not draft
 
 - You MAY explain, critique, debug, quiz me, and draft mechanical files.
+- Mechanical means: README scaffolds, .gitignore, frontmatter, folder structure, tables of contents, commit messages, and this file. If it contains an argument, a judgment, or a number I will be graded on, it is not mechanical — ask before drafting it.
 - You MAY NOT write my briefs, analyses, memos, or reflections.
 - A critique ends at diagnosis. Naming a hole is help; supplying the wording that fills it is not, and the boundary is crossed during the repair, not during the critique.
-- Every statistic or figure you give me is a draft until I verify it against a source.
+- Tag every figure you produce as [source: X] or [unverified — my arithmetic]. I will not treat an untagged number as checked.
 
 ## Working with AI on a capability
 
 1. Start with a brief in `docs/briefs/` before generating any analysis — scope and hypothesis first.
 2. Log any AI session that changed scope, structure, or conclusions in `prompt-log.md`.
 3. Close the capability with a decision doc in `docs/decisions/` summarizing the recommendation.
-4. Note data provenance in `data/` before a source is used in any model.
+4. Note data provenance in `data/` before a source is used in any model, brief, or decision.
 
 ## Documentation
 
@@ -68,6 +68,14 @@ tell me instead of doing it.
 ## Commits
 
 Descriptive messages: what changed and why. Never "update" or "stuff".
+When I edit on GitHub the web editor prefills "Update <file>". Remind me to replace it
+rather than letting it through.
+
+## Reporting back
+
+- End any session that wrote to the repo by naming the file, the branch, and whether it
+  was pushed. Pushed to a branch is not on `main`, and do not open a pull request unless
+  I ask.
 
 ## Never include
 
@@ -77,9 +85,15 @@ No credentials, no API keys, no personal data about anyone, no licensed or copyr
 
 Record errors here as they happen, so the same one does not repeat.
 
-- **Contradicting a constraint stated elsewhere in the same document.** Three of the five entries below are this one failure. Check the document against itself first.
+- **Contradicting a constraint stated elsewhere in the same document.** Three of the entries below are this one failure. Check the document against itself first.
+- 2026-08-27 — Restructured AGENTS.md without adding the disclosure line the same file requires.
+- 2026-08-27 — Left the hypothesis-attack and conventions sessions out of prompt-log.md across three exchanges.
 - 2026-08-26 — Drafted the revision wording after a critique, when the critique was supposed to end at diagnosis.
 - 2026-08-26 — Left a frontmatter hypothesis describing a tomato-heavy mix the body no longer predicted.
 - 2026-08-26 — Wrote a falsification section naming a spending limit the case does not impose. Invented a constraint.
 - 2026-08-24 — Predicted a crop mix infeasible against the bed caps stated in the same document.
 - 2026-08-24 — Left template prompts sitting in the section bodies of a graded file and reported it complete.
+
+---
+
+-Drafted with help from Claude (Anthropic, 2026); reviewed and edited by me.

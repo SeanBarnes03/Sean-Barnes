@@ -12,10 +12,10 @@ See [RESUME.md](RESUME.md) for full professional history.
 
 ## Index of Engagements
 
-No capabilities completed yet. As work begins, each engagement will be listed here with links to its capability folder, brief, and decision.
+One engagement in progress. Each is listed here with links to its capability folder, brief, and decision; the decision link appears when the engagement closes.
 
 | Capability | Brief | Decision |
 |---|---|---|
-| — | — | — |
+| [Marginal analysis](capabilities/marginal-analysis/README.md) | [Perfect competition](docs/briefs/perfect-competition-brief.md) | — |
 
 -Drafted with help from Claude (Anthropic, 2026); reviewed and edited by me.
