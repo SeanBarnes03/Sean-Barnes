@@ -14,18 +14,9 @@ hypothesis: "About 5 tomato, 10 carrot and 20 mesclun beds — tomato labor is 1
 **What is being decided:** how many beds of each of the three crops to plant across the
 64 beds available until we find the P=MC tipping point where we lose money.
 
-**By whom:** the farmer.
+**By whom:** The farmer.  She can't control the demand or the price, the only factor she can control is the supply of what she grows.  
 
-> **[Sean to write — 2 or 3 sentences]** Why she cannot change the price she gets.
-> Bullets to work from: one small seller at a farmers' market; price is given to her at
-> any quantity she could grow; growing less will not raise it, growing more will not
-> lower it; so the decision is about quantity and cost, not price.
-
-**What happens if it is decided badly:** too much or too little will waste
-time/money/resources.
-
-> **[Sean to write — 1 sentence]** Why it cannot be fixed later. Bullet: the whole season
-> is committed in one decision in the spring.
+**What happens if it is decided badly:** too much or too little will waste time/money/resources.  Once planted these are sunk costs and can't be replaced.  
 
 **What is fixed:**
 
@@ -45,9 +36,7 @@ time/money/resources.
 
 **What is chosen:** how many beds of each crop to plant.
 
-**What limits the choice:** each crop's own bed cap — 20 tomatoes, 20 carrots, 30
-mesclun — no more than 64 beds in total, and no more than 4 temporary workers on top of
-the farmer's own 720 field hours.
+**What limits the choice:** each crop's own bed cap — 20 tomatoes, 20 carrots, 30 mesclun — no more than 64 beds in total, and no more than 4 temporary workers on top of the farmer's own 720 field hours.
 
 ## What I am assuming
 
@@ -67,23 +56,11 @@ I expect about **5 tomato beds, 10 carrot beds and 20 mesclun beds** — 35 of t
 available — since mesclun and carrots take half or less the hours of labor compared to
 tomatoes.
 
-> **[Sean to write — the important part, 3 or 4 sentences]** Why the escalation beats the
-> revenue advantage. Bullets to work from: tomatoes earn $8,800 a bed against $2,700
-> mesclun and $2,094 carrots, roughly 3-4x; a tomato bed starts at 2.50 hrs/wk against
-> 1.25 and 0.833; each added tomato bed raises labor on every tomato bed by 10%, against
-> 1.25% and 2.5%; compounding at that rate you expect a tomato bed to stop paying well
-> before the 20-bed cap. Then: why mesclun over carrots even though carrots take fewer
-> hours. And: why 29 beds go unplanted rather than merely unused.
+Tomatoes earn the most, but become more expensive to plant, so I went with more mesclun and carrot for that reason, and both are cheaper to produce. 
 
 ## How I would know I was wrong
 
-If we had beds left over, I was too conservative in my estimate. I left too much on the
-table to achieve P=MC.
-
-> **[Sean to write — 1 or 2 sentences]** A second falsifier that tests the mechanism
-> rather than the count. Bullet to work from: if a crop stops at its bed cap instead of
-> where its marginal cost meets its price, then a fence set that crop's level and not the
-> economics — which is the opposite of what this brief claims.
+If we had beds left over, I was too conservative in my estimate. I left too much on the table to achieve P=MC.  Or if estimated number of bed fails to reach P=MC.  
 
 ---
 
