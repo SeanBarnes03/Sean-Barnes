@@ -8,18 +8,7 @@ status: draft          # draft | committed | superseded
 
 # Marginal analysis model — specification
 
-<!--
-HOW TO USE THIS FILE
-This is a scaffold, not a spec. Every ">> TODO" is a decision only you can make.
-Write in your own words. Rough is fine. Delete these comments when you are done.
-The test: could someone who has never seen this case build the workbook from
-this document alone, with no other conversation?
--->
-
 ## 1. Inputs
-
-Every input below is taken from the case scenario. Values are given; the names
-are the contract — Section 3 refers to these names and never to cell addresses.
 
 ### Per-crop inputs
 
@@ -46,62 +35,59 @@ are the contract — Section 3 refers to these names and never to cell addresses
 | `TEMP_RATE` | 17.36 | $ per hour | case scenario (implied) |
 | `MAX_TEMPS` | 4 | workers | case scenario |
 
->> TODO: add any input you decide the model needs that is not listed above.
-
 ---
 
 ## 2. Structure
 
->> TODO: list every sheet or region of the workbook and one line on what it is for.
->> Suggested starting point — edit, rename, add, or delete as you see fit:
 >>   - Inputs
 >>   - Cost structure
 >>   - Marginal cost schedules (one per crop)
 >>   - Optimization
 >>   - Checks
->>
->> Also state the range each marginal-cost schedule must cover
->> (e.g. "q = 0 through each crop's MAX_BEDS").
-
+>>   - price = marginal cost
+>>   - tomatoes
+>>   - mesclun
+>>   - carrots
+>>   - hours
+>>   - workers
+>>   - beds
+>>   - weeks
+>>   - total bed cap
+>>   - farmer salary
+>>   - farmer field hours
+>>   - temp worker costs
+>>   - temp hours each
+>>   - max temps
+>>   - q = 0 through each crop's MAX_BEDS
 ---
 
 ## 3. Calculation logic
 
-Written in named ranges. No cell addresses anywhere in this section.
-
 ### 3.1 Labor hours (the engine)
 
     LABOR_HRS(q) = q * HRS_PER_BED_WEEK * WEEKS * (1 + DIM_PCT)^q
-
->> TODO: state in one sentence what the (1 + DIM_PCT)^q term represents and what
->> it does to the model. This is the sentence that stops a builder from
->> simplifying it away.
+>> one more bed raises the cost of all preceding beds.  Do not remove the exponential term, costs of each bed stays the same as before, marginal cost falls.  
 
 ### 3.2 What the diminishing-returns rate acts on
 
->> TODO — RESOLVE THIS CONFLICT. The case data table describes DIM_PCT as a
->> "marginal yield loss factor", but the formula in 3.1 applies it to labor hours.
->> Those are two different models. State plainly which one this workbook builds.
+>> Revenue for tomato beds stays the same at $8,800 per bed no matter how many you plant.  Ignore the "yield loss" naming convention.  
 
 ### 3.3 Revenue
 
->> TODO: state how season revenue is calculated from bed counts. Say explicitly
->> whether revenue scales linearly with beds or is reduced by anything.
+Revenue for the season is number of beds x revenue per bed.  Add up that number for tomatoes, carrots, and mesclun.
+Revenue is constant from the first bed to the last bed.  
 
 ### 3.4 Fertilizer cost
 
->> TODO: state how fertilizer cost is calculated. Say explicitly whether it is
->> linear in beds.
+Same as revenue.  Cost of fertilizer x number of beds.  Add up that number for tomatoes, carrots, and mesclun.  Cost of fertilizer is constant from first to last bed.  
 
 ### 3.5 Labor costing — consumption order
 
->> TODO: state the order in which labor hours are consumed. Which hours are used
->> first, and which cover the remainder.
+The farmer's hours are always consumed first. Temp worker only cover what's left over.
 
 ### 3.6 Labor costing — how the farmer is charged
 
->> TODO: the farmer is paid FARMER_SALARY but has only FARMER_FIELD_HRS field
->> hours at FARMER_RATE. State what her labor costs this model, and why.
+Farmer is paid $50,000 to run the farm.  Fixed cost.  
 
 ### 3.7 Labor costing — how temporary workers are charged
 
@@ -138,9 +124,6 @@ Constraints:
   - each crop's bed count is at most its own `MAX_BEDS`
   - the three bed counts sum to at most `TOTAL_BED_CAP`
   - temporary workers required is at most `MAX_TEMPS`
-
->> TODO: add any further constraint you decide the model needs
->> (e.g. bed counts must be non-negative).
 
 ---
 
