@@ -16,7 +16,7 @@ status: draft          # draft | committed | superseded
 |---|---|---|---|---|---|
 | `MAX_BEDS` | 20 | 20 | 30 | beds | case scenario |
 | `PRICE_PER_BED` | 8,800 | 2,094 | 2,700 | $ per bed per season | case scenario — "Price $/bed" |
-| `HRS_PER_BED_WEEK` | 2.50 | 0.833 | 1.25 | hours per bed per week | case scenario |
+| `HRS_PER_BED_WEEK` | 2.50 | 5/6 | 1.25 | hours per bed per week | case scenario — carrots shown as 0.833, stored as 5/6 |
 | `FERTILIZER_PER_BED` | 880 | 440 | 880 | $ per bed | case scenario |
 | `DIM_PCT` | 10.00% | 2.50% | 1.25% | % per additional bed | case scenario |
 
@@ -29,10 +29,10 @@ status: draft          # draft | committed | superseded
 | `TOTAL_BED_CAP` | 64 | beds (16 beds x 4 plots) | case scenario |
 | `FARMER_SALARY` | 50,000 | $ per season | case scenario |
 | `FARMER_FIELD_HRS` | 720 | hours per season | case scenario |
-| `FARMER_RATE` | 34.72 | $ per hour | case scenario (implied) |
+| `FARMER_RATE` | `= FARMER_SALARY / (2 * FARMER_FIELD_HRS)` | $ per hour | derived — the case's "implied $34.72/hr" |
 | `TEMP_COST_EACH` | 25,000 | $ per worker per season | case scenario |
 | `TEMP_HRS_EACH` | 1,440 | hours per worker per season | case scenario |
-| `TEMP_RATE` | 17.36 | $ per hour | case scenario (implied) |
+| `TEMP_RATE` | `= TEMP_COST_EACH / TEMP_HRS_EACH` | $ per hour | derived — the case's "$17.36/hr" |
 | `MAX_TEMPS` | 4 | workers | case scenario |
 
 ### Decision variables
@@ -44,6 +44,12 @@ Chosen by the optimizer, not given by the case. Integers, at least zero.
 | `BEDS_TOMATO` | beds | `MAX_BEDS` tomatoes = 20 |
 | `BEDS_CARROT` | beds | `MAX_BEDS` carrots = 20 |
 | `BEDS_MESCLUN` | beds | `MAX_BEDS` mesclun = 30 |
+
+`FARMER_RATE` and `TEMP_RATE` are **derived, not typed**. The case calls $34.72 an
+"implied" rate; it is $50,000 over the farmer's 1,440 season hours, and $17.36 is
+$25,000 over 1,440. Typing the rounded figures instead shifts season profit by
+about $13 and fails the tolerance in Section 4. For the same reason carrot labor is
+stored as 5/6 hours per bed-week, which the case displays as 0.833.
 
 `PRICE_PER_BED` is the P in P = MC. The farm is a price taker: P is the same for
 the first bed and the last, and does not vary with quantity planted.
