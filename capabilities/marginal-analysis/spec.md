@@ -103,19 +103,21 @@ The plan fails if temp workers required exceeds MAX_TEMPS (4).
 
 ### 3.9 Blended labor rate for the P&L
 
->> TODO: define the blended rate and state which labor dollars and which labor
->> hours go into it. State that the permanent-vs-temporary split is a farm-level
->> fact and is not pushed down into individual crop costs.
+Blended labor rate = total labor dollars ÷ total labor hours
+Total labor dollars = The farmer — $34.72/hr + Temps — $17.36/hr
+Total labor hours = all hours across all three crops, farmer and temp together 
+Every crop's labor cost is its own hours × the blended rate. The permanent/temporary split is never assigned to individual crops.
 
 ### 3.10 Marginal cost
 
->> TODO: define the marginal cost of the qth bed as a change in total cost, not
->> as a shape. Do NOT write "marginal cost increases with quantity" — state the
->> mechanism and let the workbook produce whatever shape falls out.
+The marginal cost of the qth bed of a crop is the total cost at q beds minus the total cost at q−1 beds.
+Each crop's marginal cost schedule varies that crop's bed count from 0 to its MAX_BEDS while holding the other two crops fixed.
+take the cost at 7 beds, subtract the cost at 6 beds, that's the cost of the 7th bed
 
 ### 3.11 Profit
 
->> TODO: state how season profit is calculated from revenue and all costs.
+Season profit = total revenue − total fertilizer cost − total labor cost − FIXED_COSTS.
+Total labor cost is counted once, as $50,000. It is not also added in from the per-crop labor figures.
 
 ### 3.12 Optimization
 
@@ -182,12 +184,7 @@ The model must report:
 
 ## 6. Audit findings
 
->> Leave empty until after the build. Filled in during the audit stage:
->> what you checked, what you found, and what you did about it.
->> Minimum five checks: the q = 1 hand calculation, one intermediate marginal cost
->> cross-checked against the Farm Profit Lab, Solver run from 0/0/0 and again from
->> 20/0/0 with any path-dependence noted, the published check figures, and a
->> spot-check that calculated cells contain formulas rather than pasted values.
+
 
 ---
 
