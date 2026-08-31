@@ -1,6 +1,8 @@
 # Marginal Analysis
 
-Using marginal cost and marginal revenue to find the profit-maximizing crop mix under perfect competition. Brief: `docs/briefs/perfect-competition-brief.md`. `spec.md` (Stage 2) and a decision doc will follow in later stages.
+Using marginal cost and marginal revenue to find the profit-maximizing crop mix under perfect competition.
+
+**Exercised in:** the perfect-competition engagement — a 64-bed market garden choosing how many beds of tomatoes, carrots and mesclun to plant at prices it cannot set. Brief: `docs/briefs/perfect-competition-brief.md`. Specification: `spec.md`. Model: `model.xlsx`. A decision doc follows in Stage 3.
 
 ## Workbook color convention
 
