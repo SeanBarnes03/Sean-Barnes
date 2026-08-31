@@ -160,12 +160,27 @@ The workbook must compute each of these and report pass or fail.
 
 The model must report:
 
->> TODO: name every result the workbook has to produce. If it is not named here,
->> it is not required, and you have no grounds to call it missing at audit.
->> Consider: the optimal bed counts, season profit, total labor hours, temporary
->> workers used, the blended labor rate, the marginal cost schedule for each crop,
->> the standalone P = MC point for each crop, and the status of every rule in
->> Section 4.
+**The decision**
+- Optimal bed counts for each crop — tomatoes, carrots, mesclun
+
+**The evidence**
+- Season profit
+- The standalone P = MC point for each crop
+
+**The audit trail**
+- Temporary workers used
+- The q = 1 tomato hand-check cell (labor hours for one tomato bed)
+
+**Rule status** — each shown as pass or fail
+- Optimal mix equals 10 tomatoes / 20 carrots / 30 mesclun
+- Season profit equals $42,762
+- Standalone P = MC points are approximately 10 / 10 / 6 beds
+- Temporary workers used is at most 4
+- q = 1 tomato equals 99 labor hours
+
+>> TODO: decide whether to also report total labor hours, the blended labor rate,
+>> and the full marginal cost schedule per crop. Anything not named here is not
+>> required, and cannot be called a defect at audit.
 
 ---
 
