@@ -91,13 +91,15 @@ Farmer is paid $50,000 to run the farm.  Fixed cost.
 
 ### 3.7 Labor costing — how temporary workers are charged
 
->> TODO: if the model needs a partial worker's worth of hours, state whether the
->> cost is the full TEMP_COST_EACH or the hours actually used at TEMP_RATE.
+400 × $17.36 = $6,944
+You only charge the model for work actually done.
 
 ### 3.8 Number of temporary workers required
 
->> TODO: state how the count of temporary workers is derived from hours, and how
->> partial workers are handled, so the "at most MAX_TEMPS" rule can be checked.
+Temp workers required = (total labor hours − FARMER_FIELD_HRS) ÷ TEMP_HRS_EACH
+Any fraction is rounded up 
+If total hours are 720 or fewer, temp workers required is 0.
+The plan fails if temp workers required exceeds MAX_TEMPS (4).
 
 ### 3.9 Blended labor rate for the P&L
 
@@ -151,8 +153,6 @@ The workbook must compute each of these and report pass or fail.
 - Every calculated cell contains a formula. No pasted values.
 - Every input is a real named range carrying the unit stated in Section 1.
 - Every constraint check in 3.12 is computed in the workbook and displays green.
-
->> TODO: add any further validation rule you want the build held to.
 
 ---
 
