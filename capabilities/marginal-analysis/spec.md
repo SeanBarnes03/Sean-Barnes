@@ -178,10 +178,6 @@ The model must report:
 - Temporary workers used is at most 4
 - q = 1 tomato equals 99 labor hours
 
->> TODO: decide whether to also report total labor hours, the blended labor rate,
->> and the full marginal cost schedule per crop. Anything not named here is not
->> required, and cannot be called a defect at audit.
-
 ---
 
 ## 6. Audit findings
