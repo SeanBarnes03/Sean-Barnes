@@ -3,7 +3,7 @@ type: spec
 engagement: perfect-competition
 capability: marginal-analysis
 date: 2026-08-30
-status: draft          # draft | committed | superseded
+status: committed      # draft | committed | superseded
 ---
 
 # Marginal analysis model — specification
@@ -341,6 +341,15 @@ q = 1 = 99 hours · labor allocation $104,118 equals total labor cost. Constrain
 held, and the starting points agreed. The cell formulas did not change or corrupt
 the outcome — the figures are computed rather than typed in, which is what
 separates a model that passes from one that merely displays the right answers.
+
+**5. Formulas, not pasted values.** Confirmed formulas in cells, and no cell
+errors — no `#REF!`, `#DIV/0!` or `#NAME?` anywhere in the workbook. This catches a
+number that is right today and wrong the moment an input changes: a pasted 42762
+passes every other check on this list and then breaks silently the first time
+someone edits an assumption.
+
+**Noted for Stage 3.** Tomato marginal cost rises to $7,661 at bed 5, drops to
+$4,906 at bed 6, then rises and passes $8,800 between beds 10 and 11.
 
 ---
 
