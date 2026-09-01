@@ -265,6 +265,19 @@ compounding by q still returns exactly 99 hours at q = 1. The same defect return
 990 hours at q = 10 against the required 2,334.368214, so the second anchor is the
 one that catches it.
 
+### Independent cross-check
+
+| Check | Required value |
+|---|---|
+| Marginal cost of the 7th tomato bed, standalone | $5,586, matching the Farm Profit Lab |
+
+The Farm Profit Lab is a separate implementation of this same model, so agreement is
+independent evidence rather than the workbook confirming itself. Compare **marginal**
+cost, not total cost: the lab carries `FIXED_COSTS` inside its total and this
+specification excludes them per 3.10, so its totals run $20,000 higher at every bed
+count. The offset is constant and cancels in the subtraction, which is why the
+marginal figures are the comparable ones.
+
 ### Structural rules
 
 - No error cells anywhere in the workbook — no `#REF!`, `#DIV/0!`, `#NAME?`,
