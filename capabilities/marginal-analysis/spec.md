@@ -328,14 +328,14 @@ would have gotten 90 instead of 99.
 
 **2. Farm Profit Lab.** I compared 6 versus 7 tomato beds and got total cost for 7
 tomato beds in farm lab is $59,974, for 6 tomato beds total cost is $54,388,
-difference in cost is the same.
+difference in cost is the same $5,586.
 
 **3. Solver from two starting points.** Ran Solver at 0/0/0, then again from
 20/0/0 — identical settings both times, only B5:B7 changed. Both landed on
-10 / 20 / 30, profit $42,762. If both runs land on the same numbers, we have real
+10 / 20 / 30, profit $42,762. "If both runs land on the same numbers, we have real
 evidence the answer is not an artifact of where you started. If they disagree, it
-means we found something: the model has multiple peaks, the better answer is the
-one you now know about, and the disagreement itself is the finding. (from the Stage
+means we found something: the model has multiple peaks, the better answer is the one
+you now know about, and the disagreement itself is the finding." (from the Stage
 instructions)
 
 **4. The check figures.** All twelve rules on the Checks passed. Mix 10/20/30
