@@ -322,41 +322,30 @@ The model must report:
 
 Five checks run against the workbook after it was built and solved in Excel.
 
-**1. q = 1 by hand.** Calculated one tomato bed by hand: 1 x 2.50 x 36 x 1.10 = 99
-hours, and the workbook returned 99. Without the `^q` term we would have gotten 90
-instead of 99 — and the same missing term would flatten marginal cost in every
-schedule, so the model would never find a stopping point.
+**1. q = 1 by hand.** Calculated: 1 x 2.50 x 36 x 1.10 = 99 hours. Leaving "^q" out
+for labor removes a safety catch that could lead to a wrong answer. For example, we
+would have gotten 90 instead of 99.
 
-**2. Farm Profit Lab cross-check.** I compared 6 versus 7 tomato beds. The lab gave
-$59,974 and $54,388 against my $39,974 and $34,388 — $20,000 higher in both,
-exactly the fixed costs the lab includes and my schedule excludes, so they cancel
-and both give the same marginal cost of $5,586. The hand check only tests the
-first bed; this one tests a bed in the middle of the curve, where a wrong labor
-rate or a farmer-to-temp switchover at the wrong point would produce a wrong
-marginal cost while q = 1 still looked perfect.
+**2. Farm Profit Lab.** I compared 6 versus 7 tomato beds and got total cost for 7
+tomato beds in farm lab is $59,974, for 6 tomato beds total cost is $54,388,
+difference in cost is the same.
 
-**3. Solver from two starting points.** Ran Solver from 0/0/0, then again from
+**3. Solver from two starting points.** Ran Solver at 0/0/0, then again from
 20/0/0 — identical settings both times, only B5:B7 changed. Both landed on
-10 / 20 / 30, profit $42,762. If both runs land on the same numbers, you have real
+10 / 20 / 30, profit $42,762. If both runs land on the same numbers, we have real
 evidence the answer is not an artifact of where you started. If they disagree, it
 means we found something: the model has multiple peaks, the better answer is the
-one you now know about, and the disagreement itself is the finding.
+one you now know about, and the disagreement itself is the finding. (from the Stage
+instructions)
 
-**4. The check figures.** All twelve rules on the Checks sheet passed. Mix
-10 / 20 / 30 · profit $42,761.66 against $42,762 required · crossings 10 / 10 / 6 ·
-q = 1 = 99 hours · labor allocation $104,118 equals total labor cost. Constraints
-held, and the starting points agreed. The cell formulas did not change or corrupt
-the outcome — the figures are computed rather than typed in, which is what
-separates a model that passes from one that merely displays the right answers.
+**4. The check figures.** All twelve rules on the Checks passed. Mix 10/20/30
+yielded Profit $42,761.66 vs $42,762 required · crossings 10 / 10 / 6 · q=1 = 99
+hours. Constraints held, the starting points agreed. Cell formula did not change or
+corrupt the outcome.
 
-**5. Formulas, not pasted values.** Confirmed formulas in cells, and no cell
-errors — no `#REF!`, `#DIV/0!` or `#NAME?` anywhere in the workbook. This catches a
-number that is right today and wrong the moment an input changes: a pasted 42762
-passes every other check on this list and then breaks silently the first time
-someone edits an assumption.
-
-**Noted for Stage 3.** Tomato marginal cost rises to $7,661 at bed 5, drops to
-$4,906 at bed 6, then rises and passes $8,800 between beds 10 and 11.
+**5. Formulas, not pasted values.** Confirmed formulas in cells, no cell errors,
+Farm Lab chart shows Tomato costs rise to $7,661 at bed 5, drops to $4,906 at bed 6,
+then rises and passes $8,800 between beds 10 and 11.
 
 ---
 
