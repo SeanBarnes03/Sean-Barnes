@@ -328,12 +328,12 @@ first bed; this one tests a bed in the middle of the curve, where a wrong labor
 rate or a farmer-to-temp switchover at the wrong point would produce a wrong
 marginal cost while q = 1 still looked perfect.
 
-**3. Solver from two starting points.** I ran Solver from 0/0/0 and again from
-20/0/0, with identical settings both times and only B5:B7 changed between runs.
-Both landed on 10 / 20 / 30 and $42,762. GRG Nonlinear walks uphill and stops at
-the first peak it reaches, so two starts agreeing is real evidence the answer is
-not an artifact of where the search began; had they disagreed, the model would
-have multiple peaks and that disagreement would itself be the finding.
+**3. Solver from two starting points.** Ran Solver from 0/0/0, then again from
+20/0/0 — identical settings both times, only B5:B7 changed. Both landed on
+10 / 20 / 30, profit $42,762. If both runs land on the same numbers, you have real
+evidence the answer is not an artifact of where you started. If they disagree, it
+means we found something: the model has multiple peaks, the better answer is the
+one you now know about, and the disagreement itself is the finding.
 
 ---
 
