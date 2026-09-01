@@ -164,6 +164,13 @@ If `TOTAL_LABOR_HRS` is at or below `FARMER_FIELD_HRS`, `TEMP_HRS_USED` is zero 
 
 The plan fails if `TEMPS_REQUIRED` exceeds `MAX_TEMPS` (4).
 
+The optimizer constrains this cap in its smooth form,
+`TEMP_HRS_USED <= MAX_TEMPS * TEMP_HRS_EACH` (5,760 hours), which is exactly
+equivalent — `ROUNDUP(h / 1440) <= 4` holds precisely when `h <= 5760`. GRG
+Nonlinear assumes smooth functions, and a step function in a constraint makes it
+stall. `TEMPS_REQUIRED` remains the reported headcount and is checked in the
+workbook.
+
 `TEMPS_REQUIRED` is a headcount used only for the constraint check. Cost is always
 computed from `TEMP_HRS_USED` per 3.7, never from this count.
 
