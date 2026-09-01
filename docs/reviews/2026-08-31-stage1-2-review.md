@@ -1,7 +1,7 @@
 <!-- PR TARGET: https://github.com/SeanBarnes03/Sean-Barnes | Stage 1.2 (8 pts) -->
 # Stage 1.2 review — spec, build, audit
 
-**Provisional score 74 out of 100 — held, not entered. The stage is not due until 6 September and this is a build in progress, not a finished one.**
+**Provisional score 74 out of 100 — that would be 11.10 of the 15 points for this stage — held, not entered. The stage is not due until 6 September and this is a build in progress, not a finished one.**
 
 **Spec:** [`capabilities/marginal-analysis/spec.md`](https://github.com/SeanBarnes03/Sean-Barnes/blob/main/capabilities/marginal-analysis/spec.md)
 
@@ -50,6 +50,14 @@ Your spec frontmatter also still says status: draft. Once Solver has run and Sec
 37.5 of the 100 points on this stage sit in the workbook and the audit, and both are mid-flight. Entering 74 today would record a snapshot of a Saturday morning rather than a piece of work, and the stage is not due for six days.
 
 I am telling you the number so you know where you stand, not as a grade. Run Solver and write the audit and this lands in a very different place.
+
+### A note on the point value, new as of today
+
+This stage is now worth **15 points** rather than the 8 in the stage brief, and **Stage 1.3** — the analysis, the memo, and the prompt log — is now worth **15** as well. Cases 2 and 3 have been dropped for this cohort, so Case 1 *is* the case.
+
+In practice: this stage and the next one are together worth **30 of the 35 points** on the case. Stage 0 and Stage 1.1 are 2.5 each. The weight has moved onto the build and the analysis, which is where the work actually is.
+
+Nothing about the grading changes — the score is still out of 100 and converted at the end. The stage brief and the case page still show the old numbers; they have not been updated yet.
 
 ---
 
