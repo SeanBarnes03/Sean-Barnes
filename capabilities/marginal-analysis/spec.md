@@ -335,6 +335,13 @@ evidence the answer is not an artifact of where you started. If they disagree, i
 means we found something: the model has multiple peaks, the better answer is the
 one you now know about, and the disagreement itself is the finding.
 
+**4. The check figures.** All twelve rules on the Checks sheet passed. Mix
+10 / 20 / 30 · profit $42,761.66 against $42,762 required · crossings 10 / 10 / 6 ·
+q = 1 = 99 hours · labor allocation $104,118 equals total labor cost. Constraints
+held, and the starting points agreed. The cell formulas did not change or corrupt
+the outcome — the figures are computed rather than typed in, which is what
+separates a model that passes from one that merely displays the right answers.
+
 ---
 
 -Drafted with help from Claude (Anthropic, 2026); reviewed and edited by me.
