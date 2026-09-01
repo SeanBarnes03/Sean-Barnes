@@ -344,8 +344,8 @@ hours. Constraints held, the starting points agreed. Cell formula did not change
 corrupt the outcome.
 
 **5. Formulas, not pasted values.** Confirmed formulas in cells, no cell errors,
-Farm Lab chart shows Tomato costs rise to $7,661 at bed 5, drops to $4,906 at bed 6,
-then rises and passes $8,800 between beds 10 and 11.
+Tomato costs rise to $7,661 at bed 5, drops to $4,906 at bed 6, then rises and
+passes $8,800 between beds 10 and 11.
 
 ---
 
