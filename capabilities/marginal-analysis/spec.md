@@ -58,14 +58,15 @@ the first bed and the last, and does not vary with quantity planted.
 
 ## 2. Structure
 
-Five sheets.
+Five sheets. Sheet names carry no spaces: Excel's Solver add-in on macOS mishandles
+unquoted sheet references containing spaces and raises a VBA 1004 error.
 
 - **Inputs** — every named range in Section 1, one cell each, with its unit in an
   adjacent label cell. Nothing calculated here.
-- **Cost structure** — total labor hours, farmer hours used, temp hours used,
+- **CostStructure** — total labor hours, farmer hours used, temp hours used,
   temp workers required, farmer labor dollars, temp labor dollars, the blended
   labor rate, fertilizer cost, and total cost, at the current bed counts.
-- **Marginal cost schedules** — one block per crop, q = 0 through that crop's
+- **MCSchedules** — one block per crop, q = 0 through that crop's
   `MAX_BEDS`. Columns: q, labor hours, labor cost, fertilizer cost, total cost,
   marginal cost, and `PRICE_PER_BED` for comparison.
 - **Optimization** — the three decision variables, season profit as the objective,
