@@ -12,4 +12,4 @@ Any Excel model added to this folder (e.g. `model.xlsx`) follows the standard fi
 - **Black** — formulas (calculated within the same sheet)
 - **Green** — links to another sheet or workbook
 
-No workbook has been added yet; this documents the convention ahead of it.
+`model.xlsx` follows this convention. It is built from `spec.md`, and its Checks sheet computes every validation rule in Section 4 of that spec as PASS or FAIL.
