@@ -313,7 +313,12 @@ The model must report:
 
 ## 6. Audit findings
 
+Five checks run against the workbook after it was built and solved in Excel.
 
+**1. q = 1 by hand.** Calculated one tomato bed by hand: 1 x 2.50 x 36 x 1.10 = 99
+hours, and the workbook returned 99. Without the `^q` term we would have gotten 90
+instead of 99 — and the same missing term would flatten marginal cost in every
+schedule, so the model would never find a stopping point.
 
 ---
 
