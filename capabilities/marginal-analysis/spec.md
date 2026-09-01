@@ -320,6 +320,14 @@ hours, and the workbook returned 99. Without the `^q` term we would have gotten 
 instead of 99 — and the same missing term would flatten marginal cost in every
 schedule, so the model would never find a stopping point.
 
+**2. Farm Profit Lab cross-check.** I compared 6 versus 7 tomato beds. The lab gave
+$59,974 and $54,388 against my $39,974 and $34,388 — $20,000 higher in both,
+exactly the fixed costs the lab includes and my schedule excludes, so they cancel
+and both give the same marginal cost of $5,586. The hand check only tests the
+first bed; this one tests a bed in the middle of the curve, where a wrong labor
+rate or a farmer-to-temp switchover at the wrong point would produce a wrong
+marginal cost while q = 1 still looked perfect.
+
 ---
 
 -Drafted with help from Claude (Anthropic, 2026); reviewed and edited by me.
