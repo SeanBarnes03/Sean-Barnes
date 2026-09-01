@@ -12,10 +12,10 @@ See [RESUME.md](RESUME.md) for full professional history.
 
 ## Index of Engagements
 
-No capabilities completed yet. As work begins, each engagement will be listed here with links to its capability folder, brief, and decision.
+Each engagement is listed here with links to its capability folder, brief, and decision.
 
 | Capability | Brief | Decision |
 |---|---|---|
-| — | — | — |
+| [Marginal analysis](capabilities/marginal-analysis/) — perfect competition, choosing a crop mix at a price the farm cannot set | [Engagement brief](docs/briefs/perfect-competition-brief.md) | pending — Stage 3 |
 
 -Drafted with help from Claude (Anthropic, 2026); reviewed and edited by me.

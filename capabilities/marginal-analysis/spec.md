@@ -257,6 +257,13 @@ The workbook must compute each of these and report pass or fail.
 | Check | Required value |
 |---|---|
 | `LABOR_HRS(1)` for tomatoes | 1 x 2.50 x 36 x 1.10 = 99 hours |
+| `LABOR_HRS(10)` for tomatoes | 10 x 2.50 x 36 x 1.10^10 = 2,334.368214 hours |
+
+Two anchors, not one. The q = 1 check alone cannot fail against the likeliest
+structural defect: a builder who writes a flat `(1 + DIM_PCT)` instead of
+compounding by q still returns exactly 99 hours at q = 1. The same defect returns
+990 hours at q = 10 against the required 2,334.368214, so the second anchor is the
+one that catches it.
 
 ### Structural rules
 
