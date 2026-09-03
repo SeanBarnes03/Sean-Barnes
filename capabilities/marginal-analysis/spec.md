@@ -61,6 +61,18 @@ the first bed and the last, and does not vary with quantity planted.
 Five sheets. Sheet names carry no spaces: Excel's Solver add-in on macOS mishandles
 unquoted sheet references containing spaces and raises a VBA 1004 error.
 
+**Round-trip rule.** Any tool that writes this workbook programmatically — openpyxl
+or equivalent — stores formulas without evaluating them, and strips whatever
+calculated values the file already carried. A workbook in that state has live
+formulas and blank results: it computes correctly the moment Excel opens it, and
+says nothing at all to anyone who reads it without recalculating.
+
+So every programmatic write is followed by a round trip through Excel — open, let
+it calculate, save — before the file is committed. This is not optional and it is
+not a footnote on the commit. A workbook that has to be recalculated before it will
+report anything is a workbook whose committed state cannot be reviewed, which
+defeats the purpose of committing it.
+
 - **Inputs** — every named range in Section 1, one cell each, with its unit in an
   adjacent label cell. Nothing calculated here.
 - **CostStructure** — total labor hours, farmer hours used, temp hours used,
@@ -286,6 +298,10 @@ marginal figures are the comparable ones.
   values.
 - Every input is a real named range carrying the unit stated in Section 1.
 - Every constraint check in 3.12 is computed in the workbook and displays PASS.
+- The committed workbook carries its calculated values, not just its formulas. Open
+  the committed file and the Checks sheet must report Actual and Status without
+  recalculating; blank result columns mean the file was written programmatically and
+  never round-tripped through Excel, per the rule in Section 2.
 
 ### Tolerances
 
