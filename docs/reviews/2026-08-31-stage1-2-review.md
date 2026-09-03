@@ -1,63 +1,47 @@
 <!-- PR TARGET: https://github.com/SeanBarnes03/Sean-Barnes | Stage 1.2 (8 pts) -->
 # Stage 1.2 review — spec, build, audit
 
-**Provisional score 74 out of 100 — that would be 11.10 of the 15 points for this stage — held, not entered. The stage is not due until 6 September and this is a build in progress, not a finished one.**
+**You scored 98 out of 100 (A+) — 14.70 of the 15 points for this stage. Entered; the hold is lifted.**
 
 **Spec:** [`capabilities/marginal-analysis/spec.md`](https://github.com/SeanBarnes03/Sean-Barnes/blob/main/capabilities/marginal-analysis/spec.md)
 
-> Graded 2026-08-31, first pass. Your specification is one of the two strongest in the cohort. The workbook is built from it and is structurally correct. Solver has never been run, so the workbook does not yet report an answer and the audit section is empty — which is why this is held rather than entered. One Excel session moves this a long way.
+> Re-graded 2026-09-02 against your 1 September commits. Your previous result was 74, held, because Solver had never been run and the audit section was an empty heading. Both are done, both gaps I named in the validation rules are closed, and every figure in your audit reconciles against my own model. This is finished work.
 
 | Criterion | Earned | Notes |
 |---|---|---|
-| Spec completeness — inputs, structure, calculation flow | 37 / 37.5 | Genuinely excellent, and it does the thing that separates a specification from a description: it writes down the conventions a builder would otherwise invent. Section 3.5 through 3.9 fixes the costing order, how the farmer is charged, how temporary labor is charged, the headcount rule, and the blended rate — and then adds the rule most people miss, that the permanent-versus-temporary split is a farm-level fact and is never pushed down into a crop's cost. Section 3.2 is the sharpest half-page in the document: the diminishing-returns rate multiplies labor hours, it does not reduce yield, and some versions of the case table label it a "marginal yield loss factor" which is not what this model implements. That is you catching an ambiguity in the source and closing it in writing. One person in this cohort has that misreading live in their brief right now. |
-| Spec validation rules | 23 / 25 | Complete, written before the build, and every acceptance figure carries a tolerance with a reason — the $5 profit band exists to absorb rounding in the two derived wage rates, and you say so. The first-crossing definition in 3.10 is the most careful statement of it anyone wrote: you define the crossing as the largest q such that MC is at or below price for every bed up to q, and then explain why the looser phrasing would report the wrong point when the curve is non-monotonic. Two points off for one gap. Your only hand-calculated anchor is q = 1 tomato at 99 hours, and that is precisely the check a defective model passes: a builder that writes a flat (1 + dim) instead of compounding by q returns exactly 99.0 at q = 1 and 990 instead of 2,334.37 at q = 10. Add the second anchor. The stage's cross-check against the Farm Profit Lab is also not in your validation rules, and it is on the checklist. |
-| Workbook satisfies the contract | 14 / 25 | The build is real and it follows the spec. Five sheets named as Section 2 specifies, 47 defined names, zero error cells, formulas referencing names rather than addresses, the Solver settings written into the Optimization sheet so the run is reproducible, and a Checks sheet laid out one row per validation rule. Structurally this is sound work. What it does not do is answer the question: the changing cells B5:B7 on Optimization are still 0 / 0 / 0, so every Actual and Status cell on the Checks sheet is blank and the two-starting-point table beneath them has no rows filled. The workbook was generated from the spec and committed without ever being opened in Excel and solved. |
-| Audit note | 0 / 12.5 | Section 6 of the spec is an empty heading. That is the correct state for a workbook that has not been run, and nothing is lost — the audit is written after the build, and the build finished three hours before I looked at it. |
-| **Final** | **74 / 100** | held |
+| Spec completeness — inputs, structure, calculation flow | 37.5 / 37.5 | Up from 37, and full marks. Two additions did it, and both are the same kind of thing: a convention written down with the reason attached. The sheet-name rule — no spaces, because Solver on macOS mishandles unquoted sheet references containing them and raises a 1004 — is a build constraint a future builder would otherwise rediscover the hard way. And the smooth-constraint note on TEMPS_REQUIRED is better than that: you kept ROUNDUP out of the Solver constraint and used TEMP_HRS_USED <= 5,760 instead, then proved the two are equivalent (ROUNDUP(h/1440) <= 4 holds exactly when h <= 5760) and said why the step function would stall GRG Nonlinear. That is a modeling decision, its justification, and its proof of equivalence in five lines. |
+| Spec validation rules | 25 / 25 | Up from 23, and both gaps are closed exactly as named. The second labor anchor is in at q = 10 with the reasoning written into the spec rather than left implicit: a builder who writes a flat (1 + DIM_PCT) instead of compounding by q returns exactly 99 hours at q = 1 and 990 at q = 10 against the required 2,334.368214, so the second anchor is the one that catches it. The Farm Profit Lab cross-check is in too, and you handled the part most people would have got wrong — the lab carries FIXED_COSTS inside its totals and your spec excludes them, so its totals run $20,000 higher at every bed count. You compare marginal figures, where the constant offset cancels, and you say why. |
+| Workbook satisfies the contract | 23 / 25 | Up from 14. B5:B7 now hold 10 / 20 / 30, both Solver runs are recorded, 46 named ranges, every calculated cell is a formula referencing names rather than addresses, and the only numeric literals anywhere are the case inputs, the q index columns, the three decision cells, and the acceptance targets — which is exactly where literals belong. Two points off for one thing: the committed file was written by openpyxl and has never been saved out of Excel, so it carries no calculated values. Open it and everything computes; but until someone does, the Actual and Status columns on Checks are blank, and the two Solver runs live as typed records rather than as the workbook's own state. The file that was solved and the file that is committed are not the same file. |
+| Audit note | 12.5 / 12.5 | Up from 0, and full marks. Five checks, each with what you checked and what it was intended to catch. I reproduced every number in it independently and they all hold — see below. |
+| **Final** | **98 / 100** | entered |
 
-### What to do, in order
+### I checked your audit figures against my own model and they all hold
 
-- Open model.xlsx in Excel desktop. Solver is not in the web version.
+This matters more than the score, so I want to be specific about it.
 
-- Set B5:B7 on Optimization to 0 / 0 / 0, enter the Solver settings you already wrote into rows 22 through 30, and run. Record the mix and the profit in the Solver path-dependence table on the Checks sheet.
+The tomato marginal cost of $7,661 at bed 5 and $4,906 at bed 6 — I get $7,660.86 and $4,906.27. The Farm Profit Lab comparison of $59,974 against $54,388 for a difference of $5,586 — I get variable costs of $39,973.40 and $34,388.38, which are your numbers less the $20,000 the lab carries and yours does not, and a marginal cost of $5,585.02. Season profit $42,761.66, crossings 10 / 10 / 6, q = 1 at 99 hours: all correct.
 
-- Reset to 20 / 0 / 0 and run again. Record it. If the two disagree, that is a finding worth writing up, not an error to hide.
+So your audit is not a narrative about having checked things. It is a set of independently verifiable claims, and they verify.
 
-- Read what the Checks sheet now says. Your acceptance criteria are 10 / 20 / 30 exactly and $42,762 within $5. Whether they pass is the whole point of having written them down first.
+### The marginal cost dip at bed 6, and why you should not explain it yet
 
-- Add the q = 10 tomato anchor to Section 4 and to the Checks sheet: 10 x 2.50 x 36 x 1.10^10 = 2,334.368214 hours. Confirm the workbook returns it.
+You recorded it and did not explain it, which is right — that belongs in Stage 1.3. But hold onto what you found, because it is the most interesting thing in this case and most of the cohort's workbooks paper over it.
 
-- Cross-check one intermediate marginal cost against the Farm Profit Lab.
+Tomato marginal cost rises to $7,661 at bed 5, falls to $4,906 at bed 6, then rises again. A cost curve that falls in the middle looks like a defect. It is not. The farmer's 720 hours are the cheap hours in the sense that matters here — they are already bought — and by bed 5 they are nearly gone. The fifth bed is expensive because part of it is priced at her $34.72; the sixth is cheaper because all of it is priced at the temp's $17.36. The curve dips at the moment the marginal labor source changes.
 
-- Then write Section 6. Four or five checks, each saying what you checked, what you found, what you did about it, and — this is the part most people skip — what that check would have caught if it had failed. A check that could not have failed is not evidence.
+That is worth writing about in Stage 1.3 because it is a real economics point, not a spreadsheet artifact, and because it is the reason "the first q where MC exceeds price" is the wrong definition of the crossing — a definition you had already written the correct version of in section 3.10 before the workbook existed to show you why it mattered.
 
-### One thing worth saying about the derived rates
+### The two points, and how to close them in five minutes
 
-You wrote that typing the rounded $34.72 and $17.36 instead of deriving them shifts season profit by about $13, and made deriving them a rule. That is not a hypothetical.
+Open model.xlsx in Excel, let it calculate, and commit it again. That is the whole fix. The file then carries its own values, and someone who opens it on GitHub or in a viewer that does not recalculate sees a workbook that reports its answer rather than one that reports blanks.
 
-Another workbook in this cohort types the rounded figures, and its profit comes out $13.16 above the check figure — enough to fail a tolerance, small enough to look like a modeling error rather than a rounding one, and genuinely difficult to find once the model is built. You reasoned your way to that in advance and wrote a rule against it, which is what a specification is for.
+It is worth doing for a reason beyond the two points: a workbook that has to be recalculated to say anything is a workbook whose committed state cannot be reviewed. Your spec is unusually careful about the artifact being the thing of record; this is the same principle applied one level down.
 
-Storing carrot labor as 5/6 rather than 0.833 is the same instinct and it is worth the same amount. The case displays 0.833; the number is five sixths.
+### Where this submission sits
 
-### A small inconsistency
+There are now three finished workbooks in the cohort and yours is one of them. What distinguishes it is the specification: it is the document that most reads like something a second person could build from without asking you a single question, and the sections that write down conventions rather than formulas — 3.2 on what the diminishing-returns rate multiplies, 3.5 through 3.9 on the costing order — are the reason your workbook came out right the first time it was solved.
 
-capabilities/marginal-analysis/README.md still ends with "No workbook has been added yet; this documents the convention ahead of it." model.xlsx is sitting next to it. One line to fix, and it is worth fixing because that README is the file a reader opens first to find out what is in the folder.
-
-Your spec frontmatter also still says status: draft. Once Solver has run and Section 6 is written, that becomes committed.
-
-### Why this is held rather than entered
-
-37.5 of the 100 points on this stage sit in the workbook and the audit, and both are mid-flight. Entering 74 today would record a snapshot of a Saturday morning rather than a piece of work, and the stage is not due for six days.
-
-I am telling you the number so you know where you stand, not as a grade. Run Solver and write the audit and this lands in a very different place.
-
-### A note on the point value, new as of today
-
-This stage is now worth **15 points** rather than the 8 in the stage brief, and **Stage 1.3** — the analysis, the memo, and the prompt log — is now worth **15** as well. Cases 2 and 3 have been dropped for this cohort, so Case 1 *is* the case.
-
-In practice: this stage and the next one are together worth **30 of the 35 points** on the case. Stage 0 and Stage 1.1 are 2.5 each. The weight has moved onto the build and the analysis, which is where the work actually is.
-
-Nothing about the grading changes — the score is still out of 100 and converted at the end. The stage brief and the case page still show the old numbers; they have not been updated yet.
+For Stage 1.3: you already have the two hardest things it asks for. The dip at bed 6 is a finding with a real explanation behind it, and your brief committed a prediction that the model can be compared against. Do not revise the brief to match the model.
 
 ---
 
