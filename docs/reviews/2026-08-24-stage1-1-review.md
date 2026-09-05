@@ -1,17 +1,16 @@
-<!-- PR TARGET: https://github.com/SeanBarnes03/Sean-Barnes | Stage 1.1 (2.5 pts) -->
-# Stage 1.1 review — engagement brief · **91 / 100** (A-) · 2.28 / 2.5 pts
+<!-- PR TARGET: https://github.com/SeanBarnes03/Sean-Barnes | Stage 1.1 -->
+# Stage 1.1 review — engagement brief
 
 **Brief:** [`docs/briefs/perfect-competition-brief.md`](https://github.com/SeanBarnes03/Sean-Barnes/blob/main/docs/briefs/perfect-competition-brief.md)
 
-> Re-checked 2026-08-31. Your score is unchanged at 91. The file on main is still the reverted version — the recovery I described four days ago has not happened, and your Stage 1.2 spec and workbook are now built on top of a brief that does not say what you think it says. Read the first section before anything else.
+> Re-checked 2026-08-31. Your score is unchanged. The file on main is still the reverted version — the recovery I described four days ago has not happened, and your Stage 1.2 spec and workbook are now built on top of a brief that does not say what you think it says. Read the first section before anything else.
 
-| Criterion | Earned | Notes |
-|---|---|---|
-| Problem restated in your own voice | 28 / 30 | Graded at commit 0160cef, not at main. You separate what is being decided, by whom, what happens if it goes badly, what is fixed, what is chosen, and what limits the choice — the full frame, and one of four in the cohort that has all six parts. The caps, the season, the fixed costs, the farmer's 720 hours at $34.72 and the four temporary workers at $17.36 are all correct. |
-| Hypothesis names a specific mix | 25 / 25 | 5 tomato, 10 carrot, 20 mesclun — 35 of the 64 beds, with the shortfall stated rather than hidden. Committed and specific, and the frontmatter agrees with the body. |
-| Economic mechanism | 22 / 25 | You name the comparison the case turns on and you take a side on it: tomato labor compounds at 10 percent per bed against 2.5 and 1.25, and you expect that to overcome a three-to-four-times revenue advantage "within a few beds." That is a falsifiable claim about where the crossing sits. Three points off because "within a few beds" is where a number belongs — you predict the fifth or sixth tomato bed stops paying, and the case gives you everything needed to check it in one line. |
-| Falsifiability and process | 16 / 20 | "If we had beds left over, I was too conservative in my estimate. I left too much on the table to achieve P=MC." That is a real condition — it names an observable and the direction of the error, and given a 35-bed prediction it is very likely to fire, which is a sign you wrote it honestly rather than defensively. Four points off, and they are for the AI boundary rather than the writing — see below. |
-| **Final** | **91 / 100** | earned on merit |
+| Criterion | Where it stands |
+|---|---|
+| Problem restated in your own voice | Graded at commit 0160cef, not at main. You separate what is being decided, by whom, what happens if it goes badly, what is fixed, what is chosen, and what limits the choice — the full frame, and one of four in the cohort that has all six parts. The caps, the season, the fixed costs, the farmer's 720 hours at $34.72 and the four temporary workers at $17.36 are all correct. |
+| Hypothesis names a specific mix | 5 tomato, 10 carrot, 20 mesclun — 35 of the 64 beds, with the shortfall stated rather than hidden. Committed and specific, and the frontmatter agrees with the body. |
+| Economic mechanism | You name the comparison the case turns on and you take a side on it: tomato labor compounds at 10 percent per bed against 2.5 and 1.25, and you expect that to overcome a three-to-four-times revenue advantage "within a few beds." That is a falsifiable claim about where the crossing sits. What is still open: "within a few beds" is where a number belongs — you predict the fifth or sixth tomato bed stops paying, and the case gives you everything needed to check it in one line. |
+| Falsifiability and process | "If we had beds left over, I was too conservative in my estimate. I left too much on the table to achieve P=MC." That is a real condition — it names an observable and the direction of the error, and given a 35-bed prediction it is very likely to fire, which is a sign you wrote it honestly rather than defensively. Four points off, and they are for the AI boundary rather than the writing — see below. |
 
 ### Your brief on main is still the overwritten version
 
@@ -25,13 +24,13 @@ To recover it: open https://github.com/SeanBarnes03/Sean-Barnes/blob/0160cef/doc
 
 The likely cause is worth knowing: a browser tab left open on the GitHub editor from before the revision, saved afterwards. The tab had no idea the file had changed underneath it. It is a common way to lose work and it costs nothing once you know the shape of it.
 
-### The four points, and why they are four and not more
+### The gap, and why they are four and not more
 
 Your prompt log states plainly that Claude drafted the revised wording at your direction. I want to be precise about the line, because it is not obvious.
 
 The stage allows an assistant to explain the economics, to attack your reasoning, and to tell you where an argument does not hold. It does not allow it to write the brief. The reason is Stage 3: you will be asked to explain why your prediction and your model disagreed, and a prediction you did not personally reason your way to has nothing to explain.
 
-It cost four points rather than more because you disclosed it, and I want that to be the lesson rather than the caution. A log that records what the tool did is what makes the boundary enforceable at all, and honest logging will never be punished harder than silence would have been. Your prompt log is the best in this cohort and that has not changed.
+It cost marks rather than more because you disclosed it, and I want that to be the lesson rather than the caution. A log that records what the tool did is what makes the boundary enforceable at all, and honest logging will never be punished harder than silence would have been. Your prompt log is the best in this cohort and that has not changed.
 
 For Stage 3 the practical version is: let the assistant argue with your draft as hard as you like, then close it and write the paragraph yourself.
 
@@ -49,9 +48,11 @@ Treat this PR the way an analyst treats feedback from a senior reviewer — a re
 
 1. **Read it yourself first.** Form your own view before you change anything. Disagreeing *with a documented reason* is a legitimate, senior response.
 2. **Stress-test it with an LLM.** Paste this review and your brief into your assistant and ask it to (a) explain anything you are unsure of, and (b) argue the *other side* — where might the reviewer be wrong, and what would you give up by making each change.
-3. **Then write the changes yourself.** For a brief, this matters more than usual: a hypothesis you did not generate cannot be honestly compared against your model in Stage 3, and that comparison is the entire point of writing the brief first.
+3. **Then write the changes yourself.** For a brief this matters more than usual: a hypothesis you did not generate cannot be honestly compared against your model in Stage 3, and that comparison is the entire point of writing the brief first.
 4. **Close the loop.** Reply in this thread with what you changed and what you pushed back on, then commit and push.
 
-*One standing rule for this stage: do not revise your hypothesis to match what your model later tells you. If the model contradicts the brief, that is a finding, not an error — Stage 3 asks you to explain the gap, and a brief quietly edited to be right afterwards has nothing left to explain.*
+*One standing rule: do not revise your hypothesis to match what your model later tells you. If the model contradicts the brief, that is a finding, not an error.*
+
+*Your score and the per-criterion breakdown are in your Lamaku comment, not here — this repository is public.*
 
 — Adam
