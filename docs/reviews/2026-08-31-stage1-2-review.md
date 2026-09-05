@@ -22,7 +22,7 @@ That is the difference between fixing a bug and fixing the process that produced
 
 ### What this submission is, relative to the cohort
 
-There are five finished workbooks in this cohort now. Yours and Michelle Buff's are the two whose specifications a stranger could build from without asking a single question, and yours is the one with the most conventions written down — Section 3.2 on what the diminishing-returns rate actually multiplies, 3.5 through 3.9 on the costing order, the smooth-constraint equivalence proof for the temporary-worker cap, and now the round-trip rule.
+There are five finished workbooks in this cohort now. Yours is one of two whose specification a stranger could build from without asking a single question, and it is the one with the most conventions written down — Section 3.2 on what the diminishing-returns rate actually multiplies, 3.5 through 3.9 on the costing order, the smooth-constraint equivalence proof for the temporary-worker cap, and now the round-trip rule.
 
 Every one of those is a decision a builder would otherwise have had to invent, recorded with the reasoning. That is why your workbook came out right the first time it was solved.
 
