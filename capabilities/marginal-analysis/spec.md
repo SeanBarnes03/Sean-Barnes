@@ -215,7 +215,7 @@ in the subtraction.
 
 **Standalone** means the other two crops are held at **zero beds**, so the schedule
 shows that crop's cost alone. Each schedule runs q = 0 through that crop's
-`MAX_BEDS+1`, and `TOTAL_COST(0)` is zero.  Added a plus one to max beds as a diagnostic only. 
+`MAX_BEDS+1`, and `TOTAL_COST(0)` is zero.  Added a max bed plus one as a diagnostic only.  This is to show if marginal coast was reach or a cap.  Carrots and mesclun stopped at max cap.  Looking at if what extending the cap would to do MC.  The equation q = MAX_BEDS + 1 is no a solution.  Blocked by a rule in 3.12.
 
 The standalone P = MC point for a crop is the **first** crossing: the largest q such
 that `MC(b)` is at or below that crop's `PRICE_PER_BED` for every bed b from 1 to q.
@@ -250,8 +250,9 @@ Constraints:
   - the three bed counts sum to at most `TOTAL_BED_CAP`
   - temporary workers required is at most `MAX_TEMPS`
 
-### 3.13 Shadow cap 
-profit at the optimum with that crop's cap raised by one, minus profit at the optimum.
+### 3.13 Shadow Price
+
+This applies to carrots and mesclun.  Both max beds increase by one.  Must be calculated one at a time - when calculating one crop, the other two crops remaind fixed at original cap.  Relaxed mix must still meet the TOTAL_BED_CAP and the temp-hour constraint.  That check still applies.  Formula is MAX_BEDS → MAX_BEDS + 1.  
 
 ---
 
