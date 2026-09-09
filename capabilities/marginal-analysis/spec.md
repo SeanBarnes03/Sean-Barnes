@@ -215,7 +215,7 @@ in the subtraction.
 
 **Standalone** means the other two crops are held at **zero beds**, so the schedule
 shows that crop's cost alone. Each schedule runs q = 0 through that crop's
-`MAX_BEDS`, and `TOTAL_COST(0)` is zero.
+`MAX_BEDS+1`, and `TOTAL_COST(0)` is zero.  Added a plus one to max beds as a diagnostic only. 
 
 The standalone P = MC point for a crop is the **first** crossing: the largest q such
 that `MC(b)` is at or below that crop's `PRICE_PER_BED` for every bed b from 1 to q.
@@ -249,6 +249,9 @@ Constraints:
   - each crop's bed count is at most its own `MAX_BEDS`
   - the three bed counts sum to at most `TOTAL_BED_CAP`
   - temporary workers required is at most `MAX_TEMPS`
+
+### 3.13 Shadow cap 
+profit at the optimum with that crop's cap raised by one, minus profit at the optimum.
 
 ---
 
@@ -312,7 +315,7 @@ marginal figures are the comparable ones.
 - "PASS" means the check cell displays the text PASS. This spec uses PASS and FAIL
   rather than colour, because the capability README already reserves green font for
   cross-sheet links.
-
+- For each capped crop, PRICE − MC(cap+1) must equal the §3.13 shadow price, within existing tolerance.
 ---
 
 ## 5. Outputs
