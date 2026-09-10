@@ -79,7 +79,7 @@ defeats the purpose of committing it.
   temp workers required, farmer labor dollars, temp labor dollars, the blended
   labor rate, fertilizer cost, and total cost, at the current bed counts.
 - **MCSchedules** — one block per crop, q = 0 through that crop's
-  `MAX_BEDS`. Columns: q, labor hours, labor cost, fertilizer cost, total cost,
+  `MAX_BEDS + 1`. Columns: q, labor hours, labor cost, fertilizer cost, total cost,
   marginal cost, and `PRICE_PER_BED` for comparison.
 - **Optimization** — the three decision variables, season profit as the objective,
   and one cell per constraint in 3.12 showing PASS or FAIL.
@@ -215,7 +215,12 @@ in the subtraction.
 
 **Standalone** means the other two crops are held at **zero beds**, so the schedule
 shows that crop's cost alone. Each schedule runs q = 0 through that crop's
-`MAX_BEDS+1`, and `TOTAL_COST(0)` is zero.  Added a max bed plus one as a diagnostic only.  This is to show if marginal coast was reach or a cap.  Carrots and mesclun stopped at max cap.  Looking at if what extending the cap would to do MC.  The equation q = MAX_BEDS + 1 is no a solution.  Blocked by a rule in 3.12.
+`MAX_BEDS + 1`, and `TOTAL_COST(0)` is zero. The extra bed is diagnostic only. It
+shows whether a crop stopped because its marginal cost reached price or because it
+reached a cap. Carrots and mesclun both stop at their caps, so the extra row is where
+that distinction gets made, and it is what extending the cap would do to marginal
+cost. `q = MAX_BEDS + 1` is not a solution: 3.12 constrains the optimizer to
+`MAX_BEDS`, and that constraint is unchanged.
 
 The standalone P = MC point for a crop is the **first** crossing: the largest q such
 that `MC(b)` is at or below that crop's `PRICE_PER_BED` for every bed b from 1 to q.
@@ -252,7 +257,25 @@ Constraints:
 
 ### 3.13 Shadow Price
 
-This applies to carrots and mesclun.  Both max beds increase by one.  Must be calculated one at a time - when calculating one crop, the other two crops remaind fixed at original cap.  Relaxed mix must still meet the TOTAL_BED_CAP and the temp-hour constraint.  That check still applies.  Formula is MAX_BEDS → MAX_BEDS + 1.  
+This applies to carrots and mesclun, the two crops whose bed caps bind. Each is
+calculated one at a time: when calculating one crop, the other two stay at their
+optimal bed counts, which is not the same as their caps — tomatoes are optimal at 10
+beds against a cap of 20. The relaxed mix must still meet `TOTAL_BED_CAP` and the
+temp-hour constraint; that check still applies.
+
+    SHADOW(crop) = SEASON_PROFIT(relaxed mix) - SEASON_PROFIT(optimal mix)
+
+where the relaxed mix holds that crop at `MAX_BEDS + 1` and the other two at their
+optimal bed counts. The shadow price is a profit difference in dollars, not the
+change in the cap that produces it.
+
+Computed on the **Optimization** sheet and reported as one named range per crop,
+following the naming pattern of `PMC_CAR` and `PMC_MES`.
+
+Compute it from the cost engine at the relaxed mix. Do not compute it as
+`PRICE_PER_BED - MC(MAX_BEDS + 1)`: that identity is the Section 4 check, and a
+workbook that uses it as the definition compares a formula to itself and can never
+fail.
 
 ---
 
@@ -294,6 +317,24 @@ specification excludes them per 3.10, so its totals run $20,000 higher at every 
 count. The offset is constant and cancels in the subtraction, which is why the
 marginal figures are the comparable ones.
 
+### Shadow prices of the binding bed caps
+
+| Check | Required value |
+|---|---|
+| Shadow price of the carrot bed cap | $352 |
+| Shadow price of the mesclun bed cap | $246 |
+
+Each figure must also equal `PRICE_PER_BED - MC(MAX_BEDS + 1)` for that crop, read
+off its standalone schedule.
+
+The two sides share no formula. One runs the cost engine at a bed mix the optimizer
+never visits; the other is a single row of a standalone marginal cost schedule.
+Agreement is therefore evidence that the cost engine and the schedules implement the
+same model, in the same way the Farm Profit Lab comparison above is evidence rather
+than the workbook confirming itself. This is why 3.13 requires the shadow price to
+come from the cost engine: implemented as the identity itself, the check would pass
+by construction.
+
 ### Structural rules
 
 - No error cells anywhere in the workbook — no `#REF!`, `#DIV/0!`, `#NAME?`,
@@ -316,7 +357,11 @@ marginal figures are the comparable ones.
 - "PASS" means the check cell displays the text PASS. This spec uses PASS and FAIL
   rather than colour, because the capability README already reserves green font for
   cross-sheet links.
-- For each capped crop, PRICE − MC(cap+1) must equal the §3.13 shadow price, within existing tolerance.
+- A shadow price passes within +/- $5 of its stated value, and must agree with
+  `PRICE_PER_BED - MC(MAX_BEDS + 1)` for that crop within +/- $1. The wider band
+  absorbs rounding in `FARMER_RATE` and `TEMP_RATE`; the narrower one applies between
+  two figures this workbook computes itself, which should agree to the cent.
+
 ---
 
 ## 5. Outputs
@@ -329,6 +374,7 @@ The model must report:
 **The evidence**
 - Season profit
 - The standalone P = MC point for each crop
+- The shadow price of each binding bed cap
 
 **The audit trail**
 - Total labor hours
@@ -342,6 +388,7 @@ The model must report:
 - Optimal mix equals 10 tomatoes / 20 carrots / 30 mesclun
 - Season profit equals $42,762
 - Standalone P = MC points are approximately 10 / 10 / 6 beds
+- Each shadow price equals PRICE_PER_BED minus MC at MAX_BEDS + 1 for that crop
 - Temporary workers required is at most 4
 - Each crop's bed count is within its own MAX_BEDS
 - The three bed counts sum to at most 64
