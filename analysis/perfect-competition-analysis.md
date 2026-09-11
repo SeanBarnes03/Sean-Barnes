@@ -3,7 +3,7 @@ type: analysis
 engagement: perfect-competition
 capability: marginal-analysis
 date: 2026-09-10
-status: draft   # flip to committed when the TODOs above are done
+status: committed
 ---
 
 # Perfect competition — what the model found
@@ -39,11 +39,15 @@ The plan uses 60 of the 64 available beds (`Optimization B10`) and 4,557.2 of th
 more beds — four sit empty. If space allowed, planting more carrots and mesclun would
 add to profits: a +1 bed for carrots is $352.49 and for mesclun $246.47.  Carrot ground is worth more and should be acquired first.  
 
-standalone-vs-optimum:  Both charts below show MC rising above the price, for carrots around bed 11, for mesclun around bed 7 — however, the farmer's $34.72 hours are charged to one crop; at the optimum all three are planted, her 720 hours are spent early, and every extra bed is temp labor at $17.36. MC rises above price, but labor costs are cut in half.  
+Both charts below show MC rising above the price, for carrots around bed 11, for mesclun around bed 7 — however, the farmer's $34.72 hours are charged to one crop; at the optimum all three are planted, her 720 hours are spent early, and every extra bed is temp labor at $17.36. MC rises above price, but labor costs are cut in half.  
 
-![Carrots MC rise above price at bed 11 (figures/carrots-mc-vs-price.png)
+Carrot marginal cost rises above price at bed 11.
 
-Mesclun MC rise above price at bed 7 (figures/mesclun-mc-vs-price.png)
+![Carrot marginal cost against price](figures/carrots-mc-vs-price.png)
+
+Mesclun marginal cost rises above price at bed 7.
+
+![Mesclun marginal cost against price](figures/mesclun-mc-vs-price.png)
 
 ## The tomato marginal cost dip at bed 6
 
