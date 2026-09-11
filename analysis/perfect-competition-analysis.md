@@ -63,13 +63,28 @@ of the wage outweighed the extra hours.
 ## Why grow crops that lose money on their own
 
 The farmer pays $20,000 in fixed costs (`Inputs B15`). That is paid no matter what
-is planted.  In this case average variable cost is less than price for every crop:
+is planted.  In this case average variable cost is below price for all three crops
+**at the bed counts the plan actually plants** — which is the comparison the
+decision turns on:
 
 | Crop | Total cost | Beds | AVC | Price | |
 |---|---|---|---|---|---|
 | Tomatoes | $61,827 (`MCSchedules E17`) | 10 | $6,182.72 | $8,800 | under |
 | Carrots | $38,369 (`MCSchedules O27`) | 20 | $1,918.45 | $2,094 | under |
 | Mesclun | $72,922 (`MCSchedules Y37`) | 30 | $2,430.74 | $2,700 | under |
+
+This holds at the planted quantities, not everywhere on the schedules. Mesclun AVC
+rises above $2,700 at beds 13 and 14 ($2,716.35 and $2,702.51) before falling back,
+and tomato AVC rises above $8,800 from bed 16 ($8,840.90) up to $12,016.72 at bed 20.
+Carrots never cross: their AVC peaks at $1,986.36 at bed 16 against a $2,094 price.
+
+Both exceptions are the 720-hour boundary from the bed 6 dip above. Mesclun labor
+hours cross 720 between bed 13 (687.5) and bed 14 (749.7), so AVC bulges while the
+farmer's $34.72 hours are exhausted and then falls once $17.36 temp labor takes over
+— by the 30 beds planted it is back down to $2,430.74. Tomatoes get the same relief
+at bed 6, but 10% per bed escalation overwhelms it, so their crossing at bed 16 is
+permanent. Neither exception touches the plan: mesclun is planted past its bump,
+tomatoes six beds short of theirs.
 
 conversely, carrots and mesclun output alone lose money when the $20,000 fixed costs are factored in:
 

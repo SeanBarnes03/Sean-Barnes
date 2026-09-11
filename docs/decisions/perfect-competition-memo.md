@@ -15,3 +15,7 @@ The key judgment call concerns the carrot and mesclun limits. Both crops remain 
 The farm should not purchase more general farmland under the current plan, and more labor would not help it either. It already has four unused beds, and of the four temporary workers it is allowed it leaves roughly 1,203 of their hours unused — so neither total land nor labor limits production. The binding constraints are the crop-specific limits on carrots and mesclun.
 
 The recommendation is most sensitive to the selling price of tomatoes. Tomato bed 10 has only about a $551 margin between price and marginal cost. A tomato price decline of about 6.3% would make that bed unprofitable and reduce the recommended tomato planting from 10 beds to nine.
+
+---
+
+-Drafted with help from Claude (Anthropic, 2026); reviewed and edited by me.

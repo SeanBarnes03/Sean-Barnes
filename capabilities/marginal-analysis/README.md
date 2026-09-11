@@ -15,3 +15,7 @@ Any Excel model added to this folder (e.g. `model.xlsx`) follows the standard fi
 - **Green** — links to another sheet or workbook
 
 `model.xlsx` follows this convention. It is built from `spec.md`, and its Checks sheet computes every validation rule in Section 4 of that spec as PASS or FAIL.
+
+---
+
+-Drafted with help from Claude (Anthropic, 2026); reviewed and edited by me.
