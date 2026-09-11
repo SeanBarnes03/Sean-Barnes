@@ -86,7 +86,7 @@ at bed 6, but 10% per bed escalation overwhelms it, so their crossing at bed 16 
 permanent. Neither exception touches the plan: mesclun is planted past its bump,
 tomatoes six beds short of theirs.
 
-conversely, carrots and mesclun output alone lose money when the $20,000 fixed costs are factored in:
+Conversely, carrots and mesclun output alone lose money when the $20,000 fixed costs are factored in:
 
 | Crop | Revenue | Variable + $20,000 | Standalone |
 |---|---|---|---|
@@ -94,14 +94,14 @@ conversely, carrots and mesclun output alone lose money when the $20,000 fixed c
 | Carrots | $41,880 | $58,369 | −$16,489 |
 | Mesclun | $81,000 | $92,922 | −$11,922 |
 
-however, carrots and mesclun still make money that can be put toward the fixed costs, that is why its worth it to plant crops that lose money on their own.  All three together contribute to paying fixed costs.  Better than empty beds which contribute nothing.  (see tab AVC tab in model)
+However, carrots and mesclun still make money that can be put toward the fixed costs, that is why it's worth it to plant crops that lose money on their own.  All three together contribute to paying fixed costs.  Better than empty beds which contribute nothing.  (see AVC tab in model)
 
 ## Against my Stage 1 hypothesis
 
 I predicted a 5 / 10 / 20 mix, thinking the more expensive tomatoes would reach
 P = MC before the two less costly crops, while saving on cheaper labor for the
 carrot and mesclun beds. The model returned 10 / 20 / 30 — I was under by 5, 10 and
-10 beds respectively.  Both my falsifiers fired, but my hypothesis was wrong.  Carrots and Mesclun hit their caps.  Tomatoes hit 10 beds not 8.  Labor as a driving factor was incorrect - 1,203 hours left over.  I  did call that tomatoes would get too expensive to plant before it hit  bed cap.  
+10 beds respectively.  Both my falsifiers fired, so my hypothesis was wrong.  Carrots and mesclun hit their caps.  Tomatoes hit 10 beds not 8.  Labor as a driving factor was incorrect - 1,203 hours left over.  I did call that tomatoes would get too expensive to plant before it hit its bed cap.  
 
 ---
 
