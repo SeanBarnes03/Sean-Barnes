@@ -16,6 +16,6 @@ Each engagement is listed here with links to its capability folder, brief, and d
 
 | Capability | Brief | Decision |
 |---|---|---|
-| [Marginal analysis](capabilities/marginal-analysis/) — perfect competition, choosing a crop mix at a price the farm cannot set | [Engagement brief](docs/briefs/perfect-competition-brief.md) | pending — Stage 3 |
+| [Marginal analysis](capabilities/marginal-analysis/) — perfect competition, choosing a crop mix at a price the farm cannot set | [Engagement brief](docs/briefs/perfect-competition-brief.md) | [Planting recommendation](docs/decisions/perfect-competition-memo.md) — 10 / 20 / 30 beds, $42,762 season profit |
 
 -Drafted with help from Claude (Anthropic, 2026); reviewed and edited by me.
