@@ -35,26 +35,15 @@ Each shadow price is computed two ways, and the two agree to the cent:
 | Mesclun bed cap | $246.47 (`Checks C20`) | $246.47 (`Checks B22`) |
 
 The plan uses 60 of the 64 available beds (`Optimization B10`) and 4,557.2 of the
-5,760 available temporary hours (`Optimization B11`).  Four of four workers were used due to rounding.  Can't have a fraction of an employee.  There were 1,203 hours not used up. More workers are not value added, and neither are
+5,760 available temporary hours (`Optimization B11`).  Four of four workers were used due to rounding.  We can't have a fraction of an employee.  There were 1,203 hours not used up. More workers are not value added, and neither are
 more beds — four sit empty. If space allowed, planting more carrots and mesclun would
-add to profits: a +1 bed for carrots is $352.49 and for mesclun $246.47.
+add to profits: a +1 bed for carrots is $352.49 and for mesclun $246.47.  Carrot ground is worth more and should be acquired first.  
 
-<!-- TODO (yours): one sentence turning those two numbers into advice — which ground
-     to acquire first, and what a bed of it is worth paying. -->
+standalone-vs-optimum:  Both charts below show MC rising above the price, for carrots around bed 11, for mesclun around bed 7 — however, the farmer's $34.72 hours are charged to one crop; at the optimum all three are planted, her 720 hours are spent early, and every extra bed is temp labor at $17.36. MC rises above price, but labor costs are cut in half.  
 
-<!-- TODO (yours): the standalone-vs-optimum paragraph. Both charts below show
-     marginal cost rising ABOVE the price line partway along — carrots around bed 11,
-     mesclun around bed 7 — yet the plan fills both to their caps. Explain why the
-     charts and the plan do not disagree: the schedules run each crop alone, so the
-     farmer's $34.72 hours are charged to that one crop; at the optimum all three are
-     planted, her 720 hours are spent early, and every extra bed is temp labor at
-     $17.36. -->
+![Carrots MC rise above price at bed 11 (figures/carrots-mc-vs-price.png)
 
-<!-- TODO (yours): one sentence per chart, each making a claim the picture supports. -->
-
-![Carrot marginal cost against price](figures/carrots-mc-vs-price.png)
-
-![Mesclun marginal cost against price](figures/mesclun-mc-vs-price.png)
+Mesclun MC rise above price at bed 7 (figures/mesclun-mc-vs-price.png)
 
 ## The tomato marginal cost dip at bed 6
 
