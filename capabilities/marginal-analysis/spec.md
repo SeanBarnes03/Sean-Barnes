@@ -58,7 +58,7 @@ the first bed and the last, and does not vary with quantity planted.
 
 ## 2. Structure
 
-Five sheets. Sheet names carry no spaces: Excel's Solver add-in on macOS mishandles
+Six sheets. Sheet names carry no spaces: Excel's Solver add-in on macOS mishandles
 unquoted sheet references containing spaces and raises a VBA 1004 error.
 
 **Round-trip rule.** Any tool that writes this workbook programmatically — openpyxl
@@ -83,6 +83,9 @@ defeats the purpose of committing it.
   marginal cost, and `PRICE_PER_BED` for comparison.
 - **Optimization** — the three decision variables, season profit as the objective,
   and one cell per constraint in 3.12 showing PASS or FAIL.
+- **AVC** — average variable cost against price for each crop, alongside the same
+  crop's profit or loss when it is made to carry the whole of `FIXED_COSTS` by
+  itself. One row per crop.
 - **Checks** — one row per validation rule in Section 4, each showing its required
   value, the value the workbook produced, and PASS or FAIL.
 
@@ -276,6 +279,33 @@ Compute it from the cost engine at the relaxed mix. Do not compute it as
 `PRICE_PER_BED - MC(MAX_BEDS + 1)`: that identity is the Section 4 check, and a
 workbook that uses it as the definition compares a formula to itself and can never
 fail.
+
+### 3.14 Average variable cost and standalone profit
+
+Average variable cost is the variable cost of a crop at its optimal bed count,
+divided by that bed count.
+
+    AVC(crop) = TOTAL_COST(q*) / q*
+
+where `q*` is the crop's bed count in the optimal mix and `TOTAL_COST` is the
+standalone figure defined in 3.10 — labor and fertilizer only. `FIXED_COSTS` is
+excluded, which is the whole point: a cost that does not change with the bed count
+cannot bear on whether to plant another bed.
+
+The standalone profit of a crop is what that crop would earn if it were the only
+thing planted and had to carry all of `FIXED_COSTS` on its own.
+
+    STANDALONE_PROFIT(crop) = q* x PRICE_PER_BED - TOTAL_COST(q*) - FIXED_COSTS
+
+The two figures answer different questions and can disagree in sign. `PRICE_PER_BED`
+above `AVC` says each bed of that crop earns back what it cost to grow and
+contributes the difference toward fixed costs the farm owes whether or not it
+plants. A negative standalone profit says only that one crop alone cannot cover
+$20,000, which is not the question the planting decision asks.
+
+Both are computed on the **AVC** sheet, one row per crop, reading bed counts and
+prices from their named ranges and variable cost from the standalone schedules in
+3.10.
 
 ---
 
