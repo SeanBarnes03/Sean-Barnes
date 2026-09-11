@@ -3,7 +3,7 @@ type: analysis
 engagement: perfect-competition
 capability: marginal-analysis
 date: 2026-09-10
-status: draft
+status: draft   # flip to committed when the TODOs above are done
 ---
 
 # Perfect competition — what the model found
@@ -35,23 +35,22 @@ Each shadow price is computed two ways, and the two agree to the cent:
 | Mesclun bed cap | $246.47 (`Checks C20`) | $246.47 (`Checks B22`) |
 
 The plan uses 60 of the 64 available beds (`Optimization B10`) and 4,557.2 of the
-5,760 available temporary hours (`Optimization B11`).
+5,760 available temporary hours (`Optimization B11`).  Four of four workers were used due to rounding.  Can't have a fraction of an employee.  There were 1,203 hours not used up. More workers are not value added, and neither are
+more beds — four sit empty. If space allowed, planting more carrots and mesclun would
+add to profits: a +1 bed for carrots is $352.49 and for mesclun $246.47.
 
-<!-- TODO (content): the temp-worker line as written states the trap rather than
-     resolving it. Under a SLACK heading, "4 of 4 workers" reads as binding. The
-     headcount cell (Optimization B13) reads 4 because ROUNDUP turns 3.17 into 4;
-     the constraint Solver enforces is hours, and 1,203 of them are spare. Both
-     halves need to be in the sentence. Then: what follows for spending — what is
-     worth money to acquire, and what is not. -->
+<!-- TODO (yours): one sentence turning those two numbers into advice — which ground
+     to acquire first, and what a bed of it is worth paying. -->
 
-<!-- TODO (content): the standalone-vs-optimum point — carrot MC crosses price around
-     bed 11 and mesclun around bed 7 in the charts below, yet the plan fills both to
-     their caps. Explain why that is not a contradiction.
+<!-- TODO (yours): the standalone-vs-optimum paragraph. Both charts below show
+     marginal cost rising ABOVE the price line partway along — carrots around bed 11,
+     mesclun around bed 7 — yet the plan fills both to their caps. Explain why the
+     charts and the plan do not disagree: the schedules run each crop alone, so the
+     farmer's $34.72 hours are charged to that one crop; at the optimum all three are
+     planted, her 720 hours are spent early, and every extra bed is temp labor at
+     $17.36. -->
 
-     TODO (content): a sentence pointing at each of the two charts, making a claim.
-
-     TODO (content): the shadow prices as advice — which ground is worth buying
-     first, and what a bed of it is worth. -->
+<!-- TODO (yours): one sentence per chart, each making a claim the picture supports. -->
 
 ![Carrot marginal cost against price](figures/carrots-mc-vs-price.png)
 
@@ -64,7 +63,9 @@ The dip is caused by hours going up while cost goes down. Tomato labor hours at 
 (`B12`), so the farmer's hours run out inside that bed. At bed 6 they are 956.6
 (`B13`), and every hour past 720 is temp labor. Marginal cost at bed 5 is $7,661
 (`F12`) and at bed 6 it falls to $4,906 (`F13`). The marginal wage fell from $34.72
-to $17.36 as temp workers took over from the farmer's more costly labor.  The farmers hours ran out at 720 which cut the labor cost in half from $34.72 to $17.36.  This is why the curve falls.   In this case both inputs changed.  At bed 6 the hours went up but the wage was cut in half.  
+to $17.36 as temp workers took over from the farmer's more costly labor. This is why
+the curve falls: both ingredients of marginal cost changed at once, and the halving
+of the wage outweighed the extra hours.
 
 ## Why grow crops that lose money on their own
 
@@ -92,7 +93,7 @@ however, carrots and mesclun still make money that can be put toward the fixed c
 I predicted a 5 / 10 / 20 mix, thinking the more expensive tomatoes would reach
 P = MC before the two less costly crops, while saving on cheaper labor for the
 carrot and mesclun beds. The model returned 10 / 20 / 30 — I was under by 5, 10 and
-10 beds respectively.  Both my falsifiers were wrong.  Carrots and Mesclun hit their caps.  Tomatoes hit 10 beds not 8.  Labor as a driving factor was incorrect - 1,203 hours left over.  I  did call that tomatoes would get too expensive to plant before it hit MC.  
+10 beds respectively.  Both my falsifiers fired, but my hypothesis was wrong.  Carrots and Mesclun hit their caps.  Tomatoes hit 10 beds not 8.  Labor as a driving factor was incorrect - 1,203 hours left over.  I  did call that tomatoes would get too expensive to plant before it hit  bed cap.  
 
 ---
 
