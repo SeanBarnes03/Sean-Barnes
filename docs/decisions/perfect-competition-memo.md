@@ -1,0 +1,7 @@
+I recommend planting 10 tomato beds, 20 carrot beds, and 30 mesclun beds. This mix is projected to generate a season profit of approximately $42,762 because each planted bed adds more revenue than cost, while an eleventh tomato bed would cost more to produce than it would earn.
+
+The key judgment call concerns the carrot and mesclun limits. Both crops remain profitable at their current caps, meaning production is being stopped by the caps rather than by unfavorable economics. If additional crop-specific growing capacity can be obtained, carrot capacity should be expanded first. One additional carrot bed would add approximately $352 in profit, compared with approximately $246 for an additional mesclun bed. Therefore, the business should be willing to pay up to $352 for the right or capacity to plant one more carrot bed. After profitable carrot expansion opportunities are exhausted, mesclun capacity should be considered.
+
+Additional workers or general farmland should not be acquired under the current plan. The farm already has four unused beds and approximately 1,203 unused temporary-labor hours, so neither overall land nor labor is limiting production. The valuable constraint is the crop-specific cap on carrots, followed by the cap on mesclun.
+
+The recommendation is most sensitive to the selling price of tomatoes. Tomato bed 10 has only about a $551 margin between price and marginal cost. A tomato price decline of approximately 7% would make that bed uneconomic and would change the recommended mix from 10 tomato beds to nine.
