@@ -39,7 +39,7 @@ The plan uses 60 of the 64 available beds (`Optimization B10`) and 4,557.2 of th
 more beds — four sit empty. If space allowed, planting more carrots and mesclun would
 add to profits: a +1 bed for carrots is $352.49 and for mesclun $246.47.  Carrot ground is worth more and should be acquired first.  
 
-Both charts below show MC rising above the price, for carrots around bed 11, for mesclun around bed 7 — however, the farmer's $34.72 hours are charged to one crop; at the optimum all three are planted, her 720 hours are spent early, and every extra bed is temp labor at $17.36. MC rises above price, but labor costs are cut in half.  
+The charts look at each crop on its own, so each crop absorbs the farmer's 720 hours at $34.72 per hour by itself. Under that assumption, marginal cost rises above price around bed 11 for carrots and bed 7 for mesclun. The recommended plan is different because the farmer grows all three crops, uses her 720 hours earlier, and pays temporary workers $17.36 per hour for each additional bed. Therefore, the recommended carrot and mesclun beds remain profitable because the labor cost for those additional beds is half the cost used in the standalone charts.  
 
 Carrot marginal cost rises above price at bed 11.
 

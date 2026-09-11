@@ -26,4 +26,4 @@ However, Claude did not always provide an exact answer. It estimated that a 7% d
 
 I also pasted Adam's feedback into Claude, deconstructed his comments into specific revisions, and checked those changes against my model and analysis.
 
-Claude helped me most when I asked it to reduce complicated explanations and instructions to their essential steps. This process helped me understand the concepts, adapt the model.  I noticed that Claudes performance had more and more confusing answers as I progressed.  This caused constant iteration for clarification.  
+Claude helped me most when I asked it to reduce complicated explanations and instructions to their essential steps. This process helped me understand the concepts and adapt the model independently. I noticed that Claude's performance gave more and more confusing answers as I progressed, which caused constant iteration for clarification.  
