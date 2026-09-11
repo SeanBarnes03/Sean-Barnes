@@ -2,6 +2,16 @@
 
 Agents iterate create and review themselves to mirror working with a person. Canonical file for how AI tools are used in this repository. `CLAUDE.md` points here so any AI agent picks up the same conventions regardless of which tool is invoked.
 
+## Dates and time zone
+
+I work in Hawaii (HST, UTC-10). Any date written into this repository — frontmatter,
+`prompt-log.md` rows, review filenames — is the Hawaii date, and refers to when the
+content was written rather than when the file was created or last touched.
+
+Agents run in UTC, which is 10 hours ahead and usually a day later in the evening.
+Convert before stamping a date, and convert before reasoning about when something was
+committed or pushed.
+
 ## Disclosure
 
 Any content drafted with AI assistance is marked at the end of the file, e.g.:
