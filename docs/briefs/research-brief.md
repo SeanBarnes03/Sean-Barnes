@@ -28,11 +28,12 @@ The problem is a combination of common-pool resource dynamics, negative external
 ## Planned Analysis
 
 1. Establish the groundwater baseline from USGS and CWRM's 2019 Water Resource Protection Plan.
-2. Document the pumping-vs-sustainable-yield trend using CWRM's 12-month moving average data, to show the magnitude and trajectory of depletion.
-3. Build a standard negative-externality diagram (marginal private cost vs. marginal social cost of extraction).
-4. Evaluate the return-flow-recharge dispute directly: Mahi Pono argues the 2019 sustainable-yield figures are outdated because they don't account for irrigation water seeping back into the aquifer. This is a real methodological question the analysis needs to address, since it bears directly on whether the overdraft claim holds.
-5. Compare policy alternatives — designation vs. status quo, and metering/caps/fees in isolation vs. combined — before settling on a recommendation.
-6. Verify every number against CWRM's or USGS's original publication before it goes in the final paper.
+2. Document the pumping-vs-sustainable-yield trend using CWRM's 12-month moving average data, to show the magnitude and trajectory of depletion. This is the paper's primary figure: the 12-MAV for both aquifers plotted against their sustainable-yield lines.
+3. Chart chloride concentration at Kahului and Pā'ia production wells over time, as the observable measure of saltwater intrusion. CWRM has no deep monitor well in either aquifer — the Pā'ia and Kama'ole wells are still pre-construction — so transition-zone depth cannot be charted directly. Chloride at the wells actually in use is the available series, and it measures the externality where it lands: on the water other users pump.
+4. Build a standard negative-externality diagram (marginal private cost vs. marginal social cost of extraction) to carry the theory the chloride trend evidences.
+5. Evaluate the return-flow-recharge dispute directly: Mahi Pono argues the 2019 sustainable-yield figures are outdated because they don't account for irrigation water seeping back into the aquifer. This is a real methodological question the analysis needs to address, since it bears directly on whether the overdraft claim holds.
+6. Compare policy alternatives — designation vs. status quo, and metering/caps/fees in isolation vs. combined — before settling on a recommendation.
+7. Verify every number against CWRM's or USGS's original publication before it goes in the final paper.
 
 ## Decision Question
 
@@ -48,7 +49,7 @@ CWRM should designate the Kahului and Pā'ia aquifer sectors as a Ground Water M
 
 1. Evidence that Mahi Pono's return-flow-recharge argument is correct — that irrigation seepage genuinely offsets pumping enough that the official sustainable-yield figures are wrong. This would undercut the core overdraft claim, not just the policy prescription.
 2. Evidence that metering, caps, and fees do not measurably reduce groundwater usage where they've been tried elsewhere.
-3. Evidence that the depletion rate is primarily driven by something other than agricultural pumping — for example, municipal use or drought-driven recharge decline independent of extraction volume.
+3. Evidence that Mahi Pono's groundwater pumping rises roughly one-for-one with shortfalls in East Maui surface-water deliveries — that pumping climbs only as deliveries fall. That would make extraction a drought-driven substitution rather than a response to water being free, and it would change the instrument rather than the finding: a scarcity fee would tax a substitution the pumper cannot avoid, and the remedy would move toward surface-water reliability and allocation instead of price.
 
 ---
 
