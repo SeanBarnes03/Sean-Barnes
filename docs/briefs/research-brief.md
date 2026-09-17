@@ -1,3 +1,12 @@
+---
+type: brief
+engagement: bus-620-research-paper
+capability: economic-research
+date: 2026-09-16
+status: draft
+hypothesis: "CWRM should designate the Kahului and Pā'ia aquifer sectors as a Ground Water Management Area and implement metering, extraction caps, and scarcity-based pumping fees for large producers."
+---
+
 # Research Brief: The Economic Cost of Unpriced Groundwater Extraction in Central Maui
 
 ## The Challenge
@@ -40,3 +49,7 @@ CWRM should designate the Kahului and Pā'ia aquifer sectors as a Ground Water M
 1. Evidence that Mahi Pono's return-flow-recharge argument is correct — that irrigation seepage genuinely offsets pumping enough that the official sustainable-yield figures are wrong. This would undercut the core overdraft claim, not just the policy prescription.
 2. Evidence that metering, caps, and fees do not measurably reduce groundwater usage where they've been tried elsewhere.
 3. Evidence that the depletion rate is primarily driven by something other than agricultural pumping — for example, municipal use or drought-driven recharge decline independent of extraction volume.
+
+---
+
+-Drafted with help from Claude (Anthropic, 2026); reviewed and edited by me.
