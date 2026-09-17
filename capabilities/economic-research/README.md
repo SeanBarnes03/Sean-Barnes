@@ -7,12 +7,12 @@ recommendation.
 **Exercised in:** the Central Maui groundwater engagement (`maui-groundwater`) — whether CWRM should
 designate the Kahului and Pā'ia aquifer sectors as a Ground Water Management Area, and
 what water use permit framework should apply to large-volume pumpers. Brief:
-`../../docs/briefs/research-brief.md`. Specification: `spec.md` (not yet written).
+`../../docs/briefs/research-brief.md`. Specification: `spec.md`.
 Drafts: `../../drafts/`. Paper and figures: `../../analysis/` and
 `../../analysis/figures/`.
 
-The engagement is open — the brief is committed and the specification is the next
-deliverable.
+The engagement is open — brief and specification are committed; the paper and its
+figures are the remaining deliverables.
 
 ---
 
