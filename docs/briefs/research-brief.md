@@ -1,6 +1,6 @@
 ---
 type: brief
-engagement: bus-620-research-paper
+engagement: maui-groundwater
 capability: economic-research
 date: 2026-09-16
 status: draft
