@@ -41,6 +41,17 @@ The problem is a combination of common-pool resource dynamics, negative external
 8. Compare policy alternatives — designation now, designation of the whole Central sector, waiting for the USGS study to report, and status quo — and metering/caps/fees in isolation vs. combined, before settling on a recommendation.
 9. Verify every number against CWRM's or USGS's original publication before it goes in the final paper, and label advocacy testimony as testimony.
 
+## A Note on the Data
+
+The May 2026 12-month moving average figures (7.760 Mgal/d for Kahului, 15.175 for Pā'ia)
+come from press reporting of CWRM data, not from a CWRM publication I have been able to
+obtain. The originals are public by records request, but the request cannot be answered
+inside this project's timeline. I am using the reported figures and saying so: every
+appearance of them in the paper is attributed to the reporting rather than to CWRM
+directly, and the analysis does not rest on them alone — the 2023 withdrawals published
+by USGS from CWRM's own written communication are the primary-sourced anchor, and the
+gap between the two vintages is treated as a finding rather than smoothed over.
+
 ## Decision Question
 
 Should CWRM designate Central Maui groundwater as a Ground Water Management Area under HRS §174C-41 — and at what unit, the Kahului and Pā'ia aquifer systems or the whole Central aquifer sector whose internal boundaries its own hydrologists question — or should it wait for the USGS flow study it funded in May 2026? If it designates, what water use permit framework — metering, extraction caps, and scarcity-based pumping fees — should apply to large-volume users?
