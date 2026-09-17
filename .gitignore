@@ -24,3 +24,6 @@ __pycache__/
 
 # Logs
 *.log
+
+# Scratch — genuine throwaway work (abandoned outlines, half-cleaned pulls)
+scratch/
