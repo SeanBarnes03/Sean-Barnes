@@ -5,14 +5,14 @@ mispricing — to a live policy question, and carrying it through to a defended
 recommendation.
 
 **Exercised in:** the Central Maui groundwater engagement (`maui-groundwater`) — whether CWRM should
-designate the Kahului and Pā'ia aquifer sectors as a Ground Water Management Area, and
+designate the Kahului and Pā'ia aquifer systems as Ground Water Management Areas, and
 what water use permit framework should apply to large-volume pumpers. Brief:
 `../../docs/briefs/research-brief.md`. Specification: `spec.md`.
-Drafts: `../../drafts/`. Paper and figures: `../../analysis/` and
-`../../analysis/figures/`.
+Draft chain: `../../drafts/`. Figures: `../../analysis/figures/`. Paper:
+`../../analysis/research-paper.pdf`.
 
-The engagement is open — brief and specification are committed; the paper and its
-figures are the remaining deliverables.
+The engagement is open: brief, specification, the dated draft chain and both figures are
+committed. The finished PDF is the remaining deliverable.
 
 ---
 
