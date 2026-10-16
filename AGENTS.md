@@ -27,6 +27,7 @@ Nothing gets published from an AI draft without being reviewed and edited by me 
 - `prompt-log.md` — running record of AI sessions that materially shaped the work in this repo. Not a transcript of every prompt — just the ones that mattered.
 - `.gitignore` — what must never enter the history.
 - `.claude/skills/` — personal sandbox for Claude Code skills. Nothing in it is load-bearing for the rest of the repo.
+- `.claude/agents/` — Claude Code subagents. `critic` attacks a brief, spec, draft or piece of reviewer feedback and reports findings without editing anything.
 - `capabilities/<name>/` — one folder per capability, each with `README.md`, `spec.md`, and any supporting model/workbook files.
 - `docs/briefs/` — written BEFORE the work: scope and hypothesis.
 - `docs/decisions/` — written AFTER the work: the recommendation.
