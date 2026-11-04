@@ -20,6 +20,8 @@ Any content drafted with AI assistance is marked at the end of the file, e.g.:
 
 Nothing gets published from an AI draft without being reviewed and edited by me first.
 
+Files in `docs/reference/` are my own background material, not coursework, and do not carry the disclosure line.
+
 ## Repository layout
 
 - `README.md` — who I am, plus an index of engagements.
