@@ -21,7 +21,7 @@
 * Executive Leadership School — Air Force War College
 * Senior Leaders Program — Marine Corps Command and Staff College
 * Senior Managerial School — Expeditionary Warfare School
-* Yellow Belt — Lean Six Sigma
+* Green Belt — Lean Six Sigma
 
 ---
 
