@@ -25,6 +25,7 @@ Nothing gets published from an AI draft without being reviewed and edited by me 
 - `README.md` — who I am, plus an index of engagements.
 - `RESUME.md` — current resume.
 - `docs/reference/` — background material for agents. `resume-2026-08.md` (with the original `.docx`) is my full-length resume: every role from 2011 on, with scope and results. Read it when you need detail on my experience that the condensed `RESUME.md` leaves out.
+- LinkedIn: [linkedin.com/in/seanwbarnes](https://www.linkedin.com/in/seanwbarnes/). Agents usually can't load it, because LinkedIn requires a login and blocks automated readers. Treat the resume files as the source of truth, and don't describe the profile's contents without a saved copy in `docs/reference/`.
 - `prompt-log.md` — running record of AI sessions that materially shaped the work in this repo. Not a transcript of every prompt — just the ones that mattered.
 - `.gitignore` — what must never enter the history.
 - `.claude/skills/` — personal sandbox for Claude Code skills. Nothing in it is load-bearing for the rest of the repo.
