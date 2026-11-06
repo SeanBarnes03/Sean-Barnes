@@ -17,5 +17,6 @@ Each engagement is listed here with links to its capability folder, brief, and d
 | Capability | Brief | Decision |
 |---|---|---|
 | [Marginal analysis](capabilities/marginal-analysis/) — perfect competition, choosing a crop mix at a price the farm cannot set | [Engagement brief](docs/briefs/perfect-competition-brief.md) | [Planting recommendation](docs/decisions/perfect-competition-memo.md) — 10 / 20 / 30 beds, $42,762 season profit |
+| [Economic research](capabilities/economic-research/) — whether Central Maui's Kahului and Pāʻia aquifers should be designated Ground Water Management Areas | [Research brief](docs/briefs/research-brief.md) | In progress — [latest draft](drafts/2026-09-25-draft.md) |
 
 -Drafted with help from Claude (Anthropic, 2026); reviewed and edited by me.
