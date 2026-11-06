@@ -6,4 +6,9 @@ One folder per capability. Each folder holds:
 - `spec.md` — the scope/spec for the work
 - supporting model/workbook files (e.g. `model.xlsx`)
 
-No capabilities yet — this folder is scaffolding for Stage 0.
+## Current capabilities
+
+| Capability | What it does | Status |
+|---|---|---|
+| [Marginal analysis](marginal-analysis/) | Finds the profit-maximizing crop mix for a price-taking farm using marginal cost and marginal revenue | Closed — recommendation delivered |
+| [Economic research](economic-research/) | Applies common-pool resource and externality theory to Central Maui groundwater policy | In progress — paper in draft |
