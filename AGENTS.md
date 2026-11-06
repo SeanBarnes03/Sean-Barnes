@@ -14,14 +14,15 @@ committed or pushed.
 
 ## Writing for me
 
-This repository is no longer used for school assignments. Agents may draft, rewrite and
-edit content for me directly, including briefs, memos, analysis and my resume. Write in my
-voice: plain, direct, and specific, with numbers wherever they exist.
+From 2026-11-05 this repository is no longer used for school assignments. From that date
+on, agents may draft, rewrite and edit content for me directly. Write in my voice: plain,
+direct, and specific, with numbers wherever they exist.
 
+- **This rule looks forward only.** Leave everything committed before 2026-11-05 as it is,
+  including its AI-disclosure lines. Do not edit, clean up or reformat an earlier file unless I
+  name that file and ask for the change.
+- New work does not need an AI-disclosure line.
 - I review anything an agent writes before it goes outside this repository.
-- New files do not need an AI-disclosure line.
-- The disclosure lines on the earlier coursework (the engagements, drafts and `prompt-log.md`)
-  stay as they are. They are an accurate record of how that work was done.
 
 ## Repository layout
 
