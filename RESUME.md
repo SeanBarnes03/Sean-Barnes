@@ -83,3 +83,5 @@
 **Certifications:** Lean Six Sigma Green Belt
 
 **Interests:** Travel | Whitewater Rafting | Hiking | SCUBA Diving | Jujitsu | Kickboxing
+
+-Drafted with help from Claude (Anthropic, 2026); reviewed and edited by me.
