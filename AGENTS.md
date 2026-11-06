@@ -12,15 +12,16 @@ Agents run in UTC, which is 10 hours ahead and usually a day later in the evenin
 Convert before stamping a date, and convert before reasoning about when something was
 committed or pushed.
 
-## Disclosure
+## Writing for me
 
-Any content drafted with AI assistance is marked at the end of the file, e.g.:
+This repository is no longer used for school assignments. Agents may draft, rewrite and
+edit content for me directly, including briefs, memos, analysis and my resume. Write in my
+voice: plain, direct, and specific, with numbers wherever they exist.
 
-`-Drafted with help from ChatGPT; reviewed and edited by me.`
-
-Nothing gets published from an AI draft without being reviewed and edited by me first.
-
-Files in `docs/reference/` are my own background material, not coursework, and do not carry the disclosure line.
+- I review anything an agent writes before it goes outside this repository.
+- New files do not need an AI-disclosure line.
+- The disclosure lines on the earlier coursework (the engagements, drafts and `prompt-log.md`)
+  stay as they are. They are an accurate record of how that work was done.
 
 ## Repository layout
 
@@ -30,14 +31,14 @@ Files in `docs/reference/` are my own background material, not coursework, and d
 - LinkedIn: [linkedin.com/in/seanwbarnes](https://www.linkedin.com/in/seanwbarnes/). Agents usually can't load the live page, because LinkedIn requires a login. Use the saved copy instead: `docs/reference/linkedin-profile-2026-11.md` (with the original PDF export). It covers my full career from 1997, publications and summary, including roles the resumes leave out.
 - `prompt-log.md` — running record of AI sessions that materially shaped the work in this repo. Not a transcript of every prompt — just the ones that mattered.
 - `.gitignore` — what must never enter the history.
-- `.claude/skills/` — Claude Code skills. `mental-models/` stress-tests my work against a curated library of mental models and critiques without rewriting. Nothing in this folder is load-bearing for the rest of the repo.
+- `.claude/skills/` — Claude Code skills. `mental-models/` stress-tests my work against a curated library of mental models and can rewrite the weak passages it finds. Nothing in this folder is load-bearing for the rest of the repo.
 - `capabilities/<name>/` — one folder per capability, each with `README.md`, `spec.md`, and any supporting model/workbook files.
 - `docs/briefs/` — written BEFORE the work: scope and hypothesis.
 - `docs/decisions/` — written AFTER the work: the recommendation.
 - `data/` — sourced inputs, each with provenance noted (source, date pulled, access method).
 - `analysis/figures/` — the findings, and the charts they refer to.
 
-## Working with AI on a capability
+## Working on a capability
 
 1. Start with a brief in `docs/briefs/` before generating any analysis — scope and hypothesis first.
 2. Log any AI session that changed scope, structure, or conclusions in `prompt-log.md`.
