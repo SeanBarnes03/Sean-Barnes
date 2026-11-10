@@ -1,0 +1,294 @@
+<!doctype html><html><head><meta charset="utf-8"><title>NEO Overhead Deep Dive</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,wght@0,400;0,600;0,700;0,800;1,400&display=swap" rel="stylesheet">
+<style>
+@page { size: 1334px 750px; margin: 0; }
+* { box-sizing: border-box; }
+html, body { margin:0; padding:0; background:#F3F4F8; }
+body { font-family: 'DM Sans', 'Inter', system-ui, sans-serif; color:#1E2433; }
+.slide { width:1334px; height:750px; padding:28px 45px 0; position:relative; overflow:hidden;
+         background:#F3F4F8; page-break-after:always; break-after:page; }
+.hdr { background:#14284B; border-radius:8px; padding:14px 30px 16px; text-align:center; color:#fff; }
+.hdr h1 { margin:0; font-size:40px; font-weight:800; letter-spacing:.5px; text-transform:uppercase; line-height:1.15; }
+.hdr p { margin:6px 0 0; font-size:18px; font-style:italic; color:#D6DDEB; }
+.tag { font-size:12px; margin:-4px 0 2px; font-weight:700; letter-spacing:1px;
+        color:#AFC0DD; text-transform:uppercase; }
+.card { background:#fff; border-radius:8px; padding:16px 22px; box-shadow:0 1px 2px rgba(0,0,0,.05); }
+.card h3 { margin:0 0 10px; font-size:19px; font-weight:800; color:#14284B; text-transform:uppercase; letter-spacing:.3px; }
+.src { position:absolute; left:45px; right:45px; bottom:22px; font-size:14px; color:#6B7280; line-height:1.4; }
+.callout { background:#FDF3E6; border:1px solid #F1DCC0; border-radius:8px; padding:14px 22px; font-size:18px; line-height:1.4; }
+.callout.dark { background:#14284B; color:#fff; border:none; }
+.row { display:flex; gap:18px; }
+table.t { width:100%; border-collapse:collapse; font-size:16px; background:#fff; }
+table.t th { background:#E5EAF3; text-align:left; padding:8px 10px; font-weight:700; border:1px solid #CDD3DF; }
+table.t td { padding:6px 10px; border:1px solid #D9DEE8; vertical-align:top; }
+table.t td.n, table.t th.n { text-align:right; white-space:nowrap; }
+.hl td { background:#FBEDEA; font-weight:700; }
+.sub td { background:#F6F7FA; color:#4B5563; }
+.est { font-size:11px; font-weight:700; color:#9E4F12; border:1px solid #DB8A4B; border-radius:3px;
+        padding:0 3px; margin-left:4px; vertical-align:2px; }
+.wf { display:grid; grid-template-columns: 330px 1fr 90px; align-items:center; row-gap:6px; font-size:17px; }
+.wf .lab { padding-right:10px; }
+.wf .track { position:relative; height:26px; }
+.wf .bar { position:absolute; top:2px; height:22px; border-radius:3px; }
+.wf .zero { position:absolute; top:-4px; bottom:-4px; width:1.5px; background:#8A93A6; }
+.wf .val { text-align:right; font-weight:700; }
+.hatch { background-image: repeating-linear-gradient(45deg, rgba(255,255,255,.55) 0 4px, transparent 4px 9px); }
+.kpi { font-size:34px; font-weight:800; line-height:1.1; }
+.small { font-size:15px; color:#4B5563; line-height:1.4; }
+.cards3 { display:grid; grid-template-columns:repeat(3,1fr); gap:16px; }
+.topline { border-top:5px solid #3D5E98; }
+</style></head><body>
+<section class="slide">
+<div class="hdr"><h1>NEO&rsquo;s overhead: what&rsquo;s in it and why it&rsquo;s high</h1><p>Deep dive on v2 slides 5 and 6 &middot; FY2025, updated with Q3 2026 where noted</p></div>
+
+<div class="row" style="margin-top:18px">
+  <div class="card" style="flex:1;border-top:5px solid #14284B">
+    <div class="kpi" style="color:#14284B">$273M of G&amp;A = 37.6% of sales</div>
+    <div class="small" style="font-size:17px;margin-top:6px">Only <b>$176M</b> is the day-to-day back office (billing, IT, finance, HR, offices, fees). The rest is
+    non-cash charges ($68M), &ldquo;one-time&rdquo; items ($22M) and leadership pay ($7M).</div>
+  </div>
+  <div class="card" style="flex:1;border-top:5px solid #A52F22">
+    <div class="kpi" style="color:#A52F22">30.7 pts behind Quest</div>
+    <div class="small" style="font-size:17px;margin-top:6px">SG&amp;A of 48.5% vs. 17.8% is a $223M/yr gap. About a third is accounting and one-offs; about half is
+    the cost of being a small, specialty oncology lab. The rest is plain excess.</div>
+  </div>
+</div>
+<div class="row" style="margin-top:16px">
+  <div class="card" style="flex:1;border-top:5px solid #DB8A4B">
+    <div class="kpi" style="color:#9E4F12">Wrong yardstick, partly</div>
+    <div class="small" style="font-size:17px;margin-top:6px">Against specialty labs (Myriad, Exact, Castle, Fulgent) NEO&rsquo;s total SG&amp;A is <i>low</i>. Its problem is
+    G&amp;A alone: 37.6% vs. a 27.4% peer median, the highest of the group.</div>
+  </div>
+  <div class="card" style="flex:1;border-top:5px solid #2E6B3A">
+    <div class="kpi" style="color:#2E6B3A">Real cash gap: ~4 pts, ~$27M</div>
+    <div class="small" style="font-size:17px;margin-top:6px">Strip out stock pay, depreciation, amortization and one-offs and NEO&rsquo;s cash G&amp;A is 25.2% of sales,
+    vs. ~21% at Castle. That is the size of the prize, and it matches the ~$24M in the v2 deck.</div>
+  </div>
+</div>
+<div class="callout dark" style="margin-top:16px;display:flex;gap:14px;align-items:center">
+  <div style="font-size:22px">&#9737;</div>
+  <div><b>Why it&rsquo;s high:</b> four acquisitions never fully folded together, a billing operation that waits ~93 days to get paid
+  (Quest: ~48), stock pay at 7&times; the big-lab rate, three CEOs in four years, and a public-company cost base spread over just $727M of sales.</div>
+</div>
+<div class="src">Sources: NeoGenomics FY2025 10-K, Q3 2025 10-Q, Q4 2025 and Q3 2026 results; peer FY2025 10-Ks and earnings releases. Figures marked EST are our estimates; method on each slide and in the notes page. Not investment advice.</div></section><section class="slide">
+<div class="hdr"><div class="tag">Part 1 &middot; Slide 5 deep dive</div><h1>G&amp;A, peeled back in layers</h1><p>FY2025 general &amp; administrative costs of $273.3M &middot; what is non-cash, what is one-off, what is the real back office</p></div>
+
+<div class="row" style="margin-top:16px">
+  <div class="card" style="flex:1.65">
+    <h3>From $273M reported to $176M of real back office ($M)</h3>
+    <div class="wf">
+<div class="lab" style="font-weight:800;">Reported G&amp;A</div><div class="track"><div class="zero" style="left:0.00%"></div><div class="bar" style="left:0.00%;width:94.24%;background:#14284B"></div></div><div class="val" style="color:#14284B">273.3</div>
+<div class="lab" style="">&minus; Stock-based pay <span class="est">EST</span></div><div class="track"><div class="zero" style="left:0.00%"></div><div class="bar hatch" style="left:82.28%;width:11.97%;background:#9DB0CF"></div></div><div class="val" style="color:#14284B">&minus;34.7</div>
+<div class="lab" style="">&minus; Depreciation <span class="est">EST</span></div><div class="track"><div class="zero" style="left:0.00%"></div><div class="bar hatch" style="left:75.28%;width:7.00%;background:#9DB0CF"></div></div><div class="val" style="color:#14284B">&minus;20.3</div>
+<div class="lab" style="">&minus; Amortization of acquired assets</div><div class="track"><div class="zero" style="left:0.00%"></div><div class="bar" style="left:70.83%;width:4.45%;background:#9DB0CF"></div></div><div class="val" style="color:#14284B">&minus;12.9</div>
+<div class="lab" style="font-weight:800;">= Cash G&amp;A</div><div class="track"><div class="zero" style="left:0.00%"></div><div class="bar" style="left:0.00%;width:70.83%;background:#3D5E98"></div></div><div class="val" style="color:#3D5E98">205.4</div>
+<div class="lab" style="">&minus; Patent litigation (Natera)</div><div class="track"><div class="zero" style="left:0.00%"></div><div class="bar" style="left:66.93%;width:3.90%;background:#DB8A4B"></div></div><div class="val" style="color:#DB8A4B">&minus;11.3</div>
+<div class="lab" style="">&minus; Deal costs (Pathline etc.)</div><div class="track"><div class="zero" style="left:0.00%"></div><div class="bar" style="left:64.41%;width:2.52%;background:#DB8A4B"></div></div><div class="val" style="color:#DB8A4B">&minus;7.3</div>
+<div class="lab" style="">&minus; CEO transition</div><div class="track"><div class="zero" style="left:0.00%"></div><div class="bar" style="left:63.21%;width:1.21%;background:#DB8A4B"></div></div><div class="val" style="color:#DB8A4B">&minus;3.5</div>
+<div class="lab" style="">&minus; Exec cash pay &amp; board fees</div><div class="track"><div class="zero" style="left:0.00%"></div><div class="bar" style="left:60.69%;width:2.52%;background:#2E6B3A"></div></div><div class="val" style="color:#2E6B3A">&minus;7.3</div>
+<div class="lab" style="font-weight:800;">= Core back office</div><div class="track"><div class="zero" style="left:0.00%"></div><div class="bar" style="left:0.00%;width:60.69%;background:#14284B"></div></div><div class="val" style="color:#14284B">176.0</div>
+</div>
+  </div>
+  <div style="flex:1;display:flex;flex-direction:column;gap:14px">
+    <div class="card"><h3>Share of sales</h3>
+      <div style="display:grid;grid-template-columns:165px 170px 1fr;row-gap:6px;align-items:center;font-size:15px">
+<div>Reported G&amp;A</div><div><div style="height:22px;width:159.7px;background:#14284B;border-radius:3px"></div></div><div style="font-weight:700;padding-left:8px">37.6%</div>
+<div>Cash G&amp;A</div><div><div style="height:22px;width:120.0px;background:#3D5E98;border-radius:3px"></div></div><div style="font-weight:700;padding-left:8px">28.2%</div>
+<div>Cash, ex one-offs</div><div><div style="height:22px;width:107.1px;background:#3D5E98;border-radius:3px"></div></div><div style="font-weight:700;padding-left:8px">25.2%</div>
+<div>Core back office</div><div><div style="height:22px;width:102.8px;background:#9DB0CF;border-radius:3px"></div></div><div style="font-weight:700;padding-left:8px">24.2%</div>
+</div>
+    </div>
+    <div class="card"><h3>How the split was made</h3>
+      <div class="small">Amortization: $31.8M total less $18.9M the 10-K puts in cost of revenue. Stock pay: G&amp;A was 84% of stock pay in
+      Jan&ndash;Sep 2025 (10-Q), applied to the $41.3M year. Depreciation: the remainder of the $67.9M non-cash total.</div>
+    </div>
+  </div>
+</div>
+<div class="callout" style="margin-top:14px"><b>Over a third of &ldquo;overhead&rdquo; ($97M) is not back-office spending at all.</b> Cutting staff or vendors
+can only reach the $176M core (24% of sales), plus stock pay through policy.</div>
+<div class="src">Sources: NeoGenomics FY2025 10-K (segment note, cost-of-revenue note, G&amp;A description, adjusted EBITDA reconciliation); Q3 2025 10-Q (stock pay by line); 2026 proxy. Hatched bars = estimated split.</div></section><section class="slide">
+<div class="hdr"><div class="tag">Part 1 &middot; Slide 5 deep dive</div><h1>Inside the $176M back office</h1><p>Indicative split by function, FY2025 &middot; NEO does not disclose this; ranges are our estimates</p></div>
+
+<div class="row" style="margin-top:16px">
+  <div style="flex:2.1">
+    <table class="t">
+      <tr><th>Function <span class="est">EST</span></th><th class="n">$M</th><th class="n">Range</th><th class="n">% sales</th><th>What&rsquo;s in it</th></tr>
+      <tr><td><b>Billing &amp; revenue cycle</b></td><td class="n"><b>~55</b></td><td class="n">45&ndash;62</td><td class="n">7.6%</td><td>Coding, claims, prior authorization, appeals, collections and client services across a broad oncology menu and thousands of payers. Days to collect: ~93.</td></tr><tr><td><b>IT &amp; software</b></td><td class="n"><b>~45</b></td><td class="n">38&ndash;52</td><td class="n">6.2%</td><td>IT staff, lab information system, ERP, cloud and licenses. Software &amp; tech rose $8.0M in 2025, the biggest non-pay increase.</td></tr><tr><td><b>Finance, HR, legal &amp; admin staff</b></td><td class="n"><b>~28</b></td><td class="n">22&ndash;34</td><td class="n">3.8%</td><td>Accounting, FP&amp;A, tax, SOX, investor relations, HR/recruiting, in-house legal, compliance, procurement.</td></tr><tr><td><b>Professional fees</b></td><td class="n"><b>~16</b></td><td class="n">12&ndash;20</td><td class="n">2.2%</td><td>Outside counsel (non-litigation), Deloitte audit ($2.8M), consultants, tax advisers. Down $2.1M in 2025.</td></tr><tr><td><b>Facilities, insurance &amp; office</b></td><td class="n"><b>~17</b></td><td class="n">13&ndash;20</td><td class="n">2.3%</td><td>Fort Myers HQ and office space (part of $9.6M rent), D&amp;O and liability insurance, utilities.</td></tr><tr><td><b>Other admin</b></td><td class="n"><b>~15</b></td><td class="n">10&ndash;18</td><td class="n">2.1%</td><td>Travel ($1.3M lower in 2025), recruiting, card-processing fees, equipment upkeep, dues and miscellaneous.</td></tr>
+      <tr class="hl"><td>Core back office</td><td class="n">176.0</td><td class="n">reported</td><td class="n">24.2%</td><td>10-K: pay for executive, billing, finance, HR, IT and admin staff, plus fees, facilities and systems</td></tr>
+    </table>
+  </div>
+  <div style="flex:1;display:flex;flex-direction:column;gap:14px">
+    <div class="card topline"><h3>Hard anchors</h3>
+      <div class="small"><b>People ~60% of the core.</b> Pay &amp; benefits were the largest 2025 increase (+$11.5M) and 62% of lab-plus-overhead growth.<br><br>
+      <b>Known:</b> audit $2.8M; rent $9.6M (labs + offices); 401(k) match $8.9M company-wide; headcount ~2,500 (+300 in 2025).</div></div>
+    <div class="card" style="border-top:5px solid #DB8A4B"><h3>Why estimate?</h3>
+      <div class="small">NEO reports G&amp;A as one line; the 10-K lists what is in it but not how much. Ranges are sized from the 10-K drivers,
+      the disclosures at left, and typical cost shares for specialty labs. Use them to size work, not as fact.</div></div>
+  </div>
+</div>
+<div class="src">Sources: FY2025 10-K (G&amp;A description and drivers, leases, 401(k)); 2026 proxy (audit fees); headcount from company profile data (Yahoo Finance/Fidelity, FY2025). Functional split estimated; see notes page.</div></section><section class="slide">
+<div class="hdr"><div class="tag">Part 1 &middot; Slide 5 deep dive</div><h1>Overhead fell as a share, not in dollars</h1><p>G&amp;A FY2021&ndash;FY2025, Q3 2026, and what changed in 2025</p></div>
+
+<div class="row" style="margin-top:16px">
+  <div class="card" style="flex:1.15"><h3>G&amp;A as a share of sales</h3>
+    <div style="display:flex;gap:6px;align-items:flex-end"><div style="display:flex;flex-direction:column;align-items:center;justify-content:flex-end;height:290px;width:84px"><div style="font-weight:800;font-size:17px;margin-bottom:4px">45.6%</div><div style="width:56px;height:210px;background:#3D5E98;border-radius:3px 3px 0 0"></div><div style="font-size:15px;margin-top:6px">2021</div><div style="font-size:13px;color:#6B7280">$221M</div></div><div style="display:flex;flex-direction:column;align-items:center;justify-content:flex-end;height:290px;width:84px"><div style="font-weight:800;font-size:17px;margin-bottom:4px">47.7%</div><div style="width:56px;height:219px;background:#3D5E98;border-radius:3px 3px 0 0"></div><div style="font-size:15px;margin-top:6px">2022</div><div style="font-size:13px;color:#6B7280">$243M</div></div><div style="display:flex;flex-direction:column;align-items:center;justify-content:flex-end;height:290px;width:84px"><div style="font-weight:800;font-size:17px;margin-bottom:4px">41.1%</div><div style="width:56px;height:189px;background:#3D5E98;border-radius:3px 3px 0 0"></div><div style="font-size:15px;margin-top:6px">2023</div><div style="font-size:13px;color:#6B7280">$243M</div></div><div style="display:flex;flex-direction:column;align-items:center;justify-content:flex-end;height:290px;width:84px"><div style="font-weight:800;font-size:17px;margin-bottom:4px">39.3%</div><div style="width:56px;height:181px;background:#3D5E98;border-radius:3px 3px 0 0"></div><div style="font-size:15px;margin-top:6px">2024</div><div style="font-size:13px;color:#6B7280">$260M</div></div><div style="display:flex;flex-direction:column;align-items:center;justify-content:flex-end;height:290px;width:84px"><div style="font-weight:800;font-size:17px;margin-bottom:4px">37.6%</div><div style="width:56px;height:173px;background:#3D5E98;border-radius:3px 3px 0 0"></div><div style="font-size:15px;margin-top:6px">2025</div><div style="font-size:13px;color:#6B7280">$273M</div></div><div style="display:flex;flex-direction:column;align-items:center;justify-content:flex-end;height:290px;width:84px"><div style="font-weight:800;font-size:17px;margin-bottom:4px">32.1%</div><div style="width:56px;height:148px;background:#9DB0CF;border-radius:3px 3px 0 0"></div><div style="font-size:15px;margin-top:6px">Q3 26</div><div style="font-size:13px;color:#6B7280">quarter</div></div><div style="display:flex;flex-direction:column;align-items:center;justify-content:flex-end;height:290px;width:84px"><div style="font-weight:800;font-size:17px;margin-bottom:4px">&lt;30%</div><div style="width:56px;height:138px;border:2px dashed #3D5E98;border-radius:3px 3px 0 0"></div><div style="font-size:15px;margin-top:6px">2027 goal</div><div style="font-size:13px;color:#6B7280">&nbsp;</div></div></div>
+    <div class="small" style="margin-top:8px">Dollars rose in three of four years ($221M &rarr; $273M, +24%) but sales rose faster (+50%). The ratio fell because of growth, not cuts.</div>
+  </div>
+  <div class="card" style="flex:1"><h3>What moved G&amp;A in 2025 ($M, +$13.6M net)</h3>
+    <div style="font-size:15px"><div class="wf">
+<div class="lab" style="">Pay &amp; benefits</div><div class="track"><div class="zero" style="left:23.53%"></div><div class="bar" style="left:23.53%;width:67.65%;background:#14284B"></div></div><div class="val" style="color:#14284B">+11.5</div>
+<div class="lab" style="">Software &amp; technology</div><div class="track"><div class="zero" style="left:23.53%"></div><div class="bar" style="left:23.53%;width:47.06%;background:#14284B"></div></div><div class="val" style="color:#14284B">+8.0</div>
+<div class="lab" style="">Deal costs</div><div class="track"><div class="zero" style="left:23.53%"></div><div class="bar" style="left:23.53%;width:8.24%;background:#14284B"></div></div><div class="val" style="color:#14284B">+1.4</div>
+<div class="lab" style="">Facilities</div><div class="track"><div class="zero" style="left:23.53%"></div><div class="bar" style="left:20.59%;width:2.94%;background:#8FC08F"></div></div><div class="val" style="color:#14284B">&minus;0.5</div>
+<div class="lab" style="">Amortization</div><div class="track"><div class="zero" style="left:23.53%"></div><div class="bar" style="left:17.65%;width:5.88%;background:#8FC08F"></div></div><div class="val" style="color:#14284B">&minus;1.0</div>
+<div class="lab" style="">Travel</div><div class="track"><div class="zero" style="left:23.53%"></div><div class="bar" style="left:15.88%;width:7.65%;background:#8FC08F"></div></div><div class="val" style="color:#14284B">&minus;1.3</div>
+<div class="lab" style="">Equipment maintenance</div><div class="track"><div class="zero" style="left:23.53%"></div><div class="bar" style="left:12.94%;width:10.59%;background:#8FC08F"></div></div><div class="val" style="color:#14284B">&minus;1.8</div>
+<div class="lab" style="">Legal &amp; professional fees</div><div class="track"><div class="zero" style="left:23.53%"></div><div class="bar" style="left:11.18%;width:12.35%;background:#8FC08F"></div></div><div class="val" style="color:#14284B">&minus;2.1</div>
+</div></div>
+    <div class="small" style="margin-top:10px">People and systems added $19.5M; everything NEO cut came to $6.7M. Pathline integration put $4.7M into G&amp;A.</div>
+  </div>
+</div>
+<div class="src">Sources: NeoGenomics 10-Ks FY2021&ndash;FY2025 (income statement; FY2025 MD&amp;A G&amp;A drivers); Q3 2026 results. Q3 2026 is a single quarter.</div></section><section class="slide">
+<div class="hdr"><div class="tag">Part 1 &middot; Slide 5 deep dive</div><h1>What management can actually cut</h1><p>Each piece of FY2025 G&amp;A by cash impact, recurrence and controllability</p></div>
+
+<div style="margin-top:16px">
+<table class="t" style="font-size:17px">
+<tr><th>Piece of G&amp;A</th><th class="n">$M</th><th class="n">% sales</th><th>Cash?</th><th>Recurs?</th><th>Can management cut it?</th></tr>
+<tr><td><b>Core back office</b></td><td class="n">176.0</td><td class="n">24.2%</td><td>Cash</td><td>Recurring</td><td style="color:#2E6B3A;font-weight:700">Yes: process, systems, sourcing, location</td></tr><tr><td><b>Stock-based pay <span class="est">EST</span></b></td><td class="n">34.7</td><td class="n">4.8%</td><td>Non-cash</td><td>Recurring</td><td style="color:#DB8A4B;font-weight:700">Yes, by policy; lifts profit, not cash</td></tr><tr><td><b>Depreciation <span class="est">EST</span></b></td><td class="n">20.3</td><td class="n">2.8%</td><td>Non-cash</td><td>Recurring</td><td style="color:#6B7280;font-weight:700">Only through lower capex over time</td></tr><tr><td><b>Amortization</b></td><td class="n">12.9</td><td class="n">1.8%</td><td>Non-cash</td><td>Runs off</td><td style="color:#6B7280;font-weight:700">No; set by past deals</td></tr><tr><td><b>Litigation, deals, CEO change</b></td><td class="n">22.1</td><td class="n">3.0%</td><td>Cash</td><td>&ldquo;One-time&rdquo;</td><td style="color:#DB8A4B;font-weight:700">Mostly rolled off ($2.6M Jan&ndash;Sep 2026), but $26M in 2024</td></tr><tr><td><b>Exec cash pay &amp; board</b></td><td class="n">7.3</td><td class="n">1.0%</td><td>Cash</td><td>Recurring</td><td style="color:#6B7280;font-weight:700">Small; governance, not savings</td></tr>
+<tr class="hl"><td>Total G&amp;A</td><td class="n">273.3</td><td class="n">37.6%</td><td colspan="3"></td></tr>
+</table></div>
+<div class="row" style="margin-top:16px">
+  <div class="card" style="flex:1;border-top:5px solid #2E6B3A"><div class="kpi" style="color:#2E6B3A;font-size:28px">$176M cash pool</div>
+    <div class="small">10% out of the core = $17.6M, 2.4 pts of sales. This is where the &lt;30% goal has to come from.</div></div>
+  <div class="card" style="flex:1;border-top:5px solid #DB8A4B"><div class="kpi" style="color:#9E4F12;font-size:28px">$35M stock pay</div>
+    <div class="small">Bringing it to 2.5% of sales would add ~$17M of reported profit, no cash.</div></div>
+  <div class="card" style="flex:1;border-top:5px solid #6B7280"><div class="kpi" style="color:#6B7280;font-size:28px">$33M fixed by the past</div>
+    <div class="small">Depreciation and amortization; ignore them when setting savings targets.</div></div>
+</div>
+<div class="src">Sources: as slide 2; Q3 2026 investor presentation (one-off run-rate); FY2024 10-K (2024 one-offs). Savings figures are simple arithmetic, not company targets.</div></section><section class="slide">
+<div class="hdr"><div class="tag">Part 2 &middot; Slide 6 gap analysis</div><h1>The gap depends on the yardstick</h1><p>Overhead as a share of sales, FY2025 &middot; routine labs vs. specialty and oncology labs</p></div>
+
+<div class="row" style="margin-top:14px">
+  <div style="flex:2.2"><table class="t" style="font-size:15.5px" id="peer">
+    <tr><th>Company (FY2025)</th><th class="n">Sales $M</th><th class="n">SG&amp;A</th><th class="n">Sales &amp; mktg</th><th class="n">G&amp;A</th><th>Note</th></tr>
+    <tr class="sub"><td>Labcorp <span style='color:#6B7280;font-weight:400'>(routine)</span></td><td class="n">13,952</td><td class="n">15.9%</td><td class="n">&ndash;</td><td class="n">&ndash;</td><td>SG&amp;A one line</td></tr><tr class="sub"><td>Quest Diagnostics <span style='color:#6B7280;font-weight:400'>(routine)</span></td><td class="n">11,035</td><td class="n">17.8%</td><td class="n">&ndash;</td><td class="n">&ndash;</td><td>SG&amp;A one line</td></tr><tr><td>Exact Sciences</td><td class="n">3,250</td><td class="n">59.7%</td><td class="n">32.3%</td><td class="n">27.4%</td><td></td></tr><tr><td>Natera</td><td class="n">2,306</td><td class="n">51.1%</td><td class="n">&ndash;</td><td class="n">&ndash;</td><td>SG&amp;A derived from 10-K change</td></tr><tr><td>Myriad Genetics</td><td class="n">824</td><td class="n">65.2%</td><td class="n">34.1%</td><td class="n">31.1%</td><td>G&amp;A incl. amortization</td></tr><tr class="hl"><td>NeoGenomics</td><td class="n">727</td><td class="n">50.2%</td><td class="n">12.6%</td><td class="n">37.6%</td><td>48.5% ex amortization</td></tr><tr><td>Veracyte</td><td class="n">517</td><td class="n">&ndash;</td><td class="n">&ndash;</td><td class="n">21.4%</td><td>S&amp;M not retrieved</td></tr><tr><td>Castle Biosciences</td><td class="n">344</td><td class="n">66.6%</td><td class="n">40.1%</td><td class="n">26.5%</td><td></td></tr><tr><td>Fulgent Genetics</td><td class="n">323</td><td class="n">49.6%</td><td class="n">13.4%</td><td class="n">36.2%</td><td></td></tr>
+    <tr><td colspan="2"><b>Specialty median</b> (where reported)</td><td class="n"><b>59.7%</b></td><td class="n"><b>33.2%</b></td><td class="n"><b>27.4%</b></td><td></td></tr>
+  </table></div>
+  <div style="flex:1;display:flex;flex-direction:column;gap:12px">
+    <div class="card" style="border-top:5px solid #3D5E98"><h3 style="font-size:17px">vs. Quest &amp; Labcorp</h3><div class="small">NEO is ~3&times; on SG&amp;A. But they run a
+      high-volume routine-test model with ~15&ndash;19&times; the sales.</div></div>
+    <div class="card" style="border-top:5px solid #2E6B3A"><h3 style="font-size:17px">vs. specialty labs</h3><div class="small">NEO&rsquo;s total SG&amp;A is <b>below</b> the median: it spends
+      far less on selling (12.6% vs. 33%).</div></div>
+    <div class="card" style="border-top:5px solid #A52F22"><h3 style="font-size:17px">The real outlier</h3><div class="small">G&amp;A: 37.6%, highest in the group, 10.2 pts over the
+      specialty median, worth ~$74M a year.</div></div>
+  </div>
+</div>
+<div class="src">Sources: FY2025 10-Ks and Q4/FY2025 earnings releases for each company; Myriad S&amp;M and Veracyte G&amp;A from aggregator data matched to 10-K text; Natera SG&amp;A derived from the 10-K&rsquo;s stated $335.9M (39.9%) increase. Exact figures from an untagged 10-K table. Company definitions differ.</div></section><section class="slide">
+<div class="hdr"><div class="tag">Part 2 &middot; Slide 6 gap analysis</div><h1>NEO&rsquo;s G&amp;A is high for its size</h1><p>Specialty peers that report G&amp;A separately &middot; Quest and Labcorp report only combined SG&amp;A</p></div>
+
+<div class="row" style="margin-top:16px">
+  <div class="card" style="flex:1.7"><h3>G&amp;A as % of sales vs. company size, FY2025</h3><svg width="760" height="380" font-family="DM Sans, Inter, sans-serif"><line x1="70" x2="740" y1="272.6" y2="272.6" stroke="#E3E7EF"/><text x="60" y="277.6" font-size="14" text-anchor="end" fill="#6B7280">20%</text><line x1="70" x2="740" y1="215.2" y2="215.2" stroke="#E3E7EF"/><text x="60" y="220.2" font-size="14" text-anchor="end" fill="#6B7280">25%</text><line x1="70" x2="740" y1="157.8" y2="157.8" stroke="#E3E7EF"/><text x="60" y="162.8" font-size="14" text-anchor="end" fill="#6B7280">30%</text><line x1="70" x2="740" y1="100.4" y2="100.4" stroke="#E3E7EF"/><text x="60" y="105.4" font-size="14" text-anchor="end" fill="#6B7280">35%</text><line x1="70" x2="740" y1="43.0" y2="43.0" stroke="#E3E7EF"/><text x="60" y="48.0" font-size="14" text-anchor="end" fill="#6B7280">40%</text><text x="113.4" y="358" font-size="14" text-anchor="middle" fill="#6B7280">$300M</text><text x="235.0" y="358" font-size="14" text-anchor="middle" fill="#6B7280">$500M</text><text x="400.0" y="358" font-size="14" text-anchor="middle" fill="#6B7280">$1,000M</text><text x="565.0" y="358" font-size="14" text-anchor="middle" fill="#6B7280">$2,000M</text><text x="661.5" y="358" font-size="14" text-anchor="middle" fill="#6B7280">$3,000M</text><text x="415.0" y="378" font-size="14" text-anchor="middle" fill="#6B7280">FY2025 sales (log scale)</text><line x1="70" x2="740" y1="187.6" y2="187.6" stroke="#3D5E98" stroke-dasharray="6 5" stroke-width="1.5"/><text x="433.3" y="179.6" font-size="14" fill="#3D5E98">peer median 27.4%</text><circle cx="680.6" cy="187.6" r="8" fill="#14284B"/><text x="694.6" y="215.6" font-size="16" font-weight="600" fill="#14284B" text-anchor="end">Exact Sciences 27.4%</text><circle cx="354.1" cy="145.1" r="8" fill="#14284B"/><text x="370.1" y="150.1" font-size="16" font-weight="600" fill="#14284B" text-anchor="start">Myriad Genetics 31.1%</text><circle cx="324.2" cy="70.5" r="11" fill="#A52F22"/><text x="340.2" y="75.5" font-size="16" font-weight="800" fill="#A52F22" text-anchor="start">NeoGenomics 37.6%</text><circle cx="243.0" cy="256.5" r="8" fill="#14284B"/><text x="259.0" y="261.5" font-size="16" font-weight="600" fill="#14284B" text-anchor="start">Veracyte 21.4%</text><circle cx="146.1" cy="198.0" r="8" fill="#14284B"/><text x="162.1" y="203.0" font-size="16" font-weight="600" fill="#14284B" text-anchor="start">Castle Biosciences 26.5%</text><circle cx="130.8" cy="86.6" r="8" fill="#14284B"/><text x="146.8" y="91.6" font-size="16" font-weight="600" fill="#14284B" text-anchor="start">Fulgent Genetics 36.2%</text><line x1="324.2" x2="324.2" y1="82.5" y2="187.6" stroke="#A52F22" stroke-width="2" stroke-dasharray="3 3"/><text x="316.2" y="133.1" font-size="15" font-weight="700" fill="#A52F22" text-anchor="end">+10.2 pts &asymp; $74M</text></svg></div>
+  <div style="flex:1;display:flex;flex-direction:column;gap:14px">
+    <div class="card topline"><h3>Scale doesn&rsquo;t explain it</h3><div class="small">Veracyte and Castle are <b>smaller</b> than NEO and run G&amp;A at
+      21&ndash;27%. Myriad, a similar size, is 6.5 pts lower despite carrying amortization in G&amp;A.</div></div>
+    <div class="card" style="border-top:5px solid #DB8A4B"><h3>Fulgent is the warning</h3><div class="small">The other lab built by acquisition with a
+      lab-services mix (anatomic pathology, precision diagnostics) sits right next to NEO at 36.2%.</div></div>
+    <div class="card" style="border-top:5px solid #2E6B3A"><h3>And it&rsquo;s moving</h3><div class="small">Q3 2026 G&amp;A was 32.1% of sales. Still above the
+      median, but the gap has roughly halved.</div></div>
+  </div>
+</div>
+<div class="src">Sources: as previous slide. Peer G&amp;A shown as reported, including each company&rsquo;s own stock pay and any D&amp;A it books there.</div></section><section class="slide">
+<div class="hdr"><div class="tag">Part 2 &middot; Slide 6 gap analysis</div><h1>Why NEO spends 30 points more than Quest</h1><p>Bridge of the 30.7-point SG&amp;A gap ($223M a year at NEO&rsquo;s sales), FY2025</p></div>
+
+<div class="row" style="margin-top:14px">
+  <div class="card" style="flex:1.7"><h3>From 48.5% to 17.8% of sales, in points</h3>
+    <div class="wf">
+<div class="lab" style="font-weight:800;">NeoGenomics SG&amp;A, ex amortization</div><div class="track"><div class="zero" style="left:0.00%"></div><div class="bar" style="left:0.00%;width:93.27%;background:#A52F22"></div></div><div class="val" style="color:#A52F22">48.5%</div>
+<div class="lab" style="">Stock-based pay (5.2% vs. 0.8%)</div><div class="track"><div class="zero" style="left:0.00%"></div><div class="bar" style="left:84.81%;width:8.46%;background:#DB8A4B"></div></div><div class="val" style="color:#DB8A4B">&minus;4.4</div>
+<div class="lab" style="">&ldquo;One-time&rdquo; items in G&amp;A</div><div class="track"><div class="zero" style="left:0.00%"></div><div class="bar" style="left:79.04%;width:5.77%;background:#DB8A4B"></div></div><div class="val" style="color:#DB8A4B">&minus;3.0</div>
+<div class="lab" style="">Depreciation booked in G&amp;A <span class="est">EST</span></div><div class="track"><div class="zero" style="left:0.00%"></div><div class="bar hatch" style="left:73.65%;width:5.38%;background:#DB8A4B"></div></div><div class="val" style="color:#DB8A4B">&minus;2.8</div>
+<div class="lab" style="">Specialty sales force <span class="est">EST</span></div><div class="track"><div class="zero" style="left:0.00%"></div><div class="bar hatch" style="left:58.27%;width:15.38%;background:#3D5E98"></div></div><div class="val" style="color:#3D5E98">&minus;8.0</div>
+<div class="lab" style="">Scale: fixed corporate costs <span class="est">EST</span></div><div class="track"><div class="zero" style="left:0.00%"></div><div class="bar hatch" style="left:48.65%;width:9.62%;background:#3D5E98"></div></div><div class="val" style="color:#3D5E98">&minus;5.0</div>
+<div class="lab" style="">Billing complexity <span class="est">EST</span></div><div class="track"><div class="zero" style="left:0.00%"></div><div class="bar hatch" style="left:40.96%;width:7.69%;background:#3D5E98"></div></div><div class="val" style="color:#3D5E98">&minus;4.0</div>
+<div class="lab" style="">Unexplained excess</div><div class="track"><div class="zero" style="left:0.00%"></div><div class="bar" style="left:34.23%;width:6.73%;background:#A52F22"></div></div><div class="val" style="color:#A52F22">&minus;3.5</div>
+<div class="lab" style="font-weight:800;">Quest Diagnostics SG&amp;A</div><div class="track"><div class="zero" style="left:0.00%"></div><div class="bar" style="left:0.00%;width:34.23%;background:#14284B"></div></div><div class="val" style="color:#14284B">17.8%</div>
+</div>
+  </div>
+  <div style="flex:1;display:flex;flex-direction:column;gap:12px">
+    <div class="card" style="border-top:5px solid #DB8A4B"><div class="kpi" style="color:#9E4F12;font-size:26px">10.2 pts &middot; $74M</div>
+      <div class="small"><b>Accounting &amp; one-offs.</b> Real costs, but not &ldquo;overhead&rdquo; in the sense of a bloated back office.</div></div>
+    <div class="card" style="border-top:5px solid #3D5E98"><div class="kpi" style="color:#3D5E98;font-size:26px">17 pts &middot; $124M</div>
+      <div class="small"><b>Business model.</b> A small oncology lab needs reps and a heavy billing desk. Shrinks only with scale.</div></div>
+    <div class="card" style="border-top:5px solid #A52F22"><div class="kpi" style="color:#A52F22;font-size:26px">3.5 pts &middot; $25M</div>
+      <div class="small"><b>Excess.</b> What a well-run lab of NEO&rsquo;s size and mix wouldn&rsquo;t spend.</div></div>
+  </div>
+</div>
+<div class="src">Method: stock pay and one-offs from filings (Quest stock pay $88M; Quest&rsquo;s own one-offs ignored, so these are upper bounds). Estimates: sales force = NEO S&amp;M 12.6% less ~4.5% assumed for routine labs; scale = ~$36M of public-company core cost (exec, board, audit, SOX, IR, core finance/IT) at 5% of NEO&rsquo;s sales vs. &lt;0.5% at Quest; billing = revenue-cycle cost ~7% vs. ~3%, consistent with 93 vs. ~48 days to collect.</div></section><section class="slide">
+<div class="hdr"><div class="tag">Part 2 &middot; Slide 6 gap analysis</div><h1>Strip out the accounting: the cash gap is ~4 points</h1><p>NEO G&amp;A normalized to recurring cash cost vs. the cleanest specialty comparisons, FY2025</p></div>
+
+<div class="row" style="margin-top:16px">
+  <div class="card" style="flex:1.6"><h3>G&amp;A as % of sales, like for like</h3>
+    <div class="wf">
+<div class="lab" style="font-weight:800;">NEO G&amp;A, reported</div><div class="track"><div class="zero" style="left:0.00%"></div><div class="bar" style="left:0.00%;width:93.94%;background:#A52F22"></div></div><div class="val" style="color:#A52F22">37.6%</div>
+<div class="lab" style="">&minus; Stock-based pay <span class="est">EST</span></div><div class="track"><div class="zero" style="left:0.00%"></div><div class="bar hatch" style="left:82.02%;width:11.93%;background:#9DB0CF"></div></div><div class="val" style="color:#14284B">&minus;4.8</div>
+<div class="lab" style="">&minus; Depreciation &amp; amortization</div><div class="track"><div class="zero" style="left:0.00%"></div><div class="bar hatch" style="left:70.60%;width:11.41%;background:#9DB0CF"></div></div><div class="val" style="color:#14284B">&minus;4.6</div>
+<div class="lab" style="">&minus; &ldquo;One-time&rdquo; items</div><div class="track"><div class="zero" style="left:0.00%"></div><div class="bar" style="left:63.01%;width:7.60%;background:#DB8A4B"></div></div><div class="val" style="color:#DB8A4B">&minus;3.0</div>
+<div class="lab" style="font-weight:800;">= NEO cash G&amp;A, recurring</div><div class="track"><div class="zero" style="left:0.00%"></div><div class="bar" style="left:0.00%;width:63.01%;background:#14284B"></div></div><div class="val" style="color:#14284B">25.2%</div>
+<div class="lab" style="font-weight:800;">Castle G&amp;A ex stock pay</div><div class="track"><div class="zero" style="left:0.00%"></div><div class="bar" style="left:0.00%;width:53.60%;background:#2E6B3A"></div></div><div class="val" style="color:#2E6B3A">21.4%</div>
+<div class="lab" style="">Veracyte G&amp;A, reported (incl. stock pay)</div><div class="track"><div class="zero" style="left:0.00%"></div><div class="bar" style="left:0.00%;width:53.50%;background:#8FC08F"></div></div><div class="val" style="color:#14284B">21.4%</div>
+</div>
+  </div>
+  <div style="flex:1;display:flex;flex-direction:column;gap:14px">
+    <div class="card" style="border-top:5px solid #2E6B3A"><div class="kpi" style="color:#2E6B3A">~3.8 pts &asymp; $27M</div>
+      <div class="small">The recurring cash gap to a lean specialty peer. Same size as the v2 deck&rsquo;s &ldquo;overhead under 30%&rdquo; prize (~$24M).</div></div>
+    <div class="card topline"><h3>Read it both ways</h3><div class="small">The 30-point headline gap to Quest is mostly not cash you can take out.
+      The 4-point gap is, and unlike the one-offs it comes back every year until fixed.</div></div>
+  </div>
+</div>
+<div class="callout" style="margin-top:14px"><b>Target to hold management to:</b> cash G&amp;A (ex stock pay, D&amp;A, one-offs) at or below 21% of sales.
+That is ~$27M at 2025 sales, more as sales grow if the dollars stay flat.</div>
+<div class="src">Sources: as slides 2 and 6; Castle FY2025 10-K (G&amp;A $91.2M, of which stock pay $17.4M). Veracyte includes its stock pay, so its cash ratio is lower still.</div></section><section class="slide">
+<div class="hdr"><div class="tag">Part 2 &middot; Slide 6 gap analysis</div><h1>Six reasons NEO&rsquo;s overhead runs high</h1><p>What the filings show behind the gap</p></div>
+
+<div class="cards3" style="margin-top:16px"><div class="card" style="border-top:5px solid #DB8A4B"><h3 style="font-size:18px;text-transform:none">1 &middot; Four deals, never one company</h3><div class="small" style="font-size:15.5px">Clarient (2015), Genoptix (2018), Inivata (2021), Pathline (2025). Six US labs, overlapping systems and teams. Deal and integration costs show up every year: $26M of &ldquo;one-time&rdquo; items in 2024, $50M in 2025.</div></div><div class="card" style="border-top:5px solid #3D5E98"><h3 style="font-size:18px;text-transform:none">2 &middot; A slow, heavy billing machine</h3><div class="small" style="font-size:15.5px">~93 days to get paid vs. ~48 at Quest, and getting worse (from ~80). Oncology tests need prior auth and appeals across thousands of payers; billing staff sit in G&amp;A.</div></div><div class="card" style="border-top:5px solid #DB8A4B"><h3 style="font-size:18px;text-transform:none">3 &middot; Stock pay at 7&times; the big labs</h3><div class="small" style="font-size:15.5px">$41.3M, 5.7% of sales vs. 0.8% at Quest and Labcorp; 79% of executive pay is equity. ~$35M of it lands in G&amp;A.</div></div><div class="card" style="border-top:5px solid #A52F22"><h3 style="font-size:18px;text-transform:none">4 &middot; Leadership churn</h3><div class="small" style="font-size:15.5px">Three CEOs since 2022 and a fourth (Warren Stone) from January 2027. 2025 carried $3.5M of transition costs and $7.7M of pay to two departed executives.</div></div><div class="card" style="border-top:5px solid #3D5E98"><h3 style="font-size:18px;text-transform:none">5 &middot; Systems spend rising</h3><div class="small" style="font-size:15.5px">Software &amp; technology +$8.0M in 2025, the biggest non-pay increase. Running old and new platforms side by side costs double until the old ones are switched off.</div></div><div class="card" style="border-top:5px solid #A52F22"><h3 style="font-size:18px;text-transform:none">6 &middot; People ahead of sales</h3><div class="small" style="font-size:15.5px">Headcount ~2,200 &rarr; ~2,500 (+14%) while sales grew 10%. G&amp;A pay +$11.5M. Plus $11.3M of Natera patent litigation to defend RaDaR.</div></div></div>
+<div class="row" style="margin-top:14px;font-size:15px">
+  <div style="display:flex;align-items:center;gap:8px"><span style="width:16px;height:16px;background:#DB8A4B;display:inline-block;border-radius:3px"></span>Accounting / one-off</div>
+  <div style="display:flex;align-items:center;gap:8px"><span style="width:16px;height:16px;background:#3D5E98;display:inline-block;border-radius:3px"></span>Business model (fix slowly)</div>
+  <div style="display:flex;align-items:center;gap:8px"><span style="width:16px;height:16px;background:#A52F22;display:inline-block;border-radius:3px"></span>Management choices (fix now)</div>
+</div>
+<div class="src">Sources: FY2025 10-K (history, one-offs, drivers, receivables); FY2024 10-K; 2026 proxy (pay); Q3 2026 results (CEO succession); Quest FY2024 10-K (days sales outstanding); headcount from company profile data. Departed-executive pay = Smith $4.05M + Harris $3.69M.</div></section><section class="slide">
+<div class="hdr"><div class="tag">Part 2 &middot; Slide 6 gap analysis</div><h1>Closing the gap: what&rsquo;s worth doing</h1><p>Actions mapped to the gap they close &middot; sized from NEO&rsquo;s own numbers</p></div>
+
+<div style="margin-top:14px"><table class="t" style="font-size:16px">
+<tr><th>Action</th><th>Gap it closes</th><th class="n">Size / yr</th><th>Cash?</th><th>Status</th></tr><tr><td><b>Finish integration: one lab system, one billing platform, close duplicate sites</b></td><td>Excess + part of scale</td><td class="n">$10&ndash;15M</td><td>Cash</td><td>In progress (2 dry labs closed 2026)</td></tr><tr><td><b>Revenue-cycle overhaul: automate prior auth and denials, cut days to collect toward 60</b></td><td>Billing complexity</td><td class="n">$6&ndash;10M + ~$65M cash freed</td><td>Cash</td><td>Getting worse</td></tr><tr><td><b>Shared-services / offshore for finance, HR and billing back office</b></td><td>Excess + scale</td><td class="n">$5&ndash;8M</td><td>Cash</td><td>Not started</td></tr><tr><td><b>Cap stock pay at ~2.5% of sales</b></td><td>Stock pay</td><td class="n">~$17M profit</td><td>Non-cash</td><td>Not started</td></tr><tr><td><b>Hold G&amp;A dollars flat while sales grow 10%/yr</b></td><td>Scale</td><td class="n">~3.5 pts/yr</td><td>Both</td><td>Q3 2026 trend supports it</td></tr><tr><td><b>Stop calling recurring deal and legal costs &ldquo;one-time&rdquo;; budget for them</b></td><td>One-offs</td><td class="n">Visibility</td><td>&ndash;</td><td>Rolled off in 2026</td></tr>
+</table></div>
+<div class="row" style="margin-top:14px">
+  <div class="callout dark" style="flex:1.6"><b>Realistic prize: $25&ndash;35M a year of cash G&amp;A</b>, taking cash G&amp;A from 25% toward 21% of sales, plus the
+  ~3.5 points a year that comes free from holding dollars flat. That covers half to two-thirds of the remaining $49M operating loss.</div>
+  <div class="callout" style="flex:1"><b>Don&rsquo;t chase Quest&rsquo;s 18%.</b> NEO&rsquo;s model needs a sales force and a specialist billing desk.
+  ~40% total SG&amp;A is a credible medium-term goal.</div>
+</div>
+<div class="src">Sizes are our estimates from FY2025 figures, not company targets; they overlap, so don&rsquo;t add them up. Cash freed from collections: ~33 days &times; $2.0M of sales a day. Not investment advice.</div></section><section class="slide">
+<div class="hdr"><h1>Notes on sources and method</h1><p>What is reported, what is estimated, and how</p></div>
+
+<div class="row" style="margin-top:16px;font-size:14.5px;line-height:1.45">
+<div class="card" style="flex:1"><h3>Reported (from filings)</h3>
+<ul style="margin:0;padding-left:18px">
+<li>NEO FY2025: sales $727.3M; G&amp;A $273.3M; S&amp;M $92.0M; amortization $31.8M ($18.9M in cost of revenue); stock pay $41.3M; depreciation $36.1M; litigation $11.3M, deal $7.3M, CEO transition $3.5M (10-K, Q4 2025 release).</li>
+<li>G&amp;A drivers 2025: pay +$11.5M, software +$8.0M, deal +$1.4M, legal/professional &minus;$2.1M, equipment &minus;$1.8M, travel &minus;$1.3M, amortization &minus;$1.0M, facilities &minus;$0.5M; Pathline integration $4.7M in G&amp;A (10-K MD&amp;A).</li>
+<li>Stock pay by line, Jan&ndash;Sep 2025: G&amp;A $27.9M, S&amp;M $2.3M, R&amp;D $2.0M of $33.3M (Q3 2025 10-Q).</li>
+<li>Peers FY2025: Quest sales $11,035M, SG&amp;A ~$1,967M, stock pay $88M; Labcorp $13,951.7M, SG&amp;A $2,216.3M, stock pay ~$105M; Myriad $824.5M, G&amp;A $256.8M; Exact $3,250M, S&amp;M ~$1,050M, G&amp;A ~$888.7M; Fulgent $322.7M, S&amp;M $43.4M, G&amp;A $116.7M; Castle $344.2M, SG&amp;A $229.3M, G&amp;A $91.2M (stock pay $17.4M); Veracyte $517.1M, G&amp;A ~$110.8M; Natera $2,306.1M, SG&amp;A ~$1,178M (derived).</li>
+</ul></div>
+<div class="card" style="flex:1"><h3>Estimated (our method)</h3>
+<ul style="margin:0;padding-left:18px">
+<li><b>Stock pay in G&amp;A $34.7M:</b> 84% nine-month G&amp;A share applied to the full-year $41.3M.</li>
+<li><b>Depreciation in G&amp;A $20.3M:</b> $67.9M non-cash G&amp;A less stock pay and $12.9M amortization.</li>
+<li><b>Functional split of the $176M core:</b> sized from 10-K driver disclosures and typical specialty-lab cost shares; ranges shown.</li>
+<li><b>Bridge to Quest:</b> sales-force gap assumes ~4.5% selling cost at routine labs (they don&rsquo;t report it); scale assumes ~$36M of fixed public-company core; billing assumes revenue-cycle cost ~7% vs. ~3%. Residual is what&rsquo;s left.</li>
+<li>Headcount (~2,500, +300) is from company-profile data, not the 10-K text.</li>
+<li>SEC.gov was not reachable from this session; figures were taken from company IR sites, filing mirrors and aggregators and should be spot-checked against EDGAR before external use.</li>
+</ul></div>
+</div>
+<div class="src">Prepared November 2026. Not investment advice.</div></section>
+</body></html>
