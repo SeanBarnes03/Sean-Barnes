@@ -16,5 +16,7 @@ cuttable excess, and the right benchmark is specialty labs, not Quest and Labcor
 **What would disprove it.** NEO's G&A, normalized to recurring cash, still sitting well above
 specialty peers of similar size.
 
-**Result.** Partly confirmed. NEO's G&A is the highest of the specialty peers even after
-normalizing, but the recurring cash gap is about 4 points (~$27M), not 30.
+**Result.** Partly confirmed. Most of the gap to Quest is the business model plus accounting. But
+NEO's G&A is still the highest of the specialty peers like for like: 31.1% against a 24.3% median
+once stock pay and amortization are removed, a gap of 3.8–6.8 points (~$28–50M). Its total
+SG&A, selling and stock pay are all below the specialty median.
