@@ -43,6 +43,23 @@ deck is reported in one of the filings below, or is arithmetic on reported figur
 Sales, SG&A, S&M, G&A, stock pay and receivables come from XBRL company facts. Stock pay in G&A,
 Myriad's amortization, Fulgent's accrual and Quest's DSO come from the 10-K text.
 
+## Quarterly results (CVP view), $M
+
+From NeoGenomics earnings releases (8-K Ex. 99.1). Cash cost = net revenue − adjusted EBITDA.
+
+| Quarter | Net revenue | Adj. EBITDA | | Quarter | Net revenue | Adj. EBITDA |
+|---|---|---|---|---|---|---|
+| Q1'24 | 156.240 | 3.492 | | Q4'25 | 190.170 | 13.380 |
+| Q2'24 | 164.502 | 10.869 | | Q1'26 | 186.672 | 9.004 |
+| Q3'24 | 167.824 | 13.374 | | Q2'26 | 201.656 | 14.467 |
+| Q4'24 | 172.000 | 11.873 | | Q3'26 | 209.254 | 18.669 |
+| Q1'25 | 168.035 | 7.070 | | | | |
+| Q2'25 | 181.330 | 10.675 | | | | |
+| Q3'25 | 187.797 | 12.232 | | | | |
+
+Also from the releases: revenue per clinical test $488 (Q4 2025) and $530 (Q3 2026); Q3 2026
+clinical revenue $195M; FY2026 guidance of $807–809M revenue and ~$60M adjusted EBITDA.
+
 ## Not public
 
 - NeoGenomics' G&A by function (billing, IT, finance and so on). It would need internal cost-center data.

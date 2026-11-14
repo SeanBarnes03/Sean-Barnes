@@ -23,6 +23,14 @@ reported figures. The one thing that isn't public is G&A by function, and the de
   peer median. That's 6.8 points (~$50M), or 3.8 points (~$28M) after NEO's 2025 one-offs.
 - **Collections:** 80 days of sales in receivables, against 48 at Quest and a 46-day specialty median.
 
+## Cost-volume-profit view
+
+[NEO_CVP_Metrics.pdf](NEO_CVP_Metrics.pdf) (2 slides) applies the standard CVP formulas to FY2025.
+Costs are split into variable and fixed by the high-low method on quarterly cash cost
+(sales − adjusted EBITDA), which gives 71.5% variable and ~$164M a year fixed. CM ratio
+28.5%; cash break-even $575M; GAAP break-even $958M; operating leverage 4.8×. That 4.8×
+predicted +55% adjusted EBITDA for Q3 2026's +11.4% sales; the actual was +53%.
+
 ## Files
 
 | File | What it is |
@@ -33,3 +41,6 @@ reported figures. The one thing that isn't public is G&A by function, and the de
 | `neo-overhead-deck.html` | The generated slides (1334x750 each) |
 | `render.js` | Playwright: `node render.js <abs html> <abs pdf> <png dir>` |
 | `NEO_Overhead_Deep_Dive.pdf` | Rendered deck |
+| `pull_releases.py` | Downloads quarterly earnings releases (8-K Ex. 99.1) from EDGAR |
+| `build_cvp.py` | CVP metrics, matplotlib chart (`cvp-chart.png`) and `neo-cvp.html`; needs `pip install matplotlib` |
+| `NEO_CVP_Metrics.pdf` | Rendered CVP slides |
