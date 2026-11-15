@@ -60,6 +60,15 @@ From NeoGenomics earnings releases (8-K Ex. 99.1). Cash cost = net revenue − a
 Also from the releases: revenue per clinical test $488 (Q4 2025) and $530 (Q3 2026); Q3 2026
 clinical revenue $195M; FY2026 guidance of $807–809M revenue and ~$60M adjusted EBITDA.
 
+## Oncology peers' pharma revenue, FY2025 ($M)
+
+| Company | Line | FY2024 | FY2025 | Change | 10-K explanation |
+|---|---|---|---|---|---|
+| Guardant Health | Biopharma & data | 177.579 | 210.132 | +18% | GuardantINFINITY volume, companion diagnostic milestones, data services |
+| Caris Life Sciences | Pharma R&D services | 63.145 | 45.314 | −28.2% | $18.9M from timing of contract execution; research −$1.0M; pharma profiling +$2.1M |
+| Tempus AI | Data & applications | 241.649 | 316.408 | +31% | Insights data licensing +$70.9M (not used on the slide) |
+| Labcorp | Biopharma Laboratory Services | 2,922.6 | 3,098.2 | +6.0% (+4.0% organic) | Replaced as the comparator: too broad |
+
 ## Not public
 
 - NeoGenomics' G&A by function (billing, IT, finance and so on). It would need internal cost-center data.

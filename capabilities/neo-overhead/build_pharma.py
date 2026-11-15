@@ -3,7 +3,7 @@
 Run:  python3 build_pharma.py  -> pharma-*.png and neo-pharma.html next to this file
 Then: node render.js <abs neo-pharma.html> <abs NEO_Pharma_Executive_Briefing.pdf> <png dir>
 
-v2 answers the red-team review of v1: renamed to non-clinical, peer check against Labcorp,
+v2 answers the red-team review of v1: renamed to non-clinical, peer check against Guardant and Caris,
 organic clinical growth, sequential trend first, contract termination risk, exit hurdle as a
 range including one-time costs, options beyond keep/exit, and the $34M of non-core charges taken
 out of the pharma story.
@@ -42,7 +42,12 @@ RUN2 = sum(p for _, _, p, _ in QD[-2:]) * 2
 yoy = {QD[i][0]: QD[i][2] / QD[i - 4][2] - 1 for i in range(4, len(QD))}
 SEQ = QD[-1][2] / QD[7][2] - 1                         # Q4'25 -> Q3'26
 NC_CHG25 = p25 / p24 - 1
-LH_BLS, LH_BLS_ORG = 6.0, 4.0                         # Labcorp FY2025 10-K: BLS revenue +6.0%, organic +4.0%
+GH25, GH24 = 210.132, 177.579                         # Guardant FY2025 10-K: Biopharma & data revenue
+CAI25, CAI24, CAI_TIMING = 45.314, 63.145, 18.9       # Caris FY2025 10-K: Pharma R&D services; $18.9M decline from contract timing
+GH_CHG = (GH25 / GH24 - 1) * 100
+CAI_CHG = (CAI25 / CAI24 - 1) * 100
+CAI_EXT = (CAI25 / (CAI24 - CAI_TIMING) - 1) * 100     # Caris excluding the contract-timing effect
+GAP_GH = GH_CHG - NC_CHG25 * 100
 
 # ---------- chart style ----------
 for f in ["/usr/share/fonts/opentype/inter/Inter-Regular.otf", "/usr/share/fonts/opentype/inter/Inter-Bold.otf",
@@ -91,15 +96,15 @@ tidy(a2); fig.tight_layout()
 IMG1 = png(fig, "pharma-trend.png")
 
 # Chart 2: peer check + growth bridge
-fig, (a1, a2) = plt.subplots(1, 2, figsize=(12.4, 3.35), gridspec_kw={"width_ratios": [1, 1.25]})
-labs = ["Labcorp pharma services\n(BLS), organic", "Labcorp pharma services\n(BLS), reported", "NEO non-clinical"]
-vals = [LH_BLS_ORG, LH_BLS, NC_CHG25 * 100]
-a1.barh(range(3), vals, color=[NAVY, LBLUE, RED], height=0.56)
+fig, (a1, a2) = plt.subplots(1, 2, figsize=(12.4, 3.15), gridspec_kw={"width_ratios": [1, 1.25]})
+labs = ["Guardant\nbiopharma & data", "Caris pharma services\nexcl. contract timing", "Caris pharma services\nas reported", "NEO non-clinical"]
+vals = [GH_CHG, CAI_EXT, CAI_CHG, NC_CHG25 * 100]
+a1.barh(range(4), vals, color=[NAVY, BLUE, LBLUE, RED], height=0.56)
 for i, v in enumerate(vals):
     a1.text(v + (0.8 if v > 0 else -0.8), i, f"{v:+.1f}%", va="center", ha="left" if v > 0 else "right", fontsize=12, fontweight="bold", color=NAVY)
-a1.set_yticks(range(3)); a1.set_yticklabels(labs, fontsize=10.5); a1.invert_yaxis()
-a1.axvline(0, color=GREY, lw=1); a1.set_xlim(-32, 12); a1.set_xlabel("FY2025 revenue change (%)")
-ttl(a1, f"A {LH_BLS_ORG - NC_CHG25*100:.0f}-point gap to a peer")
+a1.set_yticks(range(4)); a1.set_yticklabels(labs, fontsize=10.5); a1.invert_yaxis()
+a1.axvline(0, color=GREY, lw=1); a1.set_xlim(-38, 28); a1.set_xlabel("FY2025 revenue change (%)")
+ttl(a1, f"Oncology peers grew; NEO fell")
 tidy(a1, "x")
 steps = [("FY2024", 0, t24, NAVY), ("Clinical,\norganic", t24, t24 + ORG, GREEN), ("Pathline\n(acquired)", t24 + ORG, t24 + ORG + PATHLINE, LGREEN),
          ("Non-clinical", t24 + ORG + PATHLINE, t25, RED), ("FY2025", 0, t25, NAVY)]
@@ -144,7 +149,7 @@ body = f"""
     <ul class="small" style="font-size:14.8px;margin:0;padding-left:18px;line-height:1.42">
       <li><b>Non-clinical revenue</b> (pharma services, data, UK lab, Trapelo until sold) fell from <b>${p23:.0f}M (2023) to ${LTM:.0f}M</b> over the last 12 months.</li>
       <li><b>Still falling:</b> {SEQ*100:.0f}% from Q4&rsquo;25 to Q3&rsquo;26. Smaller year-on-year declines mostly reflect a smaller base.</li>
-      <li><b>Not just the market:</b> Labcorp&rsquo;s pharma services grew {LH_BLS_ORG:.0f}% organically in 2025; NEO&rsquo;s non-clinical fell {abs(NC_CHG25)*100:.0f}%.</li>
+      <li><b>Not just the market:</b> in 2025 Guardant&rsquo;s biopharma &amp; data revenue grew {GH_CHG:.0f}% and Caris&rsquo;s pharma services grew ~{CAI_EXT:.0f}% excluding one contract&rsquo;s timing. NEO&rsquo;s non-clinical fell {abs(NC_CHG25)*100:.0f}%.</li>
       <li><b>Fragile revenue:</b> most pharma contracts can be ended by the client immediately or on notice.</li>
     </ul>
   </div>
@@ -161,8 +166,8 @@ body = f"""
 <div class="row" style="margin-top:12px">
   <div class="card" style="flex:1;border-top:5px solid {NAVY};text-align:center;padding:10px"><div class="kpi" style="color:{NAVY};font-size:26px">${LTM:.0f}M</div>
     <div class="small">Last 12 months, {QD[-1][2]/QD[-1][3]*100:.0f}% of Q3&rsquo;26 sales</div></div>
-  <div class="card" style="flex:1;border-top:5px solid {RED};text-align:center;padding:10px"><div class="kpi" style="color:{RED};font-size:26px">{LH_BLS_ORG - NC_CHG25*100:.0f} pts</div>
-    <div class="small">2025 growth gap to Labcorp pharma services</div></div>
+  <div class="card" style="flex:1;border-top:5px solid {RED};text-align:center;padding:10px"><div class="kpi" style="color:{RED};font-size:26px">{GAP_GH:.0f} pts</div>
+    <div class="small">2025 growth gap to Guardant&rsquo;s biopharma &amp; data</div></div>
   <div class="card" style="flex:1;border-top:5px solid {ORANGE};text-align:center;padding:10px"><div class="kpi" style="color:{DORANGE};font-size:26px">Q1 2027</div>
     <div class="small">Decision gate on the four tests above</div></div>
 </div>
@@ -170,7 +175,7 @@ body = f"""
 work or RaDaR, and test partnering RaDaR or selling the UK lab. Finance to deliver a non-clinical P&amp;L split into avoidable and shared costs, plus backlog, by Q1 2027.
 If the four tests fail, sell or close it.</div>"""
 S.append(slide("Non-clinical: resize now, decide by Q1 2027", "Executive summary &middot; NeoGenomics pharma services and other non-clinical revenue", body,
-               "Built from public filings only: NEO earnings releases Q1 2024&ndash;Q3 2026, FY2025 10-K; Labcorp FY2025 10-K. Non-clinical = total revenue &minus; clinical tests &times; revenue per test; "
+               "Built from public filings only: NEO earnings releases Q1 2024&ndash;Q3 2026, FY2025 10-K; Guardant and Caris FY2025 10-Ks. Non-clinical = total revenue &minus; clinical tests &times; revenue per test; "
                "within $0.2M of reported figures for Q1&ndash;Q3 2024. Not investment advice."))
 
 # ---------- 2. Shrinking ----------
@@ -189,7 +194,7 @@ S.append(slide("Non-clinical is still shrinking", "Quarterly non-clinical revenu
                "UK laboratory work and Trapelo until sold; the mix is not disclosed.", tag=TAG))
 
 # ---------- 3. Not just macro ----------
-drivers = [("Market (pharma and biotech spending)", "Management&rsquo;s explanation", "Weak: a large peer grew"),
+drivers = [("Market (pharma and biotech spending)", "Management&rsquo;s explanation", "Weak: oncology peers grew"),
            ("International site closures (2024)", "Q3 2024 release", "Deliberate, not demand"),
            ("Lower RaDaR revenue", "Q3 2024 release", "Product-specific"),
            ("Trapelo sold (31 Dec 2025)", "FY2025 10-K", "Divestiture; affects 2026 only"),
@@ -202,9 +207,8 @@ body = f"""
   <div class="callout" style="flex:1;font-size:14.5px;padding:10px 16px"><b>Why it matters:</b> a market downturn recovers on its own; share loss and deliberate exits don&rsquo;t.
   The case for waiting depends on which it is, and NEO doesn&rsquo;t size any of the drivers. Clinical grew {ORG/c24*100:.1f}% organically; Pathline added {PATHLINE/c24*100:.1f} pts more.</div>
 </div>"""
-S.append(slide("The decline isn&rsquo;t just the market", "FY2025: NEO non-clinical vs. Labcorp pharma services (left); NEO revenue bridge (right)",
-               body, f"Sources: Labcorp FY2025 10-K (Biopharma Laboratory Services revenue ${3098.2:,.1f}M, +6.0%, organic +4.0%; a far broader business, so a direction, not a precise benchmark); "
-               "NEO Q4 2025 release (clinical tests and revenue per test excluding Pathline); NEO releases Q3 2024 and Q2 2025 (management commentary).", tag=TAG))
+S.append(slide("The decline isn&rsquo;t just the market", "FY2025: NEO non-clinical vs. oncology lab peers&rsquo; pharma revenue (left); NEO revenue bridge (right)",
+               body, "Sources: Guardant and Caris FY2025 10-Ks (Caris: $18.9M of its fall from one contract&rsquo;s timing; pharma profiling +$2.1M); NEO Q3 2024, Q2 2025 and Q4 2025 releases.", tag=TAG))
 
 # ---------- 4. Hypotheses to test ----------
 hyps = [("Trial work feeds clinical tests", "No public evidence. NGS growth (22&ndash;29%) is clinical and not linked to trial work in any filing.",
@@ -266,7 +270,7 @@ S.append(slide("Exit only pays above an unseen hurdle", "Recurring exit economic
 
 # ---------- 7. Risks to this brief ----------
 risks = [("Non-clinical &ne; pharma", "The residual includes data, UK lab work and Trapelo. Their mix is not disclosed."),
-         ("Peer comparison is rough", "Labcorp&rsquo;s pharma services is ~50&times; larger and broader (early development, central labs)."),
+         ("Peers mix differently", "Guardant and Caris blend trial testing, companion diagnostics and data in different proportions; NEO&rsquo;s mix isn&rsquo;t disclosed. Pharma revenue is lumpy, so one year is a thin basis."),
          ("Exit margin unknown", "Every exit number depends on a margin estimate; the range runs from $9M to $30M."),
          ("Goodwill risk is unsized", "Both reporting units were tested in Q3 2025, likely for a company-wide reason. Goodwill by unit is not disclosed."),
          ("Public data only", "Leadership holds the unit P&amp;L, backlog and RaDaR plans. They can confirm or overturn this brief.")]
@@ -285,7 +289,7 @@ body = f"""
 <div class="small" style="margin-top:10px">Clinical = clinical tests &times; average revenue per clinical test, as reported each quarter. Non-clinical = total &minus; clinical.
 Rebuilt figures differ from reported 2024 Advanced Diagnostics revenue by up to $0.2M because revenue per test is rounded to whole dollars.</div>"""
 S.append(slide("Limits of this brief, sources and method", "What could change the conclusion, and how the numbers were built", body,
-               "Sources: SEC EDGAR: NEO 8-K earnings releases (Ex. 99.1) Q1 2024&ndash;Q3 2026; NEO FY2025 10-K; Labcorp FY2025 10-K. Prepared November 2026. Not investment advice."))
+               "Sources: SEC EDGAR: NEO 8-K earnings releases (Ex. 99.1) Q1 2024&ndash;Q3 2026; NEO FY2025 10-K; Guardant and Caris FY2025 10-Ks. Prepared November 2026. Not investment advice."))
 
 html = f"""<!doctype html><html><head><meta charset="utf-8"><title>NEO Non-clinical Briefing</title>
 <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,wght@0,400;0,600;0,700;0,800;1,400&display=swap" rel="stylesheet">

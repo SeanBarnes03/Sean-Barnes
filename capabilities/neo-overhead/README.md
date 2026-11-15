@@ -37,8 +37,8 @@ predicted +55% adjusted EBITDA for Q3 2026's +11.4% sales; the actual was +53%.
 after a red-team review. Non-clinical revenue (pharma services, data licensing, UK lab, Trapelo until
 sold) is rebuilt as total revenue minus clinical tests × revenue per test; the rebuild lands within
 $0.2M of the reported figures for Q1–Q3 2024. It fell from $96.5M (FY2023) to $61.0M over the last
-12 months, and by 11% from Q4'25 to Q3'26. In FY2025 it fell 24%, while Labcorp's pharma services
-grew 4% organically. The case for keeping it is set out as six hypotheses to test, with five options.
+12 months, and by 11% from Q4'25 to Q3'26. In FY2025 it fell 24%, while Guardant's biopharma & data
+revenue grew 18% and Caris's pharma services grew ~2% excluding one contract's timing. The case for keeping it is set out as six hypotheses to test, with five options.
 The exit hurdle is shown as a range ($9–30M), because the unit's margin isn't disclosed.
 Recommendation: resize now and decide at the Q1 2027 results.
 
@@ -55,5 +55,6 @@ Recommendation: resize now and decide at the Q1 2027 results.
 | `pull_releases.py` | Downloads quarterly earnings releases (8-K Ex. 99.1) from EDGAR |
 | `build_cvp.py` | CVP metrics, matplotlib chart (`cvp-chart.png`) and `neo-cvp.html`; needs `pip install matplotlib` |
 | `NEO_CVP_Metrics.pdf` | Rendered CVP slides |
+| `pull_peers2.py` | Downloads FY2025 10-Ks for Guardant, Tempus, Caris and Personalis |
 | `build_pharma.py` | Pharma revenue rebuild, three charts (`pharma-*.png`) and `neo-pharma.html` |
 | `NEO_Pharma_Executive_Briefing.pdf` | Rendered pharma briefing |
