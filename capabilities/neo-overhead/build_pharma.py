@@ -141,40 +141,42 @@ def img(b64):
 
 TAG = "Non-clinical briefing"
 S = []
+
+def exec_summary(answer, messages, decisions, kpis):
+    """answer: str; messages: [(headline, evidence, slide_ref)]; decisions: [str]; kpis: [(value, label, color)]."""
+    msg = "".join(
+        f'<div style="display:flex;gap:12px;padding:7px 0;border-bottom:1px solid #E5E7EB">'
+        f'<div style="flex:0 0 30px;height:30px;border-radius:15px;background:{NAVY};color:#fff;font-weight:800;display:flex;align-items:center;justify-content:center;font-size:15px">{i}</div>'
+        f'<div style="flex:1;font-size:15px;line-height:1.35"><b style="color:{NAVY}">{h}</b> {e}</div>'
+        f'<div style="flex:0 0 62px;text-align:right;font-size:12.5px;color:{GREY};padding-top:3px">{r}</div></div>'
+        for i, (h, e, r) in enumerate(messages, 1))
+    dec = "".join(f'<li style="margin-bottom:7px">{d}</li>' for d in decisions)
+    kp = "".join(f'<div class="card" style="flex:1;border-top:5px solid {c};text-align:center;padding:8px 6px">'
+                 f'<div class="kpi" style="color:{c};font-size:23px">{v}</div><div class="small" style="font-size:12.5px">{l}</div></div>' for v, l, c in kpis)
+    return f"""
+<div class="callout dark" style="margin-top:12px;font-size:18px;padding:12px 22px"><b>The answer:</b> {answer}</div>
+<div class="row" style="margin-top:12px">
+  <div class="card" style="flex:1.65;padding:10px 18px"><h3 style="margin-bottom:2px">Key messages</h3>{msg}</div>
+  <div style="flex:1;display:flex;flex-direction:column;gap:12px">
+    <div class="card" style="border-top:5px solid {ORANGE};padding:12px 18px"><h3 style="margin-bottom:6px">Decisions needed</h3>
+      <ol class="small" style="font-size:14.5px;margin:0;padding-left:20px;line-height:1.38">{dec}</ol></div>
+    <div class="row" style="gap:10px">{kp}</div>
+  </div>
+</div>"""
+
 # ---------- 1. Executive summary ----------
-body = f"""
-<div class="row" style="margin-top:12px">
-  <div class="card" style="flex:1;border-top:5px solid {RED};padding:12px 18px">
-    <h3 style="margin-bottom:6px">What the filings show</h3>
-    <ul class="small" style="font-size:14.8px;margin:0;padding-left:18px;line-height:1.42">
-      <li><b>Non-clinical revenue</b> (pharma services, data, UK lab, Trapelo until sold) fell from <b>${p23:.0f}M (2023) to ${LTM:.0f}M</b> over the last 12 months.</li>
-      <li><b>Still falling:</b> {SEQ*100:.0f}% from Q4&rsquo;25 to Q3&rsquo;26. Smaller year-on-year declines mostly reflect a smaller base.</li>
-      <li><b>Not just the market:</b> in 2025 Guardant&rsquo;s biopharma &amp; data revenue grew {GH_CHG:.0f}% and Caris&rsquo;s pharma services grew ~{CAI_EXT:.0f}% excluding one contract&rsquo;s timing. NEO&rsquo;s non-clinical fell {abs(NC_CHG25)*100:.0f}%.</li>
-      <li><b>Fragile revenue:</b> most pharma contracts can be ended by the client immediately or on notice.</li>
-    </ul>
-  </div>
-  <div class="card" style="flex:1;border-top:5px solid {GREEN};padding:12px 18px">
-    <h3 style="margin-bottom:6px">What has to be proven to keep it</h3>
-    <ul class="small" style="font-size:14.8px;margin:0;padding-left:18px;line-height:1.42">
-      <li>Trial work turns into <b>clinical revenue</b> (no public evidence yet).</li>
-      <li><b>RaDaR</b> has a funded trial path to reimbursement.</li>
-      <li>The unit <b>covers the costs that would leave with it</b>: ${LTM*0.15:.0f}&ndash;{LTM*0.50:.0f}M, depending on its margin.</li>
-      <li>Revenue has <b>stopped falling</b>: orders &ge; revenue billed for two quarters.</li>
-    </ul>
-  </div>
-</div>
-<div class="row" style="margin-top:12px">
-  <div class="card" style="flex:1;border-top:5px solid {NAVY};text-align:center;padding:10px"><div class="kpi" style="color:{NAVY};font-size:26px">${LTM:.0f}M</div>
-    <div class="small">Last 12 months, {QD[-1][2]/QD[-1][3]*100:.0f}% of Q3&rsquo;26 sales</div></div>
-  <div class="card" style="flex:1;border-top:5px solid {RED};text-align:center;padding:10px"><div class="kpi" style="color:{RED};font-size:26px">{GAP_GH:.0f} pts</div>
-    <div class="small">2025 growth gap to Guardant&rsquo;s biopharma &amp; data</div></div>
-  <div class="card" style="flex:1;border-top:5px solid {ORANGE};text-align:center;padding:10px"><div class="kpi" style="color:{DORANGE};font-size:26px">Q1 2027</div>
-    <div class="small">Decision gate on the four tests above</div></div>
-</div>
-<div class="callout dark" style="margin-top:12px;font-size:16.5px"><b>Recommendation: resize now, decide at Q1 2027.</b> Cut costs that don&rsquo;t serve trial-to-clinical
-work or RaDaR, and test partnering RaDaR or selling the UK lab. Finance to deliver a non-clinical P&amp;L split into avoidable and shared costs, plus backlog, by Q1 2027.
-If the four tests fail, sell or close it.</div>"""
-S.append(slide("Non-clinical: resize now, decide by Q1 2027", "Executive summary &middot; NeoGenomics pharma services and other non-clinical revenue", body,
+body = exec_summary(
+    "resize the non-clinical (pharma) business now, and decide at the Q1 2027 results whether to keep its clinical-linked core or exit, based on four tests.",
+    [("It is small and still shrinking.", f"${p23:.0f}M (2023) &rarr; ${LTM:.0f}M last 12 months, now {QD[-1][2]/QD[-1][3]*100:.0f}% of sales; {SEQ*100:.0f}% since Q4&rsquo;25 with no bottom yet.", "Slide 2"),
+     ("It isn&rsquo;t just the market.", f"In 2025 Guardant&rsquo;s biopharma &amp; data grew {GH_CHG:.0f}% and Caris&rsquo;s pharma services ~{CAI_EXT:.0f}% (excl. one contract&rsquo;s timing); NEO&rsquo;s non-clinical fell {abs(NC_CHG25)*100:.0f}%.", "Slide 3"),
+     ("It hides the core&rsquo;s growth.", f"Clinical grew {ORG/c24*100:.1f}% organically in 2025; reported growth was {(t25-t24)/t24*100:.1f}%.", "Slide 3"),
+     ("The case for keeping it is unproven.", "Trial-to-clinical pull-through, RaDaR&rsquo;s path, data revenue and cost coverage are not shown in any filing; clients can end most contracts at short notice.", "Slide 4"),
+     ("Exiting only pays above a hurdle.", f"Exit adds EBITDA only if it removes ${LTM*0.15:.0f}&ndash;{LTM*0.50:.0f}M of costs a year, before severance, lease and goodwill effects. Resizing first keeps options open.", "Slides 5&ndash;6")],
+    ["<b>Approve resizing</b> to the clinical-linked core: trial testing, RaDaR and data (option B).",
+     "<b>Test in parallel</b> partnering or licensing RaDaR, and selling the UK lab (options C and D).",
+     "<b>Finance to deliver by Q1 2027:</b> non-clinical P&amp;L split into avoidable vs. shared costs, backlog, and clinical revenue from trial work. Keep-or-exit decision then."],
+    [(f"${LTM:.0f}M", "Last 12 months revenue", NAVY), (f"{GAP_GH:.0f} pts", "2025 gap to Guardant", RED), ("Q1 2027", "Decision gate", DORANGE)])
+S.append(slide("Executive summary", "NeoGenomics non-clinical (pharma) business &middot; what the public filings show and what we recommend", body,
                "Built from public filings only: NEO earnings releases Q1 2024&ndash;Q3 2026, FY2025 10-K; Guardant and Caris FY2025 10-Ks. Non-clinical = total revenue &minus; clinical tests &times; revenue per test; "
                "within $0.2M of reported figures for Q1&ndash;Q3 2024. Not investment advice."))
 

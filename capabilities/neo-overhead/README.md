@@ -25,7 +25,7 @@ reported figures. The one thing that isn't public is G&A by function, and the de
 
 ## Cost-volume-profit view
 
-[NEO_CVP_Metrics.pdf](NEO_CVP_Metrics.pdf) (2 slides) applies the standard CVP formulas to FY2025.
+[NEO_CVP_Executive_Brief.pdf](NEO_CVP_Executive_Brief.pdf) (3 slides: executive summary, CVP chart, metric appendix) applies the standard CVP formulas to FY2025.
 Costs are split into variable and fixed by the high-low method on quarterly cash cost
 (sales − adjusted EBITDA), which gives 71.5% variable and ~$164M a year fixed. CM ratio
 28.5%; cash break-even $575M; GAAP break-even $958M; operating leverage 4.8×. That 4.8×
@@ -33,7 +33,7 @@ predicted +55% adjusted EBITDA for Q3 2026's +11.4% sales; the actual was +53%.
 
 ## Non-clinical (pharma) briefing
 
-[NEO_Pharma_Executive_Briefing.pdf](NEO_Pharma_Executive_Briefing.pdf): 7 slides for the C-suite, revised
+[NEO_Pharma_Executive_Briefing.pdf](NEO_Pharma_Executive_Briefing.pdf): 7 slides for the C-suite, opening with an executive summary, revised
 after a red-team review. Non-clinical revenue (pharma services, data licensing, UK lab, Trapelo until
 sold) is rebuilt as total revenue minus clinical tests × revenue per test; the rebuild lands within
 $0.2M of the reported figures for Q1–Q3 2024. It fell from $96.5M (FY2023) to $61.0M over the last
@@ -54,7 +54,7 @@ Recommendation: resize now and decide at the Q1 2027 results.
 | `NEO_Overhead_Deep_Dive.pdf` | Rendered deck |
 | `pull_releases.py` | Downloads quarterly earnings releases (8-K Ex. 99.1) from EDGAR |
 | `build_cvp.py` | CVP metrics, matplotlib chart (`cvp-chart.png`) and `neo-cvp.html`; needs `pip install matplotlib` |
-| `NEO_CVP_Metrics.pdf` | Rendered CVP slides |
+| `NEO_CVP_Executive_Brief.pdf` | Rendered CVP executive brief |
 | `pull_peers2.py` | Downloads FY2025 10-Ks for Guardant, Tempus, Caris and Personalis |
 | `build_pharma.py` | Pharma revenue rebuild, three charts (`pharma-*.png`) and `neo-pharma.html` |
 | `NEO_Pharma_Executive_Briefing.pdf` | Rendered pharma briefing |

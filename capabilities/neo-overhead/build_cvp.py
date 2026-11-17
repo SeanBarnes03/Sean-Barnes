@@ -83,7 +83,7 @@ a1.text(GUIDE_REV + 8, 30, f"FY2026 guide\n${GUIDE_REV:.0f}M", ha="left", va="bo
 a1.fill_between([BE, REV25], [BE, REV25], [FIXED + V * BE, FIXED + V * REV25], color=GREEN, alpha=0.12)
 a1.set_xlim(0, 1100); a1.set_ylim(0, 1100)
 a1.set_xlabel("Annual sales ($M)"); a1.set_ylabel("$M")
-a1.set_title(f"FY2025: ${REV25-BE:.0f}M past cash break-even, ${BE_GAAP-REV25:.0f}M short of GAAP", loc="left", fontsize=13.5, fontweight="bold", color=NAVY)
+a1.set_title(f"FY2025: \\${REV25-BE:.0f}M past cash break-even, \\${BE_GAAP-REV25:.0f}M short of GAAP", loc="left", fontsize=13.5, fontweight="bold", color=NAVY)
 a1.legend(loc="upper left", frameon=False, fontsize=10.5)
 
 rx = [r for _, r, _ in COST]; cy = [c for *_, c in COST]
@@ -118,11 +118,11 @@ rows = [
     ("Break-even (units)", f"{BE_TESTS/1e6:.2f}M tests", f"{M(FIXED)} &divide; ${CM_T:.0f}",
      "~295K tests a quarter covers cash fixed costs. Q3 2026 ran at ~368K clinical tests, so test volume is above it."),
     ("Break-even ($)", f"{M(BE)} cash<br>{M(BE_GAAP)} GAAP", f"{M(FIXED)} &divide; {CMR*100:.1f}% (GAAP: {M(FIXED_GAAP)} &divide; {CMR*100:.1f}%)",
-     "Cash break-even was passed around 2023. GAAP profit needs ~$960M of sales: 31% more than 2025."),
+     f"Cash break-even was passed around 2023. GAAP profit needs ~${BE_GAAP:.0f}M of sales: {(BE_GAAP/REV25-1)*100:.0f}% more than 2025."),
     ("Target profit ($)", M(TARGET), f"({M(FIXED)} + $60M target) &divide; {CMR*100:.1f}%",
      f"Sales needed for the ~$60M 2026 adj. EBITDA guide. Guided sales of ~$808M imply fixed costs creep to ~{M(FIX_IMPLIED_26)}."),
     ("Margin of safety ($)", f"{M(MOS)} ({MOS/REV25*100:.0f}%)", f"{M(REV25)} &minus; {M(BE)}",
-     "Sales could fall 21% before cash profit hits zero. On a GAAP basis the margin is &minus;$229M."),
+     f"Sales could fall {MOS/REV25*100:.0f}% before cash profit hits zero. On a GAAP basis the margin is &minus;${BE_GAAP-REV25:.0f}M."),
     ("Operating leverage", f"{DOL:.1f}&times;", f"{M(CM)} CM &divide; {M(EBITDA25)} adj. EBITDA",
      "High fixed costs make profit swing ~5&times; faster than sales, both ways. It is why growth fixes margins quickly."),
     ("% change in profit", f"+{g_rev*DOL*100:.0f}% predicted", f"Q3 2026 sales +{g_rev*100:.1f}% &times; {DOL:.1f}",
@@ -139,9 +139,9 @@ body1 = f"""
 <tr><th style="width:150px">Metric</th><th class="n" style="width:125px">NEO FY2025</th><th style="width:330px">Calculation</th><th>Why it matters for NeoGenomics</th></tr>
 {trs}
 </table></div>"""
-s1 = slide("NEO cost-volume-profit metrics", "FY2025, cash basis (adjusted EBITDA) unless noted &middot; variable/fixed split by the high-low method on quarterly results",
+s1 = slide("Appendix: CVP metric detail", "FY2025, cash basis (adjusted EBITDA) unless noted &middot; variable/fixed split by the high-low method on quarterly results",
            body1, "Sources: NeoGenomics quarterly earnings releases Q1 2024&ndash;Q3 2026 (revenue, adj. EBITDA, revenue per test, 2026 guidance); FY2025 10-K (D&amp;A, stock pay, one-offs). "
-           "Cash cost = sales &minus; adj. EBITDA. Unit figures apply the company-wide variable rate to revenue per clinical test.", tag="Part 3 &middot; CVP view")
+           "Cash cost = sales &minus; adj. EBITDA. Unit figures apply the company-wide variable rate to revenue per clinical test.", tag="CVP briefing")
 s1 = s1.replace('<div class="src">', '<div class="src" style="bottom:12px;font-size:12.5px">')
 
 # ---------- slide 2: charts ----------
@@ -154,12 +154,52 @@ body2 = f"""
   CM ratio through lab supply and test-mix gains. Sales growth alone needs ~$960M to reach GAAP profit.</div>
 </div>"""
 s2 = slide("Where NEO sits on the cost-volume-profit chart", "FY2025 annual CVP (left) and the quarterly cost data behind the split (right)",
-           body2, "Sources: as previous slide. Orange dots = FY2025 quarters used for the high-low split; light blue = other quarters. GAAP line excludes one-offs and impairments.",
-           tag="Part 3 &middot; CVP view")
+           body2, "Sources: as the appendix. Orange dots = FY2025 quarters used for the high-low split; light blue = other quarters. GAAP line excludes one-offs and impairments.",
+           tag="CVP briefing")
 
-html = f"""<!doctype html><html><head><meta charset="utf-8"><title>NEO CVP Metrics</title>
+
+def exec_summary(answer, messages, decisions, kpis):
+    """answer: str; messages: [(headline, evidence, slide_ref)]; decisions: [str]; kpis: [(value, label, color)]."""
+    msg = "".join(
+        f'<div style="display:flex;gap:12px;padding:7px 0;border-bottom:1px solid #E5E7EB">'
+        f'<div style="flex:0 0 30px;height:30px;border-radius:15px;background:{NAVY};color:#fff;font-weight:800;display:flex;align-items:center;justify-content:center;font-size:15px">{i}</div>'
+        f'<div style="flex:1;font-size:15px;line-height:1.35"><b style="color:{NAVY}">{h}</b> {e}</div>'
+        f'<div style="flex:0 0 62px;text-align:right;font-size:12.5px;color:{GREY};padding-top:3px">{r}</div></div>'
+        for i, (h, e, r) in enumerate(messages, 1))
+    dec = "".join(f'<li style="margin-bottom:7px">{d}</li>' for d in decisions)
+    kp = "".join(f'<div class="card" style="flex:1;border-top:5px solid {c};text-align:center;padding:8px 6px">'
+                 f'<div class="kpi" style="color:{c};font-size:23px">{v}</div><div class="small" style="font-size:12.5px">{l}</div></div>' for v, l, c in kpis)
+    return f"""
+<div class="callout dark" style="margin-top:12px;font-size:18px;padding:12px 22px"><b>The answer:</b> {answer}</div>
+<div class="row" style="margin-top:12px">
+  <div class="card" style="flex:1.65;padding:10px 18px"><h3 style="margin-bottom:2px">Key messages</h3>{msg}</div>
+  <div style="flex:1;display:flex;flex-direction:column;gap:12px">
+    <div class="card" style="border-top:5px solid {ORANGE};padding:12px 18px"><h3 style="margin-bottom:6px">Decisions needed</h3>
+      <ol class="small" style="font-size:14.5px;margin:0;padding-left:20px;line-height:1.38">{dec}</ol></div>
+    <div class="row" style="gap:10px">{kp}</div>
+  </div>
+</div>"""
+
+# ---------- slide 0: executive summary ----------
+GAAP_CUT_26 = FIXED_GAAP - GUIDE_REV * CMR
+body0 = exec_summary(
+    f"growth is lifting cash profit fast, but GAAP profit needs ~${BE_GAAP:.0f}M of sales or ~${GAAP_CUT_26:.0f}M less fixed cost. Overhead is the cheapest lever.",
+    [("Each sales dollar keeps 28.5&cent;.", f"Contribution margin is ${CM_T:.0f} on a ${PRICE:.0f} test; the other {V*100:.1f}% is variable cost (lab supplies, pay, shipping).", "Appendix"),
+     ("Cash break-even is behind us.", f"${BE:.0f}M of sales covers ${FIXED:.0f}M of cash fixed costs; 2025 sales were {MOS/REV25*100:.0f}% above it.", "Slide 2"),
+     ("GAAP profit is far off.", f"With D&amp;A and stock pay, break-even is ${BE_GAAP:.0f}M: {(BE_GAAP/REV25-1)*100:.0f}% above 2025. At 2026 guided sales (~${GUIDE_REV:.0f}M) it needs ~${GAAP_CUT_26:.0f}M less fixed cost.", "Slide 2"),
+     ("Growth pays back about 5&times;.", f"Operating leverage {DOL:.1f}&times;: +10% sales &asymp; +{DOL*10:.0f}% adj. EBITDA. Q3 2026 proved it: sales +{g_rev*100:.0f}%, adj. EBITDA +{g_eb*100:.0f}%.", "Appendix"),
+     ("Fixed costs are creeping.", f"2026 guidance implies cash fixed costs of ~${FIX_IMPLIED_26:.0f}M, up ~${FIX_IMPLIED_26-FIXED:.0f}M: part of the growth gain is leaking into overhead.", "Appendix")],
+    [f"<b>Cap cash fixed costs</b> at ~${FIXED:.0f}M while sales grow, to keep the {DOL:.1f}&times; leverage.",
+     f"<b>Lift the CM ratio</b> through lab supplies and test mix: each +1 pt is ~${GUIDE_REV/100:.0f}M a year at 2026 sales.",
+     f"<b>Set a dated path to GAAP profit</b> combining the G&amp;A gap ($28&ndash;50M) and stock pay with growth; each $1M of fixed cost cut lowers break-even sales by ${1/CMR:.1f}M."],
+    [(f"{CMR*100:.1f}%", "CM ratio", NAVY), (f"${BE:.0f}M", f"Cash break-even (GAAP ${BE_GAAP:.0f}M)", RED), (f"{DOL:.1f}&times;", "Operating leverage", DORANGE)])
+s0 = slide("Executive summary", "NeoGenomics cost-volume-profit view, FY2025 &middot; what it means for growth, overhead and the path to GAAP profit", body0,
+           "Sources: NeoGenomics quarterly earnings releases Q1 2024&ndash;Q3 2026 and FY2025 10-K. Cash basis = adjusted EBITDA; costs split into variable and fixed by the high-low method on quarterly results. "
+           "Not investment advice.")
+
+html = f"""<!doctype html><html><head><meta charset="utf-8"><title>NEO CVP Executive Brief</title>
 <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,wght@0,400;0,600;0,700;0,800;1,400&display=swap" rel="stylesheet">
-<style>{CSS}</style></head><body>{s1}{s2}</body></html>"""
+<style>{CSS}</style></head><body>{s0}{s2}{s1}</body></html>"""
 (HERE / "neo-cvp.html").write_text(html, encoding="utf-8")
 print(f"V={V:.4f} F={FIXED:.1f} CM={CM:.1f} CMR={CMR:.4f} BE={BE:.1f} BE_GAAP={BE_GAAP:.1f} MOS={MOS:.1f} DOL={DOL:.2f} "
       f"target={TARGET:.1f} CMtest={CM_T:.1f} BEtests={BE_TESTS:,.0f} FQ={FQ:.2f} V_all={V_ALL:.4f} fix26={FIX_IMPLIED_26:.1f}")
